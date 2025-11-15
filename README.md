@@ -2,6 +2,12 @@
 # YouTube Pipeline V2
 ---
 
+![Pipeline V1](https://github.com/ngnk/streamsmiths/actions/workflows/pipeline.yml/badge.svg)
+
+![Pipeline V2](https://github.com/ngnk/streamsmiths/actions/workflows/youtube_pipeline_v2.yml/badge.svg)
+
+---
+
 ## Channels
 
 1. **Cocomelon**
@@ -28,32 +34,6 @@
 22. **Chloe Ting**
 23. **Dude Perfect**
 24. **Linus Tech Tips**
-
----
-
-## Usage
-
-### Option 1: One-Button Local Run
-```bash
-python run_pipeline_v2.py
-```
-
-This will:
-1. Fetch data from YouTube API → `bronze_data_v2/`
-2. Transform to Parquet → `silver_data_v2/`
-3. Load to Neon tables → `channels_log_v2`, `videos_log_v2`, `trending_videos_log_v2`
-
-### Option 2: Run Individual Steps
-```bash
-# Step 1: Bronze (API ingestion)
-python bronze_v2.py
-
-# Step 2: Silver (transformation)
-python silver_v2.py
-
-# Step 3: Gold (database load)
-python gold_v2.py
-```
 
 ---
 
