@@ -2,7 +2,7 @@ name: YouTube Analytics Pipeline V2
 
 on:
   schedule:
-    # Run every hour at minute 0
+    # Run every 8 hours from 12am UTC
     - cron: '0 */8 * * *'
   
   # Allow manual trigger from GitHub UI
