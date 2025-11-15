@@ -1,5 +1,5 @@
 ---
-# YouTube Pipeline V2 - Enhanced Social Blade-Style Analytics
+# YouTube Pipeline V2
 ---
 
 ## Channels
