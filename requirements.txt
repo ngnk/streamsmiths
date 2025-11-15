@@ -1,6 +1,7 @@
 apache-airflow
 polars
 connectorx
+psycopg2-binary
 sqlalchemy
 python-dotenv
 streamlit
