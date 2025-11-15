@@ -1,0 +1,114 @@
+{
+  "channel_id": "UCANLZYMidaCbLQFWXBC95Jg",
+  "ingestion_timestamp": "2025-11-15T02:14:44.167230",
+  "items": [
+    {
+      "kind": "youtube#channel",
+      "etag": "2DxJ10R8s96-kZDfmk8Mb15H4Ys",
+      "id": "UCANLZYMidaCbLQFWXBC95Jg",
+      "snippet": {
+        "title": "TaylorSwiftVEVO",
+        "description": "I'm the problem, it's me.",
+        "customUrl": "@taylorswiftvevo",
+        "publishedAt": "2009-05-12T05:29:33Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/HFEgZENJw23LuRb0ldBpDrQKscFUWSf4n2jqrNh-1EqpE3Uiy_IYwacuUXCjCruNUP3Ttq9N=s88-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/HFEgZENJw23LuRb0ldBpDrQKscFUWSf4n2jqrNh-1EqpE3Uiy_IYwacuUXCjCruNUP3Ttq9N=s240-c-k-c0x00ffffff-no-rj",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/HFEgZENJw23LuRb0ldBpDrQKscFUWSf4n2jqrNh-1EqpE3Uiy_IYwacuUXCjCruNUP3Ttq9N=s800-c-k-c0x00ffffff-no-rj",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "TaylorSwiftVEVO",
+          "description": "I'm the problem, it's me."
+        },
+        "country": "US"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "uploads": "UUANLZYMidaCbLQFWXBC95Jg"
+        }
+      },
+      "statistics": {
+        "viewCount": "0",
+        "subscriberCount": "25300000",
+        "hiddenSubscriberCount": false,
+        "videoCount": "0"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "5QfBJU61OgmYF8YHm87hgg71M30",
+      "id": "oWVYzCPs3nE",
+      "snippet": {
+        "publishedAt": "2017-12-01T21:00:48Z",
+        "channelId": "UCANLZYMidaCbLQFWXBC95Jg",
+        "title": "TaylorSwiftVEVO Live Stream",
+        "description": "",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/oWVYzCPs3nE/default_live.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/oWVYzCPs3nE/mqdefault_live.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/oWVYzCPs3nE/hqdefault_live.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/oWVYzCPs3nE/sddefault_live.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/oWVYzCPs3nE/maxresdefault_live.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "TaylorSwiftVEVO",
+        "categoryId": "10",
+        "liveBroadcastContent": "upcoming",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "TaylorSwiftVEVO Live Stream",
+          "description": ""
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "P0D",
+        "dimension": "2d",
+        "definition": "sd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "63",
+        "favoriteCount": "0",
+        "commentCount": "1"
+      }
+    }
+  ]
+}

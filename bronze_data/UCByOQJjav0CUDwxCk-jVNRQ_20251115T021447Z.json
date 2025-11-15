@@ -1,0 +1,5817 @@
+{
+  "channel_id": "UCByOQJjav0CUDwxCk-jVNRQ",
+  "ingestion_timestamp": "2025-11-15T02:14:47.233198",
+  "items": [
+    {
+      "kind": "youtube#channel",
+      "etag": "e450oMxbT6JLdpzTnm-yXo94e3w",
+      "id": "UCByOQJjav0CUDwxCk-jVNRQ",
+      "snippet": {
+        "title": "Drake",
+        "description": "https://www.ovosound.com\nhttps://www.drakerelated.com\n\n",
+        "customUrl": "@drakeofficial",
+        "publishedAt": "2009-06-05T23:20:21Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/ytc/AIdro_lCPp6jFXJWIVHM0fIK5HofL3nyLOsmhu1Ek2OwyppYlOM=s88-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/ytc/AIdro_lCPp6jFXJWIVHM0fIK5HofL3nyLOsmhu1Ek2OwyppYlOM=s240-c-k-c0x00ffffff-no-rj",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/ytc/AIdro_lCPp6jFXJWIVHM0fIK5HofL3nyLOsmhu1Ek2OwyppYlOM=s800-c-k-c0x00ffffff-no-rj",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": {
+          "title": "Drake",
+          "description": "https://www.ovosound.com\nhttps://www.drakerelated.com\n\n"
+        }
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "uploads": "UUByOQJjav0CUDwxCk-jVNRQ"
+        }
+      },
+      "statistics": {
+        "viewCount": "21230366872",
+        "subscriberCount": "31700000",
+        "hiddenSubscriberCount": false,
+        "videoCount": "100"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "C8GdCjSYn9Cy4KMrhmUcxOWnjBU",
+      "id": "5CpDj8VHA7o",
+      "snippet": {
+        "publishedAt": "2025-09-05T02:41:01Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "ICEMAN EPISODE 3",
+        "description": "ICEMAN EPISODE 3",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/5CpDj8VHA7o/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/5CpDj8VHA7o/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/5CpDj8VHA7o/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/5CpDj8VHA7o/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "is",
+        "localized": {
+          "title": "ICEMAN EPISODE 3",
+          "description": "ICEMAN EPISODE 3"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT1H34M56S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "regionRestriction": {
+          "blocked": [
+            "BY",
+            "RU"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "2172240",
+        "likeCount": "81301",
+        "favoriteCount": "0",
+        "commentCount": "6210"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "U7akBASJ9ul6Pe33wpVqHYv0Vdc",
+      "id": "bmzXmVpHFmI",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:58:14Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY ANNIE BURKE",
+        "description": "AI-Art Based treatment, showcasing Drake in a therapy/group session discussing conflict between him and a girl we assume is his lover, while PartyNextDoor supports him throughout. \n\nDirected by Annie Burke\nhttps://instagram.com/annieaburke\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/bmzXmVpHFmI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/bmzXmVpHFmI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/bmzXmVpHFmI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/bmzXmVpHFmI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/bmzXmVpHFmI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY ANNIE BURKE",
+          "description": "AI-Art Based treatment, showcasing Drake in a therapy/group session discussing conflict between him and a girl we assume is his lover, while PartyNextDoor supports him throughout. \n\nDirected by Annie Burke\nhttps://instagram.com/annieaburke\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "441365",
+        "likeCount": "7217",
+        "favoriteCount": "0",
+        "commentCount": "2222"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "Afl75_RNeFDUZMim4Ir_IdeGSsQ",
+      "id": "rGyrATTt7wI",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:58:09Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JLEAN",
+        "description": "The whole video takes place in two adjacent fitting rooms, focusing on the beautiful women that are playing dress up and getting intimate. They hope to have someone that loves them. It’s a playful video that has stunning camera effects, colour schemes and lots of fun.\n\nDirected by JLean\nhttps://www.instagram.com/jlea.n/\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/rGyrATTt7wI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/rGyrATTt7wI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/rGyrATTt7wI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/rGyrATTt7wI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/rGyrATTt7wI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JLEAN",
+          "description": "The whole video takes place in two adjacent fitting rooms, focusing on the beautiful women that are playing dress up and getting intimate. They hope to have someone that loves them. It’s a playful video that has stunning camera effects, colour schemes and lots of fun.\n\nDirected by JLean\nhttps://www.instagram.com/jlea.n/\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "299052",
+        "likeCount": "5458",
+        "favoriteCount": "0",
+        "commentCount": "264"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "j_jH5_6MEzT_eaf8A33GIQsWZnY",
+      "id": "Zbel42hnKis",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:58:05Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JABARI DANIEL",
+        "description": "In a looping hotel hallway, a man opens three doors – to betrayal, distraction, and loneliness – reliving the emotional void of searching for real love in a world of illusions. This treatment tells the story of the emotional disorientation of modern love through the eyes of a man caught in a surreal loop of heartbreak, temptation, and isolation. Set within a single hotel hallway, the story unfolds as the protagonist repeatedly opens the same door – each time revealing a new emotional state that reflects a different phase of his inner struggle.\n\nDirected by Jabari Danielhttps://instagram.com/jabaridaniel\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Zbel42hnKis/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Zbel42hnKis/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Zbel42hnKis/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Zbel42hnKis/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Zbel42hnKis/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JABARI DANIEL",
+          "description": "In a looping hotel hallway, a man opens three doors – to betrayal, distraction, and loneliness – reliving the emotional void of searching for real love in a world of illusions. This treatment tells the story of the emotional disorientation of modern love through the eyes of a man caught in a surreal loop of heartbreak, temptation, and isolation. Set within a single hotel hallway, the story unfolds as the protagonist repeatedly opens the same door – each time revealing a new emotional state that reflects a different phase of his inner struggle.\n\nDirected by Jabari Danielhttps://instagram.com/jabaridaniel\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "216802",
+        "likeCount": "12476",
+        "favoriteCount": "0",
+        "commentCount": "736"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "5Oe8UEn-pnURp9WsFG0M53oapQQ",
+      "id": "7k7UlWqhdik",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:58:00Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JALEIGHA B JONES",
+        "description": "When a woman feels truly safe – when she knows ‘somebody loves me’, she’ll do anything to protect that feeling. Even if it means eliminating every threat that dares to challenge it. During an exclusive party in a lavish home, someone was found dead with no clear motives.. Everyone is a suspect.\n\nDirected by Jaleigha B Jones\nhttps://instagram.com/@juneebjonesss\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/7k7UlWqhdik/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/7k7UlWqhdik/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/7k7UlWqhdik/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/7k7UlWqhdik/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/7k7UlWqhdik/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JALEIGHA B JONES",
+          "description": "When a woman feels truly safe – when she knows ‘somebody loves me’, she’ll do anything to protect that feeling. Even if it means eliminating every threat that dares to challenge it. During an exclusive party in a lavish home, someone was found dead with no clear motives.. Everyone is a suspect.\n\nDirected by Jaleigha B Jones\nhttps://instagram.com/@juneebjonesss\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M4S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "129764",
+        "likeCount": "4904",
+        "favoriteCount": "0",
+        "commentCount": "314"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "5gZe5DQdtRzoakq9Pmn3v3eqkxI",
+      "id": "e-ZRXKrc41Y",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:57:42Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY HANNAH SIDER",
+        "description": "This song is a mediation on longing, ego, and the tension between desire & detachment. The mood for this short visual should feel dark, atmospheric, and slightly surreal. Like emotional weight being carried through space and luxery. This video follows a beautiful, magnetic woman as she moves through the empty streets of NYC after dark. The concept is simple, but the tone is anything but. \n\nDirected by Hannah Sider\nhttp://instagram.com/hannahsider\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/e-ZRXKrc41Y/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/e-ZRXKrc41Y/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/e-ZRXKrc41Y/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/e-ZRXKrc41Y/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/e-ZRXKrc41Y/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY HANNAH SIDER",
+          "description": "This song is a mediation on longing, ego, and the tension between desire & detachment. The mood for this short visual should feel dark, atmospheric, and slightly surreal. Like emotional weight being carried through space and luxery. This video follows a beautiful, magnetic woman as she moves through the empty streets of NYC after dark. The concept is simple, but the tone is anything but. \n\nDirected by Hannah Sider\nhttp://instagram.com/hannahsider\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M4S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "62575",
+        "likeCount": "1458",
+        "favoriteCount": "0",
+        "commentCount": "99"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "hS0RpcUud-Lp6QW4x4KPm5NMRxo",
+      "id": "Mdj_pKlavD4",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:57:38Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY TARAN",
+        "description": "Naturalistic, intimate, beautifully lit “fly-on-the-wall” storytelling with organic moments of glamour & warmth. Overall, our video places PartyNextDoor & Drake as the soundtrack to feel-good body positivity & self-love - something they’ve been doing for women around the world their entire careers.\n\nDirected by Taran\nhttps://instagram.com/teeeezyc\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Mdj_pKlavD4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Mdj_pKlavD4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Mdj_pKlavD4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Mdj_pKlavD4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Mdj_pKlavD4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY TARAN",
+          "description": "Naturalistic, intimate, beautifully lit “fly-on-the-wall” storytelling with organic moments of glamour & warmth. Overall, our video places PartyNextDoor & Drake as the soundtrack to feel-good body positivity & self-love - something they’ve been doing for women around the world their entire careers.\n\nDirected by Taran\nhttps://instagram.com/teeeezyc\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M4S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "65330",
+        "likeCount": "1774",
+        "favoriteCount": "0",
+        "commentCount": "122"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "EoLcUy2pj0mOAXf8igavMuY6Hvs",
+      "id": "TqSGzINbrF4",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:57:35Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY AARON RICKETTS",
+        "description": "Inside the interior of a luxury party, we follow a woman known only as Angel as she leads her group of girlfriends away from the noise — into the sanctuary of the bathroom — where a new kind of truth gets spoken. It’s intimate, playful, and emotionally charged.\nSet to the outro of “Somebody Loves Me,” this is a visual monologue about modern femininity, performative celibacy, and the truths we say out loud when the doors are closed.\n\nDirected by Aaron Ricketts\nhttps://instagram.com/@aaronricketts\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/TqSGzINbrF4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/TqSGzINbrF4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/TqSGzINbrF4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/TqSGzINbrF4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/TqSGzINbrF4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY AARON RICKETTS",
+          "description": "Inside the interior of a luxury party, we follow a woman known only as Angel as she leads her group of girlfriends away from the noise — into the sanctuary of the bathroom — where a new kind of truth gets spoken. It’s intimate, playful, and emotionally charged.\nSet to the outro of “Somebody Loves Me,” this is a visual monologue about modern femininity, performative celibacy, and the truths we say out loud when the doors are closed.\n\nDirected by Aaron Ricketts\nhttps://instagram.com/@aaronricketts\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT4M5S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "105277",
+        "likeCount": "4206",
+        "favoriteCount": "0",
+        "commentCount": "181"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "MR-6JL04IZeaqkDtO9NE8XBJW9A",
+      "id": "NvU2OQPyq-8",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:57:27Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JUSTICE SILVERA",
+        "description": "This short-form version of the video (1st minute of song) introduces a surreal journey of a group of women chasing PARTYNEXTDOOR and Drake across Miami. What begins as a grounded night out quickly fractures into visual absurdity. And the obsession for searching for connection is the metaphor of this visual. Throughout the visual, the camera never moves just simply glides forward, committed to its perspective no matter how chaotic or irrational the world becomes.\n\nDirected by Justice Silvera\nhttps://www.instagram.com/justicesilvera/\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/NvU2OQPyq-8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/NvU2OQPyq-8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/NvU2OQPyq-8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/NvU2OQPyq-8/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/NvU2OQPyq-8/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JUSTICE SILVERA",
+          "description": "This short-form version of the video (1st minute of song) introduces a surreal journey of a group of women chasing PARTYNEXTDOOR and Drake across Miami. What begins as a grounded night out quickly fractures into visual absurdity. And the obsession for searching for connection is the metaphor of this visual. Throughout the visual, the camera never moves just simply glides forward, committed to its perspective no matter how chaotic or irrational the world becomes.\n\nDirected by Justice Silvera\nhttps://www.instagram.com/justicesilvera/\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M49S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "2732759",
+        "likeCount": "47660",
+        "favoriteCount": "0",
+        "commentCount": "988"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "ixmrEWTZNbg1sKHrWLh2er9vOK0",
+      "id": "pnNKklqOCzI",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:57:14Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY MATIAS SARRIA & CARLOS RODRIGUEZ",
+        "description": "SLM is a sexy yet melancholy track. Pretty much like the life of a stripper… a constant battle between “wtf am I doing with my life” vs “getting the life I deserve”. This is the story of a late night driving home from a stripper who just got out from a successful night of work in a club in Miami.\n\nDirected by Matias Sarria & Carlos Rodriguez\nhttps://instagram.com/matias.sarria\nhttps://instagram.com/fuhshaw\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/pnNKklqOCzI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/pnNKklqOCzI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/pnNKklqOCzI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/pnNKklqOCzI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/pnNKklqOCzI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY MATIAS SARRIA & CARLOS RODRIGUEZ",
+          "description": "SLM is a sexy yet melancholy track. Pretty much like the life of a stripper… a constant battle between “wtf am I doing with my life” vs “getting the life I deserve”. This is the story of a late night driving home from a stripper who just got out from a successful night of work in a club in Miami.\n\nDirected by Matias Sarria & Carlos Rodriguez\nhttps://instagram.com/matias.sarria\nhttps://instagram.com/fuhshaw\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "156981",
+        "likeCount": "4862",
+        "favoriteCount": "0",
+        "commentCount": "172"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "G2nJkjWL_asQOYZVWTAM0R9fp1I",
+      "id": "jn7GhU_sW4E",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:57:09Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY AMEYA TOKYO",
+        "description": "A one-take Tokyo myth about a girl so toxic she becomes the embodiment of clout. At the center: Angel, a girl whose lovers destroy themselves for her. Drake is never seen -- until the final seconds. A story about obsession, myth, and emotional collapse.This is a psychological thriller set on a Tokyo rooftop. The film uses one unbroken take to explore what it means to be desired, used, and worshipped in the age of digital love and ghosted DMs.\n\nDirected by Amaya Tokyo\nhttps://www.instagram.com/ameya.h264\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/jn7GhU_sW4E/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/jn7GhU_sW4E/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/jn7GhU_sW4E/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/jn7GhU_sW4E/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/jn7GhU_sW4E/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY AMEYA TOKYO",
+          "description": "A one-take Tokyo myth about a girl so toxic she becomes the embodiment of clout. At the center: Angel, a girl whose lovers destroy themselves for her. Drake is never seen -- until the final seconds. A story about obsession, myth, and emotional collapse.This is a psychological thriller set on a Tokyo rooftop. The film uses one unbroken take to explore what it means to be desired, used, and worshipped in the age of digital love and ghosted DMs.\n\nDirected by Amaya Tokyo\nhttps://www.instagram.com/ameya.h264\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "41137",
+        "likeCount": "1271",
+        "favoriteCount": "0",
+        "commentCount": "64"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "vlyx1W9IpJ9OkIjscmvfyJmQLUE",
+      "id": "EucTtrwpzQk",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:57:02Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JORDAN SOOK STUDIOS",
+        "description": "A playful take on a velvet-wrapped dreamscape. This is uniquely positioned puppet-fueled odyssey of lust, status, and late nights told though the detached gaze of Drake and the smooth counterbalance of PND. Together they look for true love as they float through a carousal of indulgent scenes. The women (some real, some puppets) come and go. Some flirt, some dance, some converse… but in the end they are there for superficial reasons. The extremes of the Miami-Toronto nightlife is counterbalanced by the tension and texture of the “puppet style approach”.\n\nDirected by Jordan Sook Studios\nhttps://www.instagram.com/jordansook/\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/EucTtrwpzQk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/EucTtrwpzQk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/EucTtrwpzQk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/EucTtrwpzQk/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/EucTtrwpzQk/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY JORDAN SOOK STUDIOS",
+          "description": "A playful take on a velvet-wrapped dreamscape. This is uniquely positioned puppet-fueled odyssey of lust, status, and late nights told though the detached gaze of Drake and the smooth counterbalance of PND. Together they look for true love as they float through a carousal of indulgent scenes. The women (some real, some puppets) come and go. Some flirt, some dance, some converse… but in the end they are there for superficial reasons. The extremes of the Miami-Toronto nightlife is counterbalanced by the tension and texture of the “puppet style approach”.\n\nDirected by Jordan Sook Studios\nhttps://www.instagram.com/jordansook/\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT2M53S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "151309",
+        "likeCount": "3761",
+        "favoriteCount": "0",
+        "commentCount": "518"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "D0hv0ylzFD60ZkPZ8NItkJ7VQuw",
+      "id": "3BpAbAogbig",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:56:57Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY DT JULY",
+        "description": "Animated. Three bad bunnies moving through the city. Not in a rush. Not in danger. Just doing what they want. Each scene hits quick. No talking. No wasted shots. They steal what they want, leave something pretty behind, and vanish before anyone even thinks to stop them. At the end of every heist, a lyric floats across the screen. “Her name is Angel, but she’s far from God.”\n\nDirected by DT July\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/3BpAbAogbig/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/3BpAbAogbig/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/3BpAbAogbig/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/3BpAbAogbig/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/3BpAbAogbig/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY DT JULY",
+          "description": "Animated. Three bad bunnies moving through the city. Not in a rush. Not in danger. Just doing what they want. Each scene hits quick. No talking. No wasted shots. They steal what they want, leave something pretty behind, and vanish before anyone even thinks to stop them. At the end of every heist, a lyric floats across the screen. “Her name is Angel, but she’s far from God.”\n\nDirected by DT July\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT2M53S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "54541",
+        "likeCount": "1454",
+        "favoriteCount": "0",
+        "commentCount": "98"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "qruan63iix1ZRCpHvvAZOl1h3Xg",
+      "id": "lp46MPBFpg4",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:56:45Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY DITO ANDRES",
+        "description": "PND and Drake’s Moms are celestial guardian angels, looking down at their sons. Loving them from a distance and secretly guiding them towards good things and protecting them from trouble. \n\nDirected by Dito Andres\nhttp://instagram.com/4solnyc\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/lp46MPBFpg4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/lp46MPBFpg4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/lp46MPBFpg4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/lp46MPBFpg4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/lp46MPBFpg4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY DITO ANDRES",
+          "description": "PND and Drake’s Moms are celestial guardian angels, looking down at their sons. Loving them from a distance and secretly guiding them towards good things and protecting them from trouble. \n\nDirected by Dito Andres\nhttp://instagram.com/4solnyc\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "59642",
+        "likeCount": "1320",
+        "favoriteCount": "0",
+        "commentCount": "80"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "ABbPZmH5bW5wK0qeSwjOscISJEU",
+      "id": "nlADofVOpj8",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:56:39Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY RICH HALL",
+        "description": "This idea is for the first 45 seconds of the song. Using miniatures, we create frozen dioramas of the party mid-air on drake’s plane. Camera movies through a frozen scene.\n\nDirected by Rich Hall\nhttps://www.instagram.com/rich0hall\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/nlADofVOpj8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/nlADofVOpj8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/nlADofVOpj8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/nlADofVOpj8/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/nlADofVOpj8/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY RICH HALL",
+          "description": "This idea is for the first 45 seconds of the song. Using miniatures, we create frozen dioramas of the party mid-air on drake’s plane. Camera movies through a frozen scene.\n\nDirected by Rich Hall\nhttps://www.instagram.com/rich0hall\n\nView full 'Somebody Loves Me' submissions here: https://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "85024",
+        "likeCount": "1761",
+        "favoriteCount": "0",
+        "commentCount": "86"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "QyzXAB0cS7I62PeCAutLD0yRQpc",
+      "id": "aeWDqj1W_es",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:56:34Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY RILEY ROBBINS",
+        "description": "Love in Motion. A single forward moving one shot that travel through six distinct worlds. Each one a love letter to a different corner of somebody’s love universe. Intimate details create seamless transitions. \n\nDirected by Riley Robbins\nhttps://www.instagram.com/rileyrobbinsfilm\n\nView full 'Somebody Loves Me' submissions here: http://www.drakerelated.com/submissions",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/aeWDqj1W_es/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/aeWDqj1W_es/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/aeWDqj1W_es/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/aeWDqj1W_es/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/aeWDqj1W_es/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY RILEY ROBBINS",
+          "description": "Love in Motion. A single forward moving one shot that travel through six distinct worlds. Each one a love letter to a different corner of somebody’s love universe. Intimate details create seamless transitions. \n\nDirected by Riley Robbins\nhttps://www.instagram.com/rileyrobbinsfilm\n\nView full 'Somebody Loves Me' submissions here: http://www.drakerelated.com/submissions"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M21S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "137750",
+        "likeCount": "4946",
+        "favoriteCount": "0",
+        "commentCount": "321"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "HCcy8A76x5GMxZ-eE-beny05Oi4",
+      "id": "xGqdMj6DhI8",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:56:29Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY KRISTEN LAMBIE",
+        "description": "A 70-something year old black man as he journeys back to the very places where love first took root. With every step, memories ignite – his younger self bursting to life, reliving the sweet innocence, joy and tenderness of first love. Past and present collide in a beautiful dance, celebrating the timeless power of black love, memory and devotion.\n\nDirected by Kristen Lambie\nhttps://www.instagram.com/kristenlambie\n\nView full 'Somebody Loves Me' submissions here: http://www.drakerelated.com/submissions",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/xGqdMj6DhI8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/xGqdMj6DhI8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/xGqdMj6DhI8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/xGqdMj6DhI8/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/xGqdMj6DhI8/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY KRISTEN LAMBIE",
+          "description": "A 70-something year old black man as he journeys back to the very places where love first took root. With every step, memories ignite – his younger self bursting to life, reliving the sweet innocence, joy and tenderness of first love. Past and present collide in a beautiful dance, celebrating the timeless power of black love, memory and devotion.\n\nDirected by Kristen Lambie\nhttps://www.instagram.com/kristenlambie\n\nView full 'Somebody Loves Me' submissions here: http://www.drakerelated.com/submissions"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M4S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "101138",
+        "likeCount": "4727",
+        "favoriteCount": "0",
+        "commentCount": "343"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "bSNkZAbKFdvBdmwcK1jfdxnLib8",
+      "id": "HU4l5ZvE5ec",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:56:23Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY SEYI KG",
+        "description": "Our 1-minute video for \"Somebody Loves Me\" by Drake andPARTYNEXTDOOR takes place in a snowstorm inside a vintage banquet hall. We find ourselves in the middle of a surreal and provocative showcase, filled with costumed feminine figures—each one representing the unreachable lover Drake and PND are singing about and it's snowing inside. \n\nDirected by Seyi KG\nhttps://instagram.com/seyi.kg\n\nView full 'Somebody Loves Me' submissions here: www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/HU4l5ZvE5ec/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/HU4l5ZvE5ec/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/HU4l5ZvE5ec/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/HU4l5ZvE5ec/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/HU4l5ZvE5ec/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY SEYI KG",
+          "description": "Our 1-minute video for \"Somebody Loves Me\" by Drake andPARTYNEXTDOOR takes place in a snowstorm inside a vintage banquet hall. We find ourselves in the middle of a surreal and provocative showcase, filled with costumed feminine figures—each one representing the unreachable lover Drake and PND are singing about and it's snowing inside. \n\nDirected by Seyi KG\nhttps://instagram.com/seyi.kg\n\nView full 'Somebody Loves Me' submissions here: www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT2M52S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "75154",
+        "likeCount": "4584",
+        "favoriteCount": "0",
+        "commentCount": "383"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "0rLGpxoPvn6gyCg3BkLCPe_RuhA",
+      "id": "57hGzZiNhjc",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:56:19Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY ELIAS & TAMARA MAJIN",
+        "description": "A poetic visual exploration of emotional disconnect and longing. We follow a young man drifting through moments with women who don’t really see him — and who he doesn’t truly see either. Each person is emotionally checked out, chasing the memory or fantasy of someone else. Until he meets her. In the final seconds of the film, for the first time, he and a woman lock eyes — and both are truly present. It’s quiet, it’s unspoken — but in that moment, something aligns.\n\nDirected by Elias & Tamara Majin\n\nView full 'Somebody Loves Me' submissions here: http://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/57hGzZiNhjc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/57hGzZiNhjc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/57hGzZiNhjc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/57hGzZiNhjc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/57hGzZiNhjc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY ELIAS & TAMARA MAJIN",
+          "description": "A poetic visual exploration of emotional disconnect and longing. We follow a young man drifting through moments with women who don’t really see him — and who he doesn’t truly see either. Each person is emotionally checked out, chasing the memory or fantasy of someone else. Until he meets her. In the final seconds of the film, for the first time, he and a woman lock eyes — and both are truly present. It’s quiet, it’s unspoken — but in that moment, something aligns.\n\nDirected by Elias & Tamara Majin\n\nView full 'Somebody Loves Me' submissions here: http://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT2M57S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "61484",
+        "likeCount": "2913",
+        "favoriteCount": "0",
+        "commentCount": "289"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "D6qk8HcqoTUCaKQ31yy86u71oPI",
+      "id": "hzV_UXglb6M",
+      "snippet": {
+        "publishedAt": "2025-08-28T17:56:12Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY EDGAR DANIEL",
+        "description": "We launch an open casting call inviting real female fans to submit videos or come to an in person casting where they will get their head shots taken and are interviewed for a chance to appear in the “Somebody Loves Me” music video.\n\nDirected by Edgar Daniel\nhttp://instagram.com/edgardaniel199x\n\nView full 'Somebody Loves Me' submissions here: http://www.drakerelated.com/videos",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/hzV_UXglb6M/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/hzV_UXglb6M/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/hzV_UXglb6M/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/hzV_UXglb6M/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/hzV_UXglb6M/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME DIRECTED BY EDGAR DANIEL",
+          "description": "We launch an open casting call inviting real female fans to submit videos or come to an in person casting where they will get their head shots taken and are interviewed for a chance to appear in the “Somebody Loves Me” music video.\n\nDirected by Edgar Daniel\nhttp://instagram.com/edgardaniel199x\n\nView full 'Somebody Loves Me' submissions here: http://www.drakerelated.com/videos"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "161772",
+        "likeCount": "7852",
+        "favoriteCount": "0",
+        "commentCount": "495"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "TNgbaXElrFhe-lXx3NilF0DK0X8",
+      "id": "JqXf2vDQHuc",
+      "snippet": {
+        "publishedAt": "2025-07-25T01:59:03Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "ICEMAN EPISODE 2",
+        "description": "ICEMAN EPISODE 2",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/JqXf2vDQHuc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/JqXf2vDQHuc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/JqXf2vDQHuc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/JqXf2vDQHuc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/JqXf2vDQHuc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "ICEMAN EPISODE 2",
+          "description": "ICEMAN EPISODE 2"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT41M16S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "regionRestriction": {
+          "blocked": [
+            "BY",
+            "RU"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "2595221",
+        "likeCount": "78247",
+        "favoriteCount": "0",
+        "commentCount": "7877"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "7i_cPNG3nqamXCbe-E3UEhALaak",
+      "id": "weU76DGHKU0",
+      "snippet": {
+        "publishedAt": "2025-07-10T14:40:43Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "DRAKE - WHAT DID I MISS",
+        "description": "",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/weU76DGHKU0/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/weU76DGHKU0/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/weU76DGHKU0/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/weU76DGHKU0/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/weU76DGHKU0/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "DRAKE - WHAT DID I MISS",
+          "description": ""
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT4M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "regionRestriction": {
+          "blocked": [
+            "BY",
+            "RU"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "19582739",
+        "likeCount": "347636",
+        "favoriteCount": "0",
+        "commentCount": "21043"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "ab14kqq5JaGz9GhkwhlHTJb7g3E",
+      "id": "VTPxU2nZ7ro",
+      "snippet": {
+        "publishedAt": "2025-07-05T21:18:03Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "ICEMAN EPISODE 1",
+        "description": "",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/VTPxU2nZ7ro/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/VTPxU2nZ7ro/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/VTPxU2nZ7ro/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/VTPxU2nZ7ro/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/VTPxU2nZ7ro/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "ICEMAN EPISODE 1",
+          "description": ""
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT57M43S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "regionRestriction": {
+          "blocked": [
+            "BY",
+            "RU"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "1401734",
+        "likeCount": "68308",
+        "favoriteCount": "0",
+        "commentCount": "6721"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "zrWKv90T7yfyVBhJEJXM20SsygM",
+      "id": "8ekJMC8OtGU",
+      "snippet": {
+        "publishedAt": "2025-03-31T21:54:35Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - NOKIA (Official Music Video)",
+        "description": "Music video by Drake performing NOKIA (Official Music Video).2025 OVO Sound under exclusive license to Santa Anna Label Group and OVO under exclusive license to Republic Records, a division of UMG Recordings",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/8ekJMC8OtGU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/8ekJMC8OtGU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/8ekJMC8OtGU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/8ekJMC8OtGU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/8ekJMC8OtGU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "OVO Sound",
+          "Hip-Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - NOKIA (Official Music Video)",
+          "description": "Music video by Drake performing NOKIA (Official Music Video).2025 OVO Sound under exclusive license to Santa Anna Label Group and OVO under exclusive license to Republic Records, a division of UMG Recordings"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT4M26S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "43470063",
+        "likeCount": "697792",
+        "favoriteCount": "0",
+        "commentCount": "62615"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "Q3egZthfuQmdQtL722aXLZofy2o",
+      "id": "ZYouVfCThXU",
+      "snippet": {
+        "publishedAt": "2025-03-04T22:49:48Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME (Official Lyric Video)",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ZYouVfCThXU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/ZYouVfCThXU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/ZYouVfCThXU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/ZYouVfCThXU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/ZYouVfCThXU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "DRAKE",
+          "Party",
+          "partynextdoor",
+          "Some Sexy Songs 4 U",
+          "$$$4U",
+          "Somebody Loves Me",
+          "Somebody Who Loves Me",
+          "Drake",
+          "Drizzy"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SOMEBODY LOVES ME (Official Lyric Video)",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "6141032",
+        "likeCount": "52038",
+        "favoriteCount": "0",
+        "commentCount": "1681"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "B1rkmAHp-FPwZ9paOZCGZsLwnzI",
+      "id": "CiV9BHZCaKQ",
+      "snippet": {
+        "publishedAt": "2025-03-04T20:43:44Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - DIE TRYING (Official Lyric Video)",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/CiV9BHZCaKQ/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/CiV9BHZCaKQ/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/CiV9BHZCaKQ/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/CiV9BHZCaKQ/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/CiV9BHZCaKQ/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "DRAKE",
+          "PARTYNEXTDOOR",
+          "$$$4U",
+          "Die Trying",
+          "Lyric",
+          "Video"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - DIE TRYING (Official Lyric Video)",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M15S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "3565331",
+        "likeCount": "40318",
+        "favoriteCount": "0",
+        "commentCount": "1176"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "bay2G4VtYFNByd6p53wBWTXwSm0",
+      "id": "Ga8vFYYC9cY",
+      "snippet": {
+        "publishedAt": "2025-03-04T20:43:39Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - GIMME A HUG (Official Lyric Video)",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Ga8vFYYC9cY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Ga8vFYYC9cY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Ga8vFYYC9cY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Ga8vFYYC9cY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Ga8vFYYC9cY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "DRAKE",
+          "Give Me A Hug",
+          "GIMME A HUG",
+          "PARTY",
+          "PARTYNEXTDOOR",
+          "Some Sexy Songs 4 U",
+          "LYric",
+          "Lyric video"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - GIMME A HUG (Official Lyric Video)",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M13S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "3040608",
+        "likeCount": "31089",
+        "favoriteCount": "0",
+        "commentCount": "1653"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "knYgUPlcskl4JXuJGZVDaQJo7as",
+      "id": "YAaIgrWtRYk",
+      "snippet": {
+        "publishedAt": "2025-03-04T20:43:36Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - NOKIA (Official Lyric Video)",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/YAaIgrWtRYk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/YAaIgrWtRYk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/YAaIgrWtRYk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/YAaIgrWtRYk/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/YAaIgrWtRYk/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "Babygurl",
+          "Nokia",
+          "Drake",
+          "Party",
+          "Partynextdoor",
+          "Drizzy",
+          "Lyric Video",
+          "Some Sexy Songs 4 U",
+          "$$$4U"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - NOKIA (Official Lyric Video)",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT4M1S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "4256320",
+        "likeCount": "52499",
+        "favoriteCount": "0",
+        "commentCount": "2463"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "1ojA2rp4jMrJ-DzNqXf-BXfNwXg",
+      "id": "UD__AwYOHXE",
+      "snippet": {
+        "publishedAt": "2025-03-04T17:23:23Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - DEEPER (Official Visualizer)",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/UD__AwYOHXE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/UD__AwYOHXE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/UD__AwYOHXE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/UD__AwYOHXE/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/UD__AwYOHXE/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "DRAKE",
+          "PARTYNEXTDOOR",
+          "$$$4U",
+          "DEEPER",
+          "Visualizer"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - DEEPER (Official Visualizer)",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT2M53S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "1135681",
+        "likeCount": "16888",
+        "favoriteCount": "0",
+        "commentCount": "879"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "YWkTMUVVWxlTUVbfU3Inser5itM",
+      "id": "doypTGEd6R4",
+      "snippet": {
+        "publishedAt": "2025-03-04T17:23:19Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - CRYING IN CHANEL (Official Visualizer)",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/doypTGEd6R4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/doypTGEd6R4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/doypTGEd6R4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/doypTGEd6R4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/doypTGEd6R4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "DRAKE",
+          "PARTYNEXTDOOR",
+          "PND",
+          "$$$4U",
+          "Crying In Chanel",
+          "CHANEL",
+          "VISUALIZER"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - CRYING IN CHANEL (Official Visualizer)",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M20S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "1028660",
+        "likeCount": "12633",
+        "favoriteCount": "0",
+        "commentCount": "506"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "-KbGDCKZhk2sWZ31tmG0Igp4ZhA",
+      "id": "IbfbgH2MqGY",
+      "snippet": {
+        "publishedAt": "2025-03-03T23:49:13Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - SMALL TOWN FAME",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/IbfbgH2MqGY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/IbfbgH2MqGY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/IbfbgH2MqGY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/IbfbgH2MqGY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/IbfbgH2MqGY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "DRAKE",
+          "PARTYNEXTDOOR",
+          "Some Sexy Songs 4 U",
+          "$$$4U",
+          "Album",
+          "Single"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - SMALL TOWN FAME",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT2M29S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "866772",
+        "likeCount": "7325",
+        "favoriteCount": "0",
+        "commentCount": "597"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "A46LzzaovdkCjFmBIHepgucwkL8",
+      "id": "TmKQvtpwD0s",
+      "snippet": {
+        "publishedAt": "2025-03-03T23:48:42Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - RAINING IN HOUSTON",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/TmKQvtpwD0s/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/TmKQvtpwD0s/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/TmKQvtpwD0s/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/TmKQvtpwD0s/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/TmKQvtpwD0s/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "RAINING IN HOUSTON",
+          "DRAKE",
+          "PARTYNEXTDOOR",
+          "SOME SEXY SONGS 4 U",
+          "$$$4U",
+          "Album"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - RAINING IN HOUSTON",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT4M5S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "830736",
+        "likeCount": "6179",
+        "favoriteCount": "0",
+        "commentCount": "476"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "zDxwOGPfLq3_Vx5aze0NMsVYdGM",
+      "id": "5lcM_NhYcdc",
+      "snippet": {
+        "publishedAt": "2025-03-03T23:48:14Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - BRIAN STEEL",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/5lcM_NhYcdc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/5lcM_NhYcdc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/5lcM_NhYcdc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/5lcM_NhYcdc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/5lcM_NhYcdc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "BRIAN STEEL",
+          "DRAKE",
+          "PARTYNEXTDOOR",
+          "SOME SEXY SONGS 4 U",
+          "$$$4U"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - BRIAN STEEL",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT1M52S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "500689",
+        "likeCount": "6106",
+        "favoriteCount": "0",
+        "commentCount": "675"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "wdDqUiCcpiC73TBUhvOZC4of1_w",
+      "id": "mIczKcaV9AY",
+      "snippet": {
+        "publishedAt": "2025-03-03T23:47:19Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - GIMME A HUG",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/mIczKcaV9AY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/mIczKcaV9AY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/mIczKcaV9AY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/mIczKcaV9AY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/mIczKcaV9AY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "DRAKE",
+          "PARTYNEXTDOOR",
+          "Some Sexy Songs 4 U",
+          "$$$4U",
+          "GIMME A HUG"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - GIMME A HUG",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M14S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "257938",
+        "likeCount": "6120",
+        "favoriteCount": "0",
+        "commentCount": "1107"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "WOBoHkmyuUfZjGxMGmxZ9ugOCec",
+      "id": "rQbyl-p4l_A",
+      "snippet": {
+        "publishedAt": "2025-03-03T23:46:39Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE - NOKIA",
+        "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/rQbyl-p4l_A/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/rQbyl-p4l_A/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/rQbyl-p4l_A/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/rQbyl-p4l_A/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/rQbyl-p4l_A/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "tags": [
+          "DRAKE",
+          "PARTYNEXTDOOR",
+          "SOME SEXY SONGS 4 U",
+          "$$$4U",
+          "ALBUM",
+          "NOKIA"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE - NOKIA",
+          "description": "Listen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT4M1S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "781421",
+        "likeCount": "12791",
+        "favoriteCount": "0",
+        "commentCount": "1818"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "AYp8J0hV62pbbajQZvPtcf-zYsA",
+      "id": "g-EublArIYo",
+      "snippet": {
+        "publishedAt": "2025-02-26T16:16:55Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PIMMIE'S DILEMMA (Official Visualizer)",
+        "description": "PARTYNEXTDOOR & DRAKE - PIMMIE'S DILEMMA (Official Visualizer)\n\nListen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW PIMMIE: \nInstagram: https://www.instagram.com/ayopimmie\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\nLyrics:\nPlease don't go out with your friends\nThey don't ever keep you in check\nThey gon' let you do whatever\nAnd blame it on the liquor, oh\nWhole crew got they phones silenced, wildin…\nThink I don't know 'bout them clubs, oh\nYou got strippers that you favor, oh\nBut you said you don't go out that much?\n \nCan't you wait? Don't love nobody\nSpending time with people that don't respect the love we got here\nYou said you got me, but you're headed elsewherе \nAnd your friends ain't shit, they do the most, you know it's rеckless, yeah\n \nCan't you wait? Don't love nobody\nEntertaining bitches you said you wouldn't, you said you got me\nYou swore on everything you said, don't ever doubt me\nDon't love nobody, oh, don't love nobody, oh-oh, oh\n \nPlease, don't go out with your friends\nThey don't ever keep you in check\nThey gon' let you do whatever\nAnd blame it on the liquor, oh\nWhole crew got they phones silenced, wildin…\nThink I don't know 'bout them clubs, oh\nYou got strippers that you favor, oh\nBut you said you don't go out that much?\n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/g-EublArIYo/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/g-EublArIYo/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/g-EublArIYo/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/g-EublArIYo/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PIMMIE'S DILEMMA (Official Visualizer)",
+          "description": "PARTYNEXTDOOR & DRAKE - PIMMIE'S DILEMMA (Official Visualizer)\n\nListen to $ome $exy $ongs 4 U: https://ovo-partynextdoor.ffm.to/4u\n\nFOLLOW PIMMIE: \nInstagram: https://www.instagram.com/ayopimmie\n\nFOLLOW DRAKE: \nWebsite: https://drakerelated.com/rooms/bedroom\nInstagram: https://www.instagram.com/champagnepapi/\nTwitter: https://x.com/Drake\nFacebook: https://www.facebook.com/Drake\nYouTube: https://www.youtube.com/@DrakeOfficial/videos\nSpotify: https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4\n\nFOLLOW PARTYNEXTDOOR: \nWebsite: https://partyomo.com/\nTikTok: https://www.tiktok.com/@partynextdoor \nInstagram: https://www.instagram.com/partynextdoor\nTwitter: https://twitter.com/partynextdoor\nFacebook: https://www.facebook.com/Partyomo\nSoundcloud: https://soundcloud.com/Partyomo\nSpotify: https://open.spotify.com/artist/2HPaUgqeutzr3jx5a9WyDV?si=czy3rYLQSvuf0v7rSodJHQ \n\nLyrics:\nPlease don't go out with your friends\nThey don't ever keep you in check\nThey gon' let you do whatever\nAnd blame it on the liquor, oh\nWhole crew got they phones silenced, wildin…\nThink I don't know 'bout them clubs, oh\nYou got strippers that you favor, oh\nBut you said you don't go out that much?\n \nCan't you wait? Don't love nobody\nSpending time with people that don't respect the love we got here\nYou said you got me, but you're headed elsewherе \nAnd your friends ain't shit, they do the most, you know it's rеckless, yeah\n \nCan't you wait? Don't love nobody\nEntertaining bitches you said you wouldn't, you said you got me\nYou swore on everything you said, don't ever doubt me\nDon't love nobody, oh, don't love nobody, oh-oh, oh\n \nPlease, don't go out with your friends\nThey don't ever keep you in check\nThey gon' let you do whatever\nAnd blame it on the liquor, oh\nWhole crew got they phones silenced, wildin…\nThink I don't know 'bout them clubs, oh\nYou got strippers that you favor, oh\nBut you said you don't go out that much?\n\n#OVOSOUND #PARTYNEXTDOOR #DRAKE #SSS4U"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT1M59S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "1571390",
+        "likeCount": "40411",
+        "favoriteCount": "0",
+        "commentCount": "2849"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "L0nUYJEQbYSYtWnvsZ2a1WbTzX4",
+      "id": "cfl30Nl4djY",
+      "snippet": {
+        "publishedAt": "2025-02-03T18:14:21Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "PARTYNEXTDOOR & DRAKE    “$OME $EXY $ONGS 4 U” FEBRUARY 14",
+        "description": "https://open.spotify.com/playlist/4rW1jjNPNEqPW75pZKlclZ?si=icqbojSOTfSoyo4RMgrwRA&pi=bEIfV1xCSMKkQ&nd=1&dlsi=9cadbbfe2d794f24\n\nPARTYNEXTDOOR & DRAKE    “$OME $EXY $ONGS 4 U” FEBRUARY 14",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/cfl30Nl4djY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/cfl30Nl4djY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/cfl30Nl4djY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/cfl30Nl4djY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/cfl30Nl4djY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "PARTYNEXTDOOR & DRAKE    “$OME $EXY $ONGS 4 U” FEBRUARY 14",
+          "description": "https://open.spotify.com/playlist/4rW1jjNPNEqPW75pZKlclZ?si=icqbojSOTfSoyo4RMgrwRA&pi=bEIfV1xCSMKkQ&nd=1&dlsi=9cadbbfe2d794f24\n\nPARTYNEXTDOOR & DRAKE    “$OME $EXY $ONGS 4 U” FEBRUARY 14"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT1M10S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "1359067",
+        "likeCount": "57036",
+        "favoriteCount": "0",
+        "commentCount": "9515"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "_ZZhuutUuQqEfNi2CEL_aYpXX84",
+      "id": "HJeY-FXidDQ",
+      "snippet": {
+        "publishedAt": "2024-05-06T01:19:17Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "THE HEART PART 6 - DRAKE",
+        "description": "",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/HJeY-FXidDQ/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/HJeY-FXidDQ/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/HJeY-FXidDQ/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/HJeY-FXidDQ/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "THE HEART PART 6 - DRAKE",
+          "description": ""
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT5M26S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "26825022",
+        "likeCount": "794107",
+        "favoriteCount": "0",
+        "commentCount": "208439"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "5EOtMUAgCLYy6OZP1qsCCP0firY",
+      "id": "ZkXG3ZrXlbc",
+      "snippet": {
+        "publishedAt": "2024-05-04T03:06:01Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "DRAKE - FAMILY MATTERS",
+        "description": "",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ZkXG3ZrXlbc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/ZkXG3ZrXlbc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/ZkXG3ZrXlbc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/ZkXG3ZrXlbc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/ZkXG3ZrXlbc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "DRAKE - FAMILY MATTERS",
+          "description": ""
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT7M38S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "regionRestriction": {
+          "blocked": [
+            "BY",
+            "RU"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "48719600",
+        "likeCount": "1030317",
+        "favoriteCount": "0",
+        "commentCount": "185966"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "dGNFEHmxEChVs2iRTsp1e0fXvmM",
+      "id": "UcsSdIXHCWM",
+      "snippet": {
+        "publishedAt": "2024-02-14T23:00:27Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake ft. Sexyy Red & SZA - Rich Baby Daddy (Official Music Video)",
+        "description": "Music video by Drake performing Rich Baby Daddy. © 2024 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.\n\nhttp://vevo.ly/ifNVim",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/UcsSdIXHCWM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/UcsSdIXHCWM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/UcsSdIXHCWM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/UcsSdIXHCWM/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/UcsSdIXHCWM/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "Rich",
+          "Baby",
+          "Daddy",
+          "OVO/Republic",
+          "Hip",
+          "Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake ft. Sexyy Red & SZA - Rich Baby Daddy (Official Music Video)",
+          "description": "Music video by Drake performing Rich Baby Daddy. © 2024 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.\n\nhttp://vevo.ly/ifNVim"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT6M31S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "33794934",
+        "likeCount": "638384",
+        "favoriteCount": "0",
+        "commentCount": "28913"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "NcIz1cIORLXvmcZ1OQiyPP9XmE0",
+      "id": "w1-jss2mZlY",
+      "snippet": {
+        "publishedAt": "2023-12-20T16:49:22Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - You Broke My Heart",
+        "description": "Music video by Drake performing You Broke My Heart.© 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/w1-jss2mZlY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/w1-jss2mZlY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/w1-jss2mZlY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/w1-jss2mZlY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/w1-jss2mZlY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "OVO/Republic",
+          "Hip Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - You Broke My Heart",
+          "description": "Music video by Drake performing You Broke My Heart.© 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT4M53S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "true",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "17697603",
+        "likeCount": "312610",
+        "favoriteCount": "0",
+        "commentCount": "12277"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "DddZmHvQobAcd7esYu4SMmWxrN0",
+      "id": "0bxhAxRmrJw",
+      "snippet": {
+        "publishedAt": "2023-11-29T17:00:10Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - Polar Opposites",
+        "description": "Music video by Drake performing Polar Opposites. © 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/0bxhAxRmrJw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/0bxhAxRmrJw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/0bxhAxRmrJw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/0bxhAxRmrJw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/0bxhAxRmrJw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "Polar",
+          "Opposites",
+          "OVO/Republic",
+          "Hip",
+          "Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - Polar Opposites",
+          "description": "Music video by Drake performing Polar Opposites. © 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT4M13S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "9328617",
+        "likeCount": "200088",
+        "favoriteCount": "0",
+        "commentCount": "13432"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "pOjJahct8_d1vwMbiwK2dzopj7U",
+      "id": "wrhDUwYbTkI",
+      "snippet": {
+        "publishedAt": "2023-11-17T05:00:36Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - Evil Ways (Audio) ft. J. Cole",
+        "description": "Music video by Drake performing Evil Ways (Audio).© 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/wrhDUwYbTkI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/wrhDUwYbTkI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/wrhDUwYbTkI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/wrhDUwYbTkI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/wrhDUwYbTkI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "J. Cole",
+          "OVO/Republic",
+          "Hip Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - Evil Ways (Audio) ft. J. Cole",
+          "description": "Music video by Drake performing Evil Ways (Audio).© 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M48S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "4435407",
+        "likeCount": "85986",
+        "favoriteCount": "0",
+        "commentCount": "5874"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "xnXjtzF1c-yryywWBt7mabBmTkU",
+      "id": "tm4bgwUFRqk",
+      "snippet": {
+        "publishedAt": "2023-11-17T05:00:26Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - The Shoe Fits (Audio)",
+        "description": "Listen to For All The Dogs Scary Hours Edition: https://drake.lnk.to/FATDSHE\n\nMusic video by Drake performing The Shoe Fits (Audio). © 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.\n\nhttp://vevo.ly/48N0S7",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/tm4bgwUFRqk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/tm4bgwUFRqk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/tm4bgwUFRqk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/tm4bgwUFRqk/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/tm4bgwUFRqk/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "The",
+          "Shoe",
+          "Fits",
+          "(Audio)",
+          "OVO/Republic",
+          "Hip",
+          "Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - The Shoe Fits (Audio)",
+          "description": "Listen to For All The Dogs Scary Hours Edition: https://drake.lnk.to/FATDSHE\n\nMusic video by Drake performing The Shoe Fits (Audio). © 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.\n\nhttp://vevo.ly/48N0S7"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT6M15S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "3732062",
+        "likeCount": "57292",
+        "favoriteCount": "0",
+        "commentCount": "3656"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "vbjl0CQPUMZs0PMJG58xdQ9BORY",
+      "id": "leWap1vgE8U",
+      "snippet": {
+        "publishedAt": "2023-11-17T05:00:24Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - Red Button (Audio)",
+        "description": "Listen to For All The Dogs Scary Hours Edition: https://drake.lnk.to/FATDSHE\n\nMusic video by Drake performing Red Button (Audio). © 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.\n\nhttp://vevo.ly/r5sqVI",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/leWap1vgE8U/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/leWap1vgE8U/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/leWap1vgE8U/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/leWap1vgE8U/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/leWap1vgE8U/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "Red",
+          "Button",
+          "(Audio)",
+          "OVO/Republic",
+          "Hip",
+          "Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - Red Button (Audio)",
+          "description": "Listen to For All The Dogs Scary Hours Edition: https://drake.lnk.to/FATDSHE\n\nMusic video by Drake performing Red Button (Audio). © 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.\n\nhttp://vevo.ly/r5sqVI"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT2M41S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "2974345",
+        "likeCount": "44523",
+        "favoriteCount": "0",
+        "commentCount": "4124"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "Bi3YyZX5fkVMD5StE6t1oBuGkac",
+      "id": "CeulVAjHTaM",
+      "snippet": {
+        "publishedAt": "2023-11-17T05:00:14Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - Stories About My Brother (Audio)",
+        "description": "Listen to For All The Dogs Scary Hours Edition: https://drake.lnk.to/FATDSHE\n\nMusic video by Drake performing Stories About My Brother (Audio). © 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.\n\nhttp://vevo.ly/dCUWHd",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/CeulVAjHTaM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/CeulVAjHTaM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/CeulVAjHTaM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/CeulVAjHTaM/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/CeulVAjHTaM/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "Stories",
+          "About",
+          "Brother",
+          "(Audio)",
+          "OVO/Republic",
+          "Hip",
+          "Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - Stories About My Brother (Audio)",
+          "description": "Listen to For All The Dogs Scary Hours Edition: https://drake.lnk.to/FATDSHE\n\nMusic video by Drake performing Stories About My Brother (Audio). © 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.\n\nhttp://vevo.ly/dCUWHd"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT4M25S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "3825185",
+        "likeCount": "55228",
+        "favoriteCount": "0",
+        "commentCount": "3562"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "wvdxNZAO7qptA39O5OCxqaaP_AU",
+      "id": "1pBmvVgEQsw",
+      "snippet": {
+        "publishedAt": "2023-11-17T05:00:01Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - Wick Man (Audio)",
+        "description": "Music video by Drake performing Wick Man (Audio).© 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/1pBmvVgEQsw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/1pBmvVgEQsw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/1pBmvVgEQsw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/1pBmvVgEQsw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/1pBmvVgEQsw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "OVO/Republic",
+          "Hip Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - Wick Man (Audio)",
+          "description": "Music video by Drake performing Wick Man (Audio).© 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M2S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "1532151",
+        "likeCount": "28266",
+        "favoriteCount": "0",
+        "commentCount": "2439"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "0LTtzeI5WPMKRy-NKyni31wnWzs",
+      "id": "-_HIZtRlkDo",
+      "snippet": {
+        "publishedAt": "2023-11-17T05:00:00Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - You Broke My Heart (Audio)",
+        "description": "Music video by Drake performing You Broke My Heart (Audio).© 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/-_HIZtRlkDo/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/-_HIZtRlkDo/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/-_HIZtRlkDo/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/-_HIZtRlkDo/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/-_HIZtRlkDo/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "OVO/Republic",
+          "Hip Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - You Broke My Heart (Audio)",
+          "description": "Music video by Drake performing You Broke My Heart (Audio).© 2023 OVO, under exclusive license to Republic Records, a division of UMG Recordings, Inc."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT3M51S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "14142913",
+        "likeCount": "111853",
+        "favoriteCount": "0",
+        "commentCount": "4885"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "CRL4hKeasmsLhh8mD3BUQJi3WDc",
+      "id": "6hwXc2qEMEw",
+      "snippet": {
+        "publishedAt": "2023-11-17T02:03:59Z",
+        "channelId": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "title": "Scary Hours 3 Trailer",
+        "description": "Director: Theo Skudra\nProd Co: Denim \nEP: Christian Tyler\nProducers: Alex Dall’Orso & Cameron Frengopoulos\nCoordinator: Connor Brown\nDOP: Jackson Parrell\nSteadicam: Mark Skinner\n1st Assistant Camera: Adrian Muir\n2nd Assistant Camera: Susan Liu \n1st Assistant Camera: Mark Ekin \n2nd Assistant Camera: Britny Elias \nGrip: Todd Thompson\nGaffer: Nick Grguric\nGaffer: Peter McDonald\nDrone: Drone Boy, Real Drone\nEditor: Theo Skudra\nCo-Editor: Ashton Lewis\nColourist: Alter Ego / Wade Odlum\nSound designer & Mixer: Chris Stiliadis\nTitle \"Playbill\" Designer: Ronan Mcgee\nOnline: Studio Feather / Julian Van Mil\nScore: Kid Masterpiece\n\nSpecial Thanks to The Toronto Symphony Orchestra and Roy Thompson Hall",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/6hwXc2qEMEw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/6hwXc2qEMEw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/6hwXc2qEMEw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/6hwXc2qEMEw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/6hwXc2qEMEw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Drake",
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Scary Hours 3 Trailer",
+          "description": "Director: Theo Skudra\nProd Co: Denim \nEP: Christian Tyler\nProducers: Alex Dall’Orso & Cameron Frengopoulos\nCoordinator: Connor Brown\nDOP: Jackson Parrell\nSteadicam: Mark Skinner\n1st Assistant Camera: Adrian Muir\n2nd Assistant Camera: Susan Liu \n1st Assistant Camera: Mark Ekin \n2nd Assistant Camera: Britny Elias \nGrip: Todd Thompson\nGaffer: Nick Grguric\nGaffer: Peter McDonald\nDrone: Drone Boy, Real Drone\nEditor: Theo Skudra\nCo-Editor: Ashton Lewis\nColourist: Alter Ego / Wade Odlum\nSound designer & Mixer: Chris Stiliadis\nTitle \"Playbill\" Designer: Ronan Mcgee\nOnline: Studio Feather / Julian Van Mil\nScore: Kid Masterpiece\n\nSpecial Thanks to The Toronto Symphony Orchestra and Roy Thompson Hall"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT1M57S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "536887",
+        "likeCount": "27904",
+        "favoriteCount": "0",
+        "commentCount": "1812"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "Wbllf0yiplTi_UW2Y5Z4ijlbb_s",
+      "id": "Xty2gi5cMa8",
+      "snippet": {
+        "publishedAt": "2023-11-15T20:26:07Z",
+        "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+        "title": "Drake - First Person Shooter ft. J. Cole",
+        "description": "Listen to For All The Dogs Scary Hours Edition: https://drake.lnk.to/FATDSHE\n\nDirector - Gibson Hazard\nEP/Producer - Liam Akiva\nEP - Christian Tyler\nExecutive Producer /Creative Direction- Drake, qJamil \"Big Juice\" 'Davis\nCreative Direction - Jack Bannon & Reduciano \nProduction Company - House of Hazard x Denim\nLine Producer - Cam Frengopoulos & Alex Dall’Orso\nAssociate Producer - Jackie De Niverville\nProduction Manager - Trevor Evoy\nProduction Coordinator - Amber Warus\nCinematographer - Bobby Shore\n1st AC - Dave Stuart\nB-Unit Director - Nick Dean\nProduction Designer - Electa Porado\nGaffer - Jordan Heguy\nKey Grip - Todd N Thompson\nEditors - Gibson Hazard & Jack Bannon\nSound Design - Chris Smith & Jack Bannon\n3D Animation Lead - Reduciano\nVFX - Mathematic \nVFX - Karen Arakelian\nVFX - Pendulum\nVFX - Scissor Films\nVFX - Black Hat\nVFX - Aid6n.edits\nColourist - Dante Pasquinelli\nGraphic Design - Alessandro Comotti\nSpecial thanks to Scotiabank Arena, House of Hazard, OVO, Dreamville and Vanessa Hoffer",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Xty2gi5cMa8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Xty2gi5cMa8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Xty2gi5cMa8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Xty2gi5cMa8/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Xty2gi5cMa8/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "DrakeVEVO",
+        "tags": [
+          "Drake",
+          "J. Cole",
+          "OVO/Republic",
+          "Hip Hop"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Drake - First Person Shooter ft. J. Cole",
+          "description": "Listen to For All The Dogs Scary Hours Edition: https://drake.lnk.to/FATDSHE\n\nDirector - Gibson Hazard\nEP/Producer - Liam Akiva\nEP - Christian Tyler\nExecutive Producer /Creative Direction- Drake, qJamil \"Big Juice\" 'Davis\nCreative Direction - Jack Bannon & Reduciano \nProduction Company - House of Hazard x Denim\nLine Producer - Cam Frengopoulos & Alex Dall’Orso\nAssociate Producer - Jackie De Niverville\nProduction Manager - Trevor Evoy\nProduction Coordinator - Amber Warus\nCinematographer - Bobby Shore\n1st AC - Dave Stuart\nB-Unit Director - Nick Dean\nProduction Designer - Electa Porado\nGaffer - Jordan Heguy\nKey Grip - Todd N Thompson\nEditors - Gibson Hazard & Jack Bannon\nSound Design - Chris Smith & Jack Bannon\n3D Animation Lead - Reduciano\nVFX - Mathematic \nVFX - Karen Arakelian\nVFX - Pendulum\nVFX - Scissor Films\nVFX - Black Hat\nVFX - Aid6n.edits\nColourist - Dante Pasquinelli\nGraphic Design - Alessandro Comotti\nSpecial thanks to Scotiabank Arena, House of Hazard, OVO, Dreamville and Vanessa Hoffer"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT5M1S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": true,
+        "regionRestriction": {
+          "allowed": [
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ]
+        },
+        "contentRating": {},
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "80737546",
+        "likeCount": "1359959",
+        "favoriteCount": "0",
+        "commentCount": "67105"
+      }
+    }
+  ]
+}

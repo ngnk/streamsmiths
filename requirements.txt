@@ -1,0 +1,11 @@
+apache-airflow
+polars
+connectorx
+sqlalchemy
+python-dotenv
+streamlit
+requests
+plotly
+pandas
+schedule
+numpy
