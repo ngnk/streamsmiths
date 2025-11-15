@@ -4,32 +4,30 @@
 
 ## Channels
 
-```
-UCbCmjCuTUZos6Inko4u57UQ  # Cocomelon
-UCJplp5SjeGSdVdwsfb9Q7lQ  # LikeNastya
-UC4TTx9XmK2KYCtbiN_knQvA  # Ryan's World
-UCX6OQ3DkcsbYNE6H8uQQuVA  # MrBeast
-UC-lHJZR3Gqxm24_Vd_AJ5Yw  # PewDiePie
-UCDogdKl7t7HzQ95aEwkdMw   # Sidemen
-UCsT0YIqwnpJCM-mx7-gSA4Q  # TEDx Talks
-UCsxVk37bltHxD1rDPwtNM8Q  # Kurzgesagt
-UCMyOj6fhvKFMjxUCp3b3gAQ  # Nick DiGiovanni
-UCupvZG-5ko_eiXAupbDfxWw  # CNN
-UCBNs31xyxpxAGMheg8OrgA   # Yuya
-UCucot-Zp428OwkyRm2I72Q   # James Charles
-UCYiGq8XF7YQD00x7wAd6zzg  # JuegaGerman
-UC7_YxT-KID8kRbqZo7MyscQ  # Markiplier
-UCqECaJ8Gagnn7YCbPEzWH6g  # Taylor Swift
-UC50rbDVD9scpcAstz7JnQGA  # Michael Jackson
-UCOmHUn--16B90oW2L6FRR3A  # Blackpink
-UCmBA_wu8xGg1Qg1Of0kW13Q  # Bad Bunny
-UCq-Fj5jknLsUf-MWSy4_brA  # T-Series
-UCtxD0xAuNNqdXO9Wp5pGHew # UR Cristiano
-UCpWaR3qNAQsGx48lQCqV0Cw  # Tibo InShape
-UCCgLoMYlYoP0U56dEb06adQ  # Chloe Ting
-UCRijo3ddMTht_IHyNSNXpNQ  # Dude Perfect
-UCXuqSBlHAE6Xw-yeJA8sc_w  # Linus Tech Tips
-```
+1. **Cocomelon**
+2. **LikeNastya**
+3. **Ryan's World**
+4. **MrBeast**
+5. **PewDiePie**
+6. **Sidemen**
+7. **TEDx Talks**
+8. **Kurzgesagt**
+9. **Nick DiGiovanni**
+10. **CNN**
+11. **Yuya**
+12. **James Charles**
+13. **JuegaGerman**
+14. **Markiplier**
+15. **Taylor Swift**
+16. **Michael Jackson**
+17. **BLACKPINK**
+18. **Bad Bunny**
+19. **T-Series**
+20. **UR Cristiano**
+21. **Tibo InShape**
+22. **Chloe Ting**
+23. **Dude Perfect**
+24. **Linus Tech Tips**
 
 ---
 
