@@ -2,9 +2,9 @@
 # YouTube Pipeline V2
 ---
 
-![Pipeline V1](https://github.com/ngnk/streamsmiths/actions/workflows/pipeline.yml/badge.svg)
+![V1](https://github.com/ngnk/streamsmiths/actions/workflows/pipeline.yml/badge.svg)
 
-![Pipeline V2](https://github.com/ngnk/streamsmiths/actions/workflows/youtube_pipeline_v2.yml/badge.svg)
+![V2](https://github.com/ngnk/streamsmiths/actions/workflows/youtube_pipeline_v2.yml/badge.svg)
 
 ---
 
