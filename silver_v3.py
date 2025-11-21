@@ -199,9 +199,19 @@ def run_silver_transformation_v2() -> None:
                 engagement_rate = _calculate_engagement_rate(like_count, comment_count, view_count)
                 views_per_day = view_count / days_since_publish if days_since_publish > 0 else 0
                 
-                                # Calculate performance metrics
+                # Calculate performance metrics
                 engagement_rate = _calculate_engagement_rate(like_count, comment_count, view_count)
                 views_per_day = view_count / days_since_publish if days_since_publish > 0 else 0
+
+                # Like-to-view ratio (how positive the audience response is)
+                like_view_ratio = (like_count / view_count) if view_count > 0 else 0.0
+
+                # Comment-to-view ratio (indicates controversy or high engagement)
+                comment_view_ratio = (comment_count / view_count) if view_count > 0 else 0.0
+
+                # Like-to-comment ratio (high value means positive sentiment)
+                like_comment_ratio = (like_count / comment_count) if comment_count > 0 else 0.0
+
 
                 # --- Attention 500 index: segmentation flags ---
 
@@ -253,10 +263,14 @@ def run_silver_transformation_v2() -> None:
                     "engagement_rate": round(engagement_rate, 4),
                     "views_per_day": round(views_per_day, 2),
                     "days_since_publish": days_since_publish,
-                    "is_billionaires_watch": is_billionaires_watch,      # 👇 new
-                    "is_milestones_watch": is_milestones_watch,          # 👇 new
-                    "is_highly_viral": is_highly_viral,                  # 👇 new
-                    "attention_segment": attention_segment,              # 👇 new
+                    "is_billionaires_watch": is_billionaires_watch,
+                    "is_milestones_watch": is_milestones_watch,
+                    "is_highly_viral": is_highly_viral,    
+                    "attention_segment": attention_segment,
+                    "like_view_ratio": round(like_view_ratio, 4),
+                    "comment_view_ratio": round(comment_view_ratio, 4),
+                    "like_comment_ratio": round(like_comment_ratio, 4),
+
                     "ingestion_timestamp": ingest_ts_clean,
                 }
 
