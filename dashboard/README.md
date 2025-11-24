@@ -3,7 +3,6 @@
 ## How to run
 
 1. Create virtual env and install dependencies:
-
 ```bash
 pip install -r requirements.txt
 ```
