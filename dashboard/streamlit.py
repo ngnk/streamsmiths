@@ -241,8 +241,6 @@ reg_result = train_and_eval_regression(df)
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Train size", reg_result["train_size"])
 c2.metric("Test size", reg_result["test_size"])
-c3.metric("MAE", f"{reg_result['mae']:.2f}")
-c4.metric("RMSE", f"{reg_result['rmse']:.2f}")
 
 st.write(f"R²: **{reg_result['r2']:.4f}**")
 
