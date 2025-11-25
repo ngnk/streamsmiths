@@ -1,0 +1,47 @@
+name: YouTube Pipeline V3 - Attention 500
+
+on:
+  # Run on 8-hour schedule
+  schedule:
+    - cron: '0 */8 * * *'  # Every 8 hours
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      include_trending:
+        description: 'Include trending videos'
+        required: false
+        default: 'true'
+        type: boolean
+
+jobs:
+  run-pipeline-v3:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests python-dotenv polars pyarrow
+      
+      - name: Run YouTube Pipeline V3 - Attention 500
+        run: python run_pipeline_v3.py
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YOUTUBE_CHANNEL_IDS: ${{ secrets.YOUTUBE_CHANNEL_IDS }}
+          NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
+      
+      - name: Pipeline Summary
+        if: success()
+        run: |
+          echo "✅ V3 Pipeline completed successfully!"
+          echo "🎯 Tables updated: channels_log_v3, videos_log_v3, trending_videos_log_v3"
+          echo "📊 New features: Milestone tracking (10M→1B+), 5% approaching threshold"
