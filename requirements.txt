@@ -10,3 +10,7 @@ plotly
 pandas
 schedule
 numpy
+statsmodels
+scipy
+matplotlib
+scikit-learn
