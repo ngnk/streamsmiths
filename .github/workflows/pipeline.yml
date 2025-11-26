@@ -1,4 +1,4 @@
-name: YouTube Analytics Pipeline
+name: V1 Pipeline
 
 on:
   # Run on schedule
