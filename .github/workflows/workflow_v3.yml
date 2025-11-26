@@ -3,7 +3,7 @@ name: YouTube Pipeline V3 - Attention 500
 on:
   # Run on 8-hour schedule
   schedule:
-    - cron: '0 */8 * * *'  # Every 8 hours
+    - cron: '0 * * * *'  # Every 8 hours
   
   # Allow manual trigger
   workflow_dispatch:
