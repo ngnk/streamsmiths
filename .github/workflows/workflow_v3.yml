@@ -1,4 +1,4 @@
-name: YouTube Pipeline V3 - Attention 500
+name: V3 Pipeline 
 
 on:
   # Run on 8-hour schedule
