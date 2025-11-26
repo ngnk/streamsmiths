@@ -3,7 +3,7 @@
 ---
 
 ![V2](https://github.com/ngnk/streamsmiths/actions/workflows/youtube_pipeline_v2.yml/badge.svg)
-
+![V3](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v3.yml/badge.svg)
 ---
 
 ## Channels
