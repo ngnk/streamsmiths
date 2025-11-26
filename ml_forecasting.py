@@ -30,13 +30,15 @@ from dotenv import load_dotenv
 # ============================================================================
 
 def fetch_videos_from_neon(table_name: str = "videos_log_v2") -> pl.DataFrame:
-    """Fetch videos_log_v2 table from Neon database"""
+    """Fetch videos_log_v2 table from Neon database or fall back to local parquet"""
     load_dotenv()
     
     db_uri = os.getenv("NEON_DATABASE_URL")
+    
+    # Fallback to hardcoded connection string if no .env file
     if not db_uri:
-        # If no .env file, use the direct connection string
-        db_uri = "postgresql://neondb_owner:npg_c38OpMvawKVg@ep-withered-sky-aeqx6en8-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+        print("[FETCH] No .env file found, using hardcoded connection string...")
+        db_uri = "postgresql://neondb_owner:npg_c38OpMvawKVg@ep-withered-sky-aeqx6en8-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
     
     # Clean the connection string
     db_uri = db_uri.strip()
@@ -55,9 +57,24 @@ def fetch_videos_from_neon(table_name: str = "videos_log_v2") -> pl.DataFrame:
         print(f"[FETCH] ✓ Fetched {len(df)} rows from {table_name}")
         return df
     except Exception as e:
-        print(f"[FETCH] ✗ Error: {e}")
-        print("\nTrying pandas + SQLAlchemy as backup...")
-        return fetch_with_pandas(table_name, db_uri)
+        print(f"[FETCH] ✗ Polars connection error: {str(e)[:100]}")
+        print("[FETCH] Trying pandas + SQLAlchemy as backup...")
+        
+        try:
+            return fetch_with_pandas(table_name, db_uri)
+        except Exception as e2:
+            print(f"[FETCH] ✗ SQLAlchemy connection error: {str(e2)[:100]}")
+            print("\n" + "="*70)
+            print("DATABASE CONNECTION FAILED")
+            print("="*70)
+            print("Possible solutions:")
+            print("1. Install required packages: pip install psycopg2-binary sqlalchemy")
+            print("2. Check network/firewall settings")
+            print("3. Verify database is accessible")
+            print("4. Use local parquet file instead (see below)")
+            print("="*70)
+            print("\n[FETCH] Falling back to local parquet file...")
+            return fetch_from_local_parquet()
 
 
 def fetch_with_pandas(table_name: str, db_uri: str) -> pl.DataFrame:
@@ -74,17 +91,56 @@ def fetch_with_pandas(table_name: str, db_uri: str) -> pl.DataFrame:
     return pl.from_pandas(df_pandas)
 
 
+def fetch_from_local_parquet() -> pl.DataFrame:
+    """Fallback to local parquet file if database connection fails"""
+    possible_paths = [
+        "silver_data/videos.parquet",
+        "data/videos.parquet",
+        "videos.parquet",
+        "../silver_data/videos.parquet"
+    ]
+    
+    for path in possible_paths:
+        if Path(path).exists():
+            print(f"[FETCH] ✓ Found local parquet: {path}")
+            df = pl.read_parquet(path)
+            
+            # Rename columns if needed to match database schema
+            cols = set(df.columns)
+            if 'ingest_timestamp' in cols and 'ingestion_timestamp' not in cols:
+                df = df.rename({'ingest_timestamp': 'ingestion_timestamp'})
+            
+            # Add views_per_day if missing
+            if 'views_per_day' not in df.columns:
+                df = df.with_columns([pl.lit(0).alias('views_per_day')])
+            
+            print(f"[FETCH] ✓ Loaded {len(df)} rows from local parquet")
+            return df
+    
+    raise FileNotFoundError(
+        "\n" + "="*70 + "\n"
+        "NO DATA SOURCE AVAILABLE\n"
+        "="*70 + "\n"
+        "Neither Neon database connection nor local parquet file found.\n\n"
+        "Please either:\n"
+        "1. Fix your .env with correct NEON_DATABASE_URL, or\n"
+        "2. Place a parquet file at one of these locations:\n" +
+        "\n".join(f"   - {p}" for p in possible_paths) + "\n" +
+        "="*70
+    )
+
+
 # ============================================================================
 # TIME SERIES DATA PREPARATION
 # ============================================================================
 
-def prepare_timeseries_data(df: pl.DataFrame, aggregation: str = "hourly") -> pd.DataFrame:
+def prepare_timeseries_data(df: pl.DataFrame, aggregation: str = "minutely") -> pd.DataFrame:
     """
     Convert videos_log_v2 data into aggregated time series.
     
     Args:
         df: Polars DataFrame from Neon
-        aggregation: "hourly" or "daily"
+        aggregation: "minutely", "hourly" or "daily"
         
     Returns:
         Pandas DataFrame with aggregated metrics
@@ -95,14 +151,37 @@ def prepare_timeseries_data(df: pl.DataFrame, aggregation: str = "hourly") -> pd
     # Convert to pandas for easier time series manipulation
     df_pd = df.to_pandas()
     
-    # Parse timestamps
+    # Check which timestamp to use
+    timestamp_col = 'ingestion_timestamp'
+    
+    # Parse ingestion timestamps
     df_pd['ingestion_timestamp'] = pd.to_datetime(df_pd['ingestion_timestamp'])
     
-    # Create time bins
-    if aggregation == "hourly":
-        df_pd['time_bin'] = df_pd['ingestion_timestamp'].dt.floor('H')
+    # Check time spread of ingestion_timestamp
+    ingestion_unique = df_pd['ingestion_timestamp'].dt.floor('h').nunique()
+    
+    if ingestion_unique < 5:
+        print(f"[PREPARE] ⚠️  ingestion_timestamp has only {ingestion_unique} unique hours")
+        print(f"[PREPARE] This indicates batch loading - switching to published_at")
+        
+        # Use published_at instead
+        if 'published_at' in df_pd.columns:
+            timestamp_col = 'published_at'
+            df_pd['published_at'] = pd.to_datetime(df_pd['published_at'], errors='coerce')
+            df_pd = df_pd.dropna(subset=['published_at'])
+            print(f"[PREPARE] Using published_at timestamps (when videos were published)")
+        else:
+            print(f"[PREPARE] ✗ No published_at column found!")
+            print(f"[PREPARE] Cannot perform time series analysis with batch-loaded data")
+            timestamp_col = 'ingestion_timestamp'
+    
+    # Create time bins based on chosen timestamp
+    if aggregation == "minutely":
+        df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('T')
+    elif aggregation == "hourly":
+        df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('h')
     else:  # daily
-        df_pd['time_bin'] = df_pd['ingestion_timestamp'].dt.date
+        df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('D')
     
     # Calculate engagement_rate if not present or recalculate
     df_pd['engagement_rate'] = ((df_pd['like_count'] + df_pd['comment_count']) / 
@@ -212,10 +291,14 @@ class DLMForwardBackward:
         if y_test is not None:
             n_test = len(y_test)
             predictions = np.zeros(n_test)
-            predictions[0] = self.filtered_means[-1]
+            pred_cov = self.filtered_covs[-1] + self.state_variance
+            
+            # Simple exponential smoothing forecast
+            last_state = self.filtered_means[-1]
+            predictions[0] = last_state
             
             for i in range(1, n_test):
-                predictions[i] = predictions[i-1]
+                predictions[i] = predictions[i-1]  # Random walk forecast
             
             return self.smoothed_means, predictions
         
@@ -226,26 +309,57 @@ class DLMForwardBackward:
 # MODEL FITTING FUNCTIONS
 # ============================================================================
 
-def fit_arima_model(y_train, y_test, order=(1, 1, 1)):
-    """Fit ARIMA model"""
-    try:
-        model = ARIMA(y_train, order=order)
-        model_fit = model.fit()
+def fit_arima_model(y_train, y_test, order=None):
+    """Fit ARIMA model with automatic order selection if order=None"""
+    if order is None:
+        # Try multiple orders and select best AIC
+        orders_to_try = [
+            (0, 0, 0), (1, 0, 0), (0, 0, 1), (1, 0, 1),
+            (0, 1, 0), (1, 1, 0), (0, 1, 1), (1, 1, 1),
+            (2, 0, 0), (0, 0, 2), (2, 1, 0), (0, 1, 2),
+            (2, 1, 1), (1, 1, 2), (2, 0, 1), (1, 0, 2)
+        ]
+        best_aic = np.inf
+        best_order = (1, 1, 1)
+        best_model = None
         
-        fitted = model_fit.fittedvalues
-        forecast = model_fit.forecast(steps=len(y_test))
+        for test_order in orders_to_try:
+            try:
+                model = ARIMA(y_train, order=test_order)
+                model_fit = model.fit()
+                if model_fit.aic < best_aic:
+                    best_aic = model_fit.aic
+                    best_order = test_order
+                    best_model = model_fit
+            except:
+                continue
         
-        return {
-            'model': model_fit,
-            'fitted': fitted,
-            'forecast': forecast,
-            'aic': model_fit.aic,
-            'bic': model_fit.bic,
-            'params': order
-        }
-    except Exception as e:
-        print(f"ARIMA fitting error: {e}")
-        return None
+        if best_model is None:
+            print("  Could not fit any ARIMA model")
+            return None
+        
+        print(f"  Best ARIMA order: {best_order} (AIC: {best_aic:.2f})")
+        order = best_order
+        model_fit = best_model
+    else:
+        try:
+            model = ARIMA(y_train, order=order)
+            model_fit = model.fit()
+        except Exception as e:
+            print(f"  ARIMA fitting error: {e}")
+            return None
+    
+    fitted = model_fit.fittedvalues
+    forecast = model_fit.forecast(steps=len(y_test))
+    
+    return {
+        'model': model_fit,
+        'fitted': fitted,
+        'forecast': forecast,
+        'aic': model_fit.aic,
+        'bic': model_fit.bic,
+        'params': order
+    }
 
 
 def fit_ar1_model(y_train, y_test):
@@ -266,7 +380,7 @@ def fit_ar1_model(y_train, y_test):
             'params': 1
         }
     except Exception as e:
-        print(f"AR(1) fitting error: {e}")
+        print(f"  AR(1) fitting error: {e}")
         return None
 
 
@@ -295,7 +409,7 @@ def fit_dlm_model(y_train, y_test):
             'params': {'obs_var': obs_var, 'state_var': state_var}
         }
     except Exception as e:
-        print(f"DLM fitting error: {e}")
+        print(f"  DLM fitting error: {e}")
         return None
 
 
@@ -322,6 +436,103 @@ def calculate_metrics(y_true, y_pred):
         'MAPE': mape,
         'MSE': mse
     }
+
+
+# ============================================================================
+# VISUALIZATION FUNCTION
+# ============================================================================
+
+def create_visualization(results_dict, output_dir='outputs'):
+    """Create visualization of fitted models and forecasts"""
+    if not results_dict:
+        print("\n[VIZ] No results to visualize")
+        return
+    
+    data = results_dict['data']
+    results = results_dict['results']
+    target_col = data['target_col']
+    
+    y_train = data['y_train']
+    y_test = data['y_test']
+    dates_train = data['dates_train']
+    dates_test = data['dates_test']
+    
+    # Combine for full series plotting
+    y_full = np.concatenate([y_train, y_test])
+    dates_full = np.concatenate([dates_train, dates_test])
+    
+    print(f"\n[VIZ] Creating visualization for {target_col}...")
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(14, 7))
+    
+    # Plot full observed series
+    ax.plot(pd.to_datetime(dates_full), y_full, 
+            label="Observed", color="#1f77b4", linewidth=2, alpha=0.7)
+    
+    # Plot each model's fitted and forecast
+    colors = {'ARIMA': '#ff7f0e', 'AR1': '#2ca02c', 'DLM': '#d62728'}
+    
+    for model_name, result in results.items():
+        color = colors.get(model_name, '#000000')
+        
+        # Get fitted values
+        fitted = np.asarray(result['fitted'])
+        if len(fitted) > 0:
+            # Plot fitted line
+            model_label = model_name
+            if model_name == 'ARIMA' and 'params' in result:
+                model_label = f"ARIMA{result['params']}"
+            
+            ax.plot(pd.to_datetime(dates_train[-len(fitted):]), fitted,
+                   label=f"{model_label} fitted", linestyle="--", 
+                   color=color, linewidth=2)
+        
+        # Get forecast values
+        forecast = result.get('forecast')
+        if forecast is not None:
+            forecast = np.asarray(forecast)
+            if len(forecast) > 0:
+                ax.plot(pd.to_datetime(dates_test[:len(forecast)]), forecast,
+                       label=f"{model_label} forecast", linestyle=":", 
+                       color=color, linewidth=2)
+    
+    # Add vertical line at train/test split
+    split_date = pd.to_datetime(dates_train[-1])
+    ax.axvline(split_date, color='black', linestyle='--', 
+               alpha=0.3, linewidth=1.5, label='Train/Test Split')
+    
+    # Formatting
+    title_map = {
+        'total_views': 'Total Views',
+        'total_likes': 'Total Likes',
+        'total_comments': 'Total Comments',
+        'avg_engagement_rate': 'Average Engagement Rate',
+        'avg_views_per_day': 'Average Views Per Day',
+        'num_videos': 'Number of Videos'
+    }
+    
+    title = title_map.get(target_col, target_col.replace('_', ' ').title())
+    ax.set_title(f"{title} — Observed, Fitted, and Forecasts", 
+                 fontsize=14, fontweight='bold')
+    ax.set_xlabel("Date", fontsize=12)
+    ax.set_ylabel(title, fontsize=12)
+    ax.legend(loc='best', framealpha=0.9, fontsize=10)
+    ax.grid(alpha=0.3, linestyle='--')
+    
+    plt.tight_layout()
+    
+    # Save figure
+    output_path = Path(output_dir)
+    output_path.mkdir(exist_ok=True)
+    
+    filename = f"{target_col}_forecast.png"
+    save_path = output_path / filename
+    
+    fig.savefig(save_path, dpi=150, bbox_inches='tight')
+    print(f"[VIZ] ✓ Saved: {save_path}")
+    
+    plt.close()
 
 
 # ============================================================================
@@ -357,9 +568,9 @@ def run_model_comparison(data, target_col='total_views', train_size=0.7):
     
     results = {}
     
-    # Fit ARIMA
-    print("\nFitting ARIMA(1,1,1)...")
-    arima_result = fit_arima_model(y_train, y_test, order=(1, 1, 1))
+    # Fit ARIMA with automatic order selection
+    print("\nFitting ARIMA (auto order selection)...")
+    arima_result = fit_arima_model(y_train, y_test, order=None)
     if arima_result:
         results['ARIMA'] = arima_result
         print(f"  AIC: {arima_result['aic']:.2f}, BIC: {arima_result['bic']:.2f}")
@@ -466,38 +677,93 @@ def main():
     # Fetch data from Neon
     df_videos = fetch_videos_from_neon("videos_log_v2")
     
-    # Try hourly aggregation first
-    hourly_data = prepare_timeseries_data(df_videos, aggregation="hourly")
+    # Check if data has time spread in ingestion_timestamp
+    df_pd_check = df_videos.to_pandas()
+    df_pd_check['ingestion_timestamp'] = pd.to_datetime(df_pd_check['ingestion_timestamp'])
+    ingestion_hours = df_pd_check['ingestion_timestamp'].dt.floor('h').nunique()
     
-    # If not enough hourly data, try daily
-    if len(hourly_data) < 10:
-        print("\n⚠️  Not enough hourly data points. Switching to daily aggregation...")
-        daily_data = prepare_timeseries_data(df_videos, aggregation="daily")
-        time_series_data = daily_data
+    # If ingestion timestamps are concentrated, start with daily aggregation
+    # Otherwise, try minutely first
+    if ingestion_hours < 5:
+        print("\n[INFO] Detected batch ingestion - starting with daily aggregation")
+        print("[INFO] (Will use published_at timestamps instead of ingestion_timestamp)")
+        time_series_data = prepare_timeseries_data(df_videos, aggregation="daily")
     else:
-        time_series_data = hourly_data
+        # Try minutely aggregation first
+        minutely_data = prepare_timeseries_data(df_videos, aggregation="minutely")
+
+        # If not enough minutely data, try hourly then daily
+        if len(minutely_data) < 10:
+            print("\n⚠️  Not enough minutely data points. Switching to hourly aggregation...")
+            hourly_data = prepare_timeseries_data(df_videos, aggregation="hourly")
+            if len(hourly_data) < 10:
+                print("\n⚠️  Not enough hourly data points. Switching to daily aggregation...")
+                daily_data = prepare_timeseries_data(df_videos, aggregation="daily")
+                time_series_data = daily_data
+            else:
+                time_series_data = hourly_data
+        else:
+            time_series_data = minutely_data
+    
+    # Check if we have enough data
+    if len(time_series_data) < 10:
+        print("\n" + "="*70)
+        print("❌ INSUFFICIENT DATA FOR TIME SERIES ANALYSIS")
+        print("="*70)
+        print(f"Found only {len(time_series_data)} time points (need at least 10)")
+        print("\nPossible issues:")
+        print("1. Data was loaded in a single batch (all same ingestion_timestamp)")
+        print("2. Not enough videos with published_at dates")
+        print("3. Published dates are too concentrated")
+        print("\nSuggestions:")
+        print("- Check your data source has videos published over time")
+        print("- Verify published_at column exists and has valid dates")
+        print("- Load more historical video data")
+        print("="*70)
+        return None
     
     # Run forecasting models
     print("\n" + "="*70)
     print("RUNNING FORECASTING MODELS")
     print("="*70)
     
+    # Store results for visualization
+    all_results = {}
+    
     # Analyze total views
     print("\n📊 TARGET: Total Views")
     results_views = run_model_comparison(time_series_data, target_col='total_views')
+    if results_views:
+        all_results['total_views'] = results_views
     
-    # Analyze total likes (optional)
+    # Analyze total likes
     print("\n\n📊 TARGET: Total Likes")
     results_likes = run_model_comparison(time_series_data, target_col='total_likes')
+    if results_likes:
+        all_results['total_likes'] = results_likes
     
-    # Analyze engagement rate (optional)
+    # Analyze engagement rate
     print("\n\n📊 TARGET: Average Engagement Rate")
     results_engagement = run_model_comparison(time_series_data, target_col='avg_engagement_rate')
+    if results_engagement:
+        all_results['avg_engagement_rate'] = results_engagement
+    
+    # Create visualizations
+    print("\n" + "="*70)
+    print("CREATING VISUALIZATIONS")
+    print("="*70)
+    
+    for target, results in all_results.items():
+        create_visualization(results, output_dir='outputs')
     
     print("\n" + "="*70)
     print("✅ ANALYSIS COMPLETE!")
     print("="*70)
-    print("\nResults saved to: ./results/model_comparison.csv")
+    print("\nResults saved to:")
+    print("  - ./results/model_comparison.csv")
+    print("  - ./outputs/*_forecast.png")
+    
+    return all_results
 
 
 if __name__ == "__main__":
