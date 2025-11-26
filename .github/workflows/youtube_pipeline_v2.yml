@@ -1,4 +1,4 @@
-name: YouTube Analytics Pipeline V2
+name: V2 Pipeline
 
 on:
   schedule:
