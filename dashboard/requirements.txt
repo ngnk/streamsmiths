@@ -1,0 +1,7 @@
+streamlit
+plotly
+pandas
+numpy
+scikit-learn
+psycopg2-binary
+google-api-python-client
