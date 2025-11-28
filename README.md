@@ -1,9 +1,10 @@
 # STREAMWATCH
 ### YouTube Analytics Platform
 
-![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
+![V1](https://github.com/ngnk/streamsmiths/actions/workflows/pipeline.yml/badge.svg)![V2](https://github.com/ngnk/streamsmiths/actions/workflows/pipeline.yml/badge.svg)![V3](https://github.com/ngnk/streamsmiths/actions/workflows/pipeline.yml/badge.svg)
+
 ![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub%20Actions-brightgreen.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 
 **IDS 706 Fall 2025 Final Project**  
 
