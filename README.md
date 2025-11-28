@@ -4,7 +4,7 @@
 
 ### IDS 706 Fall 2025 Final Project: YouTube Analytics Platform
 
-![V1](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v1.yml/badge.svg) ![V2](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v2.yml/badge.svg) ![V3](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v3.yml/badge.svg) ![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub%20Actions-brightgreen.svg)
+![V3](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v3.yml/badge.svg) ![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub%20Actions-brightgreen.svg)
 
 **Team 6 (Streamsmiths): Tony Ngari, Can He, Matthew Fischer, Joseph Hong, Trey Chase**
 
@@ -18,7 +18,6 @@
 - [Setup Instructions](#-setup-instructions)
 - [Key Principles Implementation](#-key-principles-implementation)
 - [Dashboard Features](#-dashboard-features)
-- [Project Evolution](#-project-evolution)
 - [Future Improvements](#-future-improvements)
 
 ---
@@ -27,7 +26,7 @@
 
 **STREAMWATCH** is a comprehensive YouTube analytics platform that provides insights into channel performance, video trends, and milestone tracking.
 
-The platform processes data from 50-100+ YouTube channels through a **bronze-silver-gold data pipeline architecture**, delivering:
+The platform processes data from 50+ YouTube channels through a **bronze-silver-gold data pipeline architecture**, delivering:
 - Real-time channel and video performance tracking
 - Milestone achievement monitoring
 - Engagement analytics and trend identification
@@ -53,38 +52,35 @@ The platform processes data from 50-100+ YouTube channels through a **bronze-sil
 STREAMWATCH implements a **medallion architecture** (bronze-silver-gold).
 
 ### Data Source
-- [**YouTube Data API v3**][https://developers.google.com/youtube/v3]
+[**YouTube Data API v3**][https://developers.google.com/youtube/v3]
 
 ### Data Flow
-Ingestion > Storage > Transformation > Analytics > Visualization
-
-Ingestion: GitHub Actions trigger pipeline hourly
-Raw Storage: YouTube API data appended to Bronze tables
+Ingestion: Pipeline ingests data from Youtube API
+Raw Storage: Raw data appended to Bronze tables
 Transformation: Silver layer computes metrics and cleans data
 Analytics: Gold layer creates aggregated, dashboard-ready views
 Visualization: Streamlit dashboard queries latest Gold layer data
 
 **Bronze Layer (bronze_v3.py)**
 
-Grabs raw data from YouTube (channel info, videos, trending content) and saves as JSON files with timestamps
+- Grabs raw data from YouTube (channel info, videos, trending content) and saves as JSON files with timestamps
 
 **Silver Layer (silver_v3.py)**
 
-Cleans up the raw data, Calculates useful metrics like engagement rates, milestons, then converts JSON to Parquet (a faster file format)
+- Cleans up the raw data, Calculates useful metrics like engagement rates, milestons, then converts JSON to Parquet (a faster file format)
 
 **Gold Layer (gold_v3.py)**
 
-Takes cleaned data and loads it into the database
+- Takes cleaned data and loads it into the database
 
 **Orchestration (run_pipeline_v3.py)**
 
-Runs all three layers in order automatically
-Scheduled to run hourly via GitHub Actions
-Tech: Python, GitHub Actions
+- Runs all three layers in order automatically
+- Can be scheduled to run hourly via GitHub Actions
 
 **Visualization**
 
-Interactive web dashboard displaying channnel and video metrircs.
+- Interactive web dashboard displaying channnel and video metrircs.
 
 ---
 
@@ -187,42 +183,36 @@ For automated pipeline runs:
 ## Key Principles Implementation
 
 ### 1. Scalability
-**Implementation:**
 - **Horizontal Scaling**: Database-driven channel management supports 50-100+ channels (vs. 25-channel GitHub Secrets limit)
 - **API Quota Efficiency**: Pipeline consumes only 77 units/run (35x under estimated 2,719), providing massive headroom
 - **Time-Series Architecture**: Append-only Bronze tables support unlimited historical growth
 - **Cloud Database**: Neon PostgreSQL with connection pooling handles concurrent queries
 
 ### 2. Modularity
-**Implementation:**
 - **Versioned Tables**: Separate V1, V2, V3 schemas preserve existing data during iteration
 - **Layered Architecture**: Bronze (raw) → Silver (transformed) → Gold (analytics) separation
 - **Reusable Functions**: `calculate_grade()`, `format_number()`, `load_channels()` used across dashboard
 - **Independent Workflows**: Separate GitHub Actions for V1, V2, V3 pipelines
 
 ### 3. Reusability
-**Implementation:**
 - **Templated SQL Queries**: Parameterized queries work for channels, videos, time ranges
 - **Abstracted Data Loaders**: `load_video_history()`, `load_channel_history()` functions
 - **Style Components**: Reusable CSS classes (`.metric-card`, `.channel-card`, `.milestone-badge`)
 - **Visualization Templates**: Plotly chart configurations used across multiple pages
 
 ### 4. Observability
-**Implementation:**
 - **Ingestion Timestamps**: Every record tagged with `ingestion_timestamp` for lineage tracking
 - **Pipeline Logging**: GitHub Actions logs capture API responses, row counts, errors
 - **Version Tracking**: V1 → V2 → V3 tables preserve evolution history
 - **Dashboard Metrics**: Real-time counts of channels, videos, Billionaires Club members
 
 ### 5. Data Governance
-**Implementation:**
 - **Schema Versioning**: V1, V2, V3 tables document pipeline evolution
 - **Immutable Bronze Layer**: Raw API responses never modified (append-only)
 - **Data Lineage**: Clear transformation path: Bronze → Silver → Gold
 - **Quality Validation**: Timestamp formatting, duplicate detection, null handling
 
 ### 6. Reliability
-**Implementation:**
 - **Connection Pooling**: SQLAlchemy `pool_pre_ping=True` prevents stale connections
 - **Error Recovery**: Try-catch blocks in API calls with graceful degradation
 - **Scheduled Automation**: GitHub Actions hourly cron ensures consistent data freshness
@@ -230,14 +220,12 @@ For automated pipeline runs:
 
 
 ### 7. Efficiency
-**Implementation:**
 - **API Quota Optimization**: Batch requests, selective field retrieval (`part='snippet,statistics'`)
 - **Query Optimization**: `DISTINCT ON` for latest records, indexed `ingestion_timestamp`
 - **Dashboard Caching**: 1-hour TTL prevents redundant database queries
 - **Selective Data Loading**: Only fetch 20 videos per page, 30-day history windows
 
 ### 8. Security
-**Implementation:**
 - **Secret Management**: API keys stored in GitHub Secrets, never committed to Git
 - **Environment Variables**: `.env` file in `.gitignore`, `python-dotenv` for local dev
 - **Database Encryption**: Neon provides SSL/TLS connections by default
@@ -288,32 +276,18 @@ For automated pipeline runs:
 
 This project is currently in an early stage, and we've identified several areas that will take the idea to the next level. Our primary focus for future development is organized into the following categories:
 
-
 **User Experience and Interface (UI/UX)**
-
-- Platform Migration: Migrate the frontend from Streamlit to a more robust framework like Next.js. This will provide greater customization and control over the visualization experience, enabling a more professional and scalable user interface.
-
-- Custom Watchlists: Implement features for custom channel/video watchlists and easier input methods. This will facilitate more efficient control over the data being tracked and analyzed.
-
-- Browser Integration: Explore browser extensions or tools for seamless integration and data input directly from video platforms.
-
+- Migrate the frontend from Streamlit to a more robust framework like Next.js. This will provide greater customization and control over the visualization experience, enabling a more professional and scalable user interface.
+- Implement features for custom channel/video watchlists and easier input methods. This will facilitate more efficient control over the data being tracked and analyzed.
+- Explore browser extensions or tools for seamless integration and data input directly from video platforms.
 
 **Additional Data Integration**
-
-- To increase the dimensions and insights that can be derived, we plan to integrate data from diverse external sources:
-
-- Social Media: Integrate data from platforms like the Twitter API to analyze social engagement surrounding video content.
-
-- Contextual Data: Incorporate data from Google Trends and Wikipedia to provide richer context and external factors influencing the trends being analyzed.
-
-- Other Platforms: Investigate integrating data from platforms like Spotify for broader media analysis.
+- Integrate data from platforms like the Twitter API and Spotify to analyze social engagement surrounding video content.
+- Incorporate data from Google Trends and Wikipedia to provide richer context and external factors influencing the trends being analyzed.
 
 
 **Data Orchestration and Scalability**
-
-While the current setup is functional, migrating to a dedicated orchestration platform will be necessary for enterprise-level scale:
-
-Orchestration Migration: Transition the data pipeline from GitHub Actions to a more comprehensive workflow management platform, such as Apache Airflow. This will allow for greater resilience, more complex and high-level data transformations, and improved monitoring for a scalable, production environment.
+- Transition the data pipeline from GitHub Actions to a more comprehensive workflow management platform, such as Apache Airflow. This will allow for greater resilience, more complex and high-level data transformations, and improved monitoring for a scalable, production environment.
 
 ---
 
