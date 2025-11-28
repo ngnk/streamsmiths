@@ -1,12 +1,14 @@
+<div align="center">
+
 # STREAMWATCH
-### YouTube Analytics Platform
 
-![V1](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v1.yml/badge.svg)![V2](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v2.yml/badge.svg)![V3](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v3.yml/badge.svg)![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub%20Actions-brightgreen.svg)
+### IDS 706 Fall 2025 Final Project: YouTube Analytics Platform
 
+![V1](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v1.yml/badge.svg) ![V2](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v2.yml/badge.svg) ![V3](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v3.yml/badge.svg) ![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub%20Actions-brightgreen.svg)
 
-**IDS 706 Fall 2025 Final Project**  
+**Team 6 (Streamsmiths): Tony Ngari, Can He, Matthew Fischer, Joseph Hong, Trey Chase**
 
----
+</div>
 
 ## Table of Contents
 
