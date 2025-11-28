@@ -1,4 +1,4 @@
-# STREAMWATCH 📊
+# STREAMWATCH
 ### Advanced YouTube Analytics Platform with Predictive Intelligence
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
@@ -46,7 +46,7 @@ The platform processes data from 50-100+ YouTube channels through a **bronze-sil
 
 ---
 
-## 👥 Team
+## Team
 
 | Name | Role | Responsibilities |
 |------|------|-----------------|
@@ -58,7 +58,7 @@ The platform processes data from 50-100+ YouTube channels through a **bronze-sil
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 STREAMWATCH implements a **medallion architecture** (bronze-silver-gold) for data processing, ensuring data quality, traceability, and scalability.
 
@@ -139,34 +139,34 @@ STREAMWATCH implements a **medallion architecture** (bronze-silver-gold) for dat
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 📊 Channel Analytics
+### Channel Analytics
 - **Leaderboard System**: Social Blade-style letter grades (A++, A+, A, B+, B, C)
 - **Growth Tracking**: Subscriber and view count history over time
 - **Engagement Metrics**: Aggregated performance across all videos
 - **Channel Metadata**: Description, custom URLs, country, thumbnails
 
-### 🎬 Video Intelligence
+### Video Intelligence
 - **Billionaires Club**: Videos with 1B+ views
 - **Milestone Tracker**: Videos within 5% of next major milestone (10M, 25M, 50M, 100M, 250M, 500M, 1B)
 - **Viral Detection**: Videos with engagement rates > 4%
 - **Performance Metrics**: Views per day, engagement ratios, growth velocity
 
-### 📈 Interactive Visualizations
+### Interactive Visualizations
 - **Time-Series Charts**: Historical view counts with Plotly
 - **Channel Comparison**: Multi-channel performance overlays
 - **Milestone Progress**: Visual progress bars and forecasting
 - **Engagement Analysis**: Like-to-view, comment-to-view ratios
 
-### 🔍 Drill-Down Navigation
+### Drill-Down Navigation
 - Channel → Video exploration
 - Video → Historical analysis
 - Filterable views: Billionaires, Approaching Milestones, Highly Viral
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Data Engineering
 - **Pipeline**: Python 3.9+
@@ -190,7 +190,7 @@ STREAMWATCH implements a **medallion architecture** (bronze-silver-gold) for dat
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 - Python 3.9 or higher
@@ -286,7 +286,7 @@ For automated pipeline runs:
 
 ---
 
-## 🎓 Key Principles Implementation
+## Key Principles Implementation
 
 ### 1. Scalability
 **Implementation:**
@@ -454,7 +454,7 @@ response = youtube.videos().list(id=video_ids, part='statistics')
 
 **Example:**
 ```python
-# ✅ CORRECT: Secure API key handling
+# CORRECT: Secure API key handling
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -462,7 +462,7 @@ load_dotenv()
 api_key = os.getenv("YOUTUBE_API_KEY")  # Reads from .env or environment
 youtube = build('youtube', 'v3', developerKey=api_key)
 
-# ❌ WRONG: Hardcoded credentials (never do this!)
+# WRONG: Hardcoded credentials (never do this!)
 # api_key = "AIzaSyC_1234567890abcdefg"  # EXPOSED IN GIT HISTORY!
 ```
 
@@ -476,7 +476,7 @@ credentials.json
 
 ---
 
-## 🔄 Data Pipeline
+## Data Pipeline
 
 ### Bronze Layer (Raw Ingestion)
 **Tables:**
@@ -545,15 +545,15 @@ jobs:
 
 ---
 
-## 📊 Dashboard Features
+## Dashboard Features
 
-### 🏠 Home Page
+### Home Page
 - **STREAMWATCH Header**: Gradient-styled branding
 - **7 Key Metrics**: Channels, Videos, Billionaires Club, Viral Videos, Total Subs, Total Views, Avg Engagement
 - **Top Channels**: Leaderboard with Social Blade grades (A++, A+, etc.)
 - **Recent Videos**: Latest uploads across all channels
 
-### 📈 Channel Leaderboard
+### Channel Leaderboard
 - **Grading System**: 
   - `A++`: 50M+ subs, 10B+ views
   - `A+`: 10M+ subs, 1B+ views
@@ -563,20 +563,20 @@ jobs:
 - **Sortable Metrics**: Subscribers, views, engagement, video count
 - **Drill-Down**: Click channel → View all videos
 
-### 🎬 Video Explorer
+### Video Explorer
 - **Filters**: All Videos, Billionaires Watch (1B+), Approaching Milestone, Highly Viral
 - **Milestone Tiers**: 1B+, 500M-1B, 250M-500M, 100M-250M, 50M-100M, 25M-50M, 10M-25M
 - **Thumbnails**: Visual video cards
 - **Badges**: 💎 Billionaires Club, 🎯 Milestone Progress, 🔥 Highly Viral
 - **Drill-Down**: Click video → Historical analysis
 
-### 🚀 Milestone Tracker
+### Milestone Tracker
 - **Progress Bars**: Visual completion percentage
 - **Forecasting**: Days to next milestone (linear projection)
 - **Velocity Metrics**: Daily view growth rate
 - **5% Threshold**: Only shows videos within striking distance
 
-### 📉 Video Deep Dive (Drill-Down)
+### Video Deep Dive (Drill-Down)
 - **30-Day History**: Plotly time-series chart
 - **Growth Metrics**: Views gained, daily growth, growth rate %
 - **Engagement Analysis**: Like-to-view, comment-to-view, like-to-comment ratios
@@ -584,7 +584,7 @@ jobs:
 
 ---
 
-## 🔀 Project Evolution
+## Project Evolution
 
 ### Version 1 (V1)
 - **Scope**: 25 channels managed via GitHub Secrets
@@ -642,7 +642,7 @@ jobs:
 
 ---
 
-## 📚 Project Documentation
+## Project Documentation
 
 ### Key Components
 
@@ -725,31 +725,15 @@ pytest tests/ -v
 
 ---
 
-## 🤝 Acknowledgments
+## Acknowledgments
 
-- **Duke University IDS 706** for project guidance
+- **IDS 706 + Teaching Team** for project guidance
 - **YouTube Data API v3** for comprehensive data access
 - **Neon** for cloud-hosted PostgreSQL
 - **Streamlit** for rapid dashboard prototyping
 - **Social Blade** for UI/UX inspiration
 
 ---
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 📧 Contact
-
-For questions or collaboration inquiries, please reach out to the team:
-
-- **Tony Ngari** - [tony.ngari@duke.edu](mailto:tony.ngari@duke.edu)
-- **Project Repository** - [GitHub](https://github.com/your-org/streamwatch)
-
----
-
 <div align="center">
     <strong>Built with ❤️ by the STREAMWATCH Team</strong><br>
     <em>IDS 706 Fall 2025 - Duke University</em>
