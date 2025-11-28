@@ -1,30 +1,3 @@
-"""
-One-button runner for the Attention 500 YouTube Pipeline V3:
-BRONZE-V3 -> SILVER-V3 -> GOLD-V3
-
-🆕 V3 ENHANCEMENTS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-FROM V2 (Joseph's additions):
-✓ Like-to-view ratio (audience positivity)
-✓ Comment-to-view ratio (engagement/controversy indicator)
-✓ Like-to-comment ratio (positive sentiment)
-✓ Attention segments (billionaires_watch, milestones_watch, highly_viral)
-
-NEW IN V3:
-✓ Advanced milestone tracking system
-  - Milestones: 10M, 25M, 50M, 100M, 250M, 500M, 1B
-  - Progress tracking with 5% approaching threshold
-  - Days to milestone estimates (perfect for ML models)
-  - Milestone tier categorization
-✓ Separate V3 tables (preserves V1 & V2 data)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-DATABASE TABLES:
-  • channels_log_v3
-  • videos_log_v3
-  • trending_videos_log_v3
-"""
-
 from dotenv import load_dotenv
 
 from bronze_v3 import run_bronze_ingestion_v3
