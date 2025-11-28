@@ -136,7 +136,7 @@ STREAMWATCH implements a **medallion architecture** (bronze-silver-gold) for dat
 ## Key Features
 
 ### Channel Analytics
-- **Leaderboard System**: Social Blade-style letter grades (A++, A+, A, B+, B, C)
+- **Leaderboard System**: Channel grades (A++, A+, A, B+, B, C)
 - **Growth Tracking**: Subscriber and view count history over time
 - **Engagement Metrics**: Aggregated performance across all videos
 - **Channel Metadata**: Description, custom URLs, country, thumbnails
@@ -153,29 +153,24 @@ STREAMWATCH implements a **medallion architecture** (bronze-silver-gold) for dat
 - **Milestone Progress**: Visual progress bars and forecasting
 - **Engagement Analysis**: Like-to-view, comment-to-view ratios
 
-### Drill-Down Navigation
-- Channel → Video exploration
-- Video → Historical analysis
-- Filterable views: Billionaires, Approaching Milestones, Highly Viral
-
 ---
 
-## Technology Stack
+## Technology Stack IMPROVE THIS SECTION
 
 ### Data Engineering
-- **Pipeline**: Python 3.9+
+- **Pipeline**: Python
 - **Database**: Neon PostgreSQL (cloud-hosted)
 - **Orchestration**: GitHub Actions (YAML workflows)
 - **Data Processing**: Pandas, Polars
 
 ### Dashboard
-- **Framework**: Streamlit 1.40+
+- **Framework**: Streamlit
 - **Visualization**: Plotly Express, Plotly Graph Objects
-- **Styling**: Custom CSS (Social Blade-inspired design)
+- **Styling**: Custom CSS
 
-### APIs & Data Sources
-- **YouTube Data API v3**: Channel and video metadata
-- **Quotas**: ~77 units per run (well below 10,000 daily limit)
+### Data Sources
+- 
+[**YouTube Data API v3**][https://developers.google.com/youtube/v3]
 
 ### Development Tools
 - **Version Control**: Git / GitHub
@@ -187,14 +182,26 @@ STREAMWATCH implements a **medallion architecture** (bronze-silver-gold) for dat
 ## Setup Instructions
 
 ### Prerequisites
-- Python 3.9 or higher
-- YouTube Data API key
-- Neon database account (or PostgreSQL instance)
+- Python
+- YouTube Data API key [Follow instructions here on how to obtain][https://www.youtube.com/watch?v=EPeDTRNKAVo]
+- [Neon][https://neon.com/] database account (or desired PostgreSQL instance) _create a free account, create a project and open your psotgres instance_
 - Git
 
+**Getting a YouTube API Key:**
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project
+3. Enable "YouTube Data API v3"
+4. Create credentials (API key)
+5. Copy the API key to `.env`
+
+**Setting up Neon Database:**
+1. Sign up at [Neon.tech](https://neon.tech)
+2. Create a new project
+3. Copy the connection string to `NEON_DATABASE_URL`
+   
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-org/streamwatch.git
+git clone https://github.com/ngnk/streamsmiths.git
 cd streamwatch
 ```
 
@@ -221,26 +228,14 @@ Create a `.env` file in the project root:
 
 ```bash
 # YouTube API Configuration
-YOUTUBE_API_KEY=your_youtube_api_key_here
+YOUTUBE_API_KEY=YOUR_YOUTUBE_API_KEY
 
 # Database Configuration
-NEON_DATABASE_URL=postgresql://user:password@host/database
+NEON_DATABASE_URL=YOUR_DATABASE_CONNECTION_STRING
 
 # Optional: Channel List (comma-separated channel IDs)
 YOUTUBE_CHANNEL_IDS=UCupvZG-5ko_eiXAupbDfxWw,UCX6OQ3DkcsbYNE6H8uQQuVA
 ```
-
-**Getting a YouTube API Key:**
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project
-3. Enable "YouTube Data API v3"
-4. Create credentials (API key)
-5. Copy the API key to `.env`
-
-**Setting up Neon Database:**
-1. Sign up at [Neon.tech](https://neon.tech)
-2. Create a new project
-3. Copy the connection string to `NEON_DATABASE_URL`
 
 ### 4. Initialize Database Tables
 Run the pipeline setup script to create tables:
@@ -261,6 +256,7 @@ python pipeline/ingest_youtube_data.py
 
 ### 6. Launch Dashboard
 ```bash
+cd dashboard
 streamlit run dashboard.py
 ```
 
@@ -276,7 +272,7 @@ For automated pipeline runs:
    - `NEON_DATABASE_URL`
    - `YOUTUBE_CHANNEL_IDS`
 4. Enable GitHub Actions in repository settings
-5. Pipeline will run automatically every 8 hours
+5. Pipeline will run automatically every hour
 
 ---
 
