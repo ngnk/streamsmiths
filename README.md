@@ -1,7 +1,7 @@
 # STREAMWATCH
 ### YouTube Analytics Platform
 
-![V1](https://github.com/ngnk/streamsmiths/actions/workflows/pipeline.yml/badge.svg)![V2](https://github.com/ngnk/streamsmiths/actions/workflows/pipeline.yml/badge.svg)![V3](https://github.com/ngnk/streamsmiths/actions/workflows/pipeline.yml/badge.svg)
+![V1](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v1.yml/badge.svg)![V2](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v2.yml/badge.svg)![V3](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v3.yml/badge.svg)
 
 ![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub%20Actions-brightgreen.svg)
 
