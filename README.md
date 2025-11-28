@@ -15,15 +15,13 @@
 - [Project Overview](#-project-overview)
 - [Team](#-team)
 - [Architecture](#-architecture)
-- [Key Features](#-key-features)
-- [Technology Stack](#-technology-stack)
 - [Setup Instructions](#-setup-instructions)
 - [Key Principles Implementation](#-key-principles-implementation)
 - [Data Pipeline](#-data-pipeline)
 - [Dashboard Features](#-dashboard-features)
 - [Project Evolution](#-project-evolution)
-- [Future Roadmap](#-future-roadmap)
-- [Acknowledgments](#-acknowledgments)
+- [Future Improvements](#-future-improvements)
+- [Lessons Learned](#-lessons-learned)
 
 ---
 
@@ -56,106 +54,12 @@ The platform processes data from 50-100+ YouTube channels through a **bronze-sil
 
 STREAMWATCH implements a **medallion architecture** (bronze-silver-gold) for data processing, ensuring data quality, traceability, and scalability.
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                         STREAMWATCH ARCHITECTURE                     │
-└─────────────────────────────────────────────────────────────────────┘
-
-┌──────────────────┐
-│  YouTube Data    │
-│      API         │
-└────────┬─────────┘
-         │
-         ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                      BRONZE LAYER (Raw Ingestion)                    │
-│  • Channels API → channels_log_v3 (raw channel metadata)            │
-│  • Videos API → videos_log_v3 (raw video data)                      │
-│  • Append-only logs with ingestion timestamps                       │
-│  • Full historical preservation                                     │
-└────────┬────────────────────────────────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                    SILVER LAYER (Transformation)                     │
-│  • Data cleaning and normalization                                  │
-│  • Timestamp formatting (ISO → YYYY-MM-DD HH:MM:SS)                │
-│  • Computed metrics: engagement_rate, views_per_day                 │
-│  • Milestone tracking: next_milestone, days_to_milestone           │
-│  • Deduplication and quality validation                            │
-└────────┬────────────────────────────────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                      GOLD LAYER (Analytics)                          │
-│  • Aggregated channel leaderboards                                  │
-│  • Video performance rankings                                       │
-│  • Milestone achievement tracking                                   │
-│  • Time-series analysis ready data                                  │
-│  • Dashboard-optimized views                                        │
-└────────┬────────────────────────────────────────────────────────────┘
-         │
-         ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│                    PRESENTATION LAYER                                 │
-│  ┌─────────────────┐         ┌──────────────────┐                   │
-│  │  Streamlit      │         │  Future: Next.js │                   │
-│  │  Dashboard      │         │  Web App         │                   │
-│  └─────────────────┘         └──────────────────┘                   │
-│  • Interactive visualizations with Plotly                            │
-│  • Channel leaderboards with Social Blade-style grading             │
-│  • Video explorer with drill-down analytics                         │
-│  • Milestone tracker with progress forecasting                      │
-└──────────────────────────────────────────────────────────────────────┘
-
-┌──────────────────────────────────────────────────────────────────────┐
-│                    ORCHESTRATION & AUTOMATION                         │
-│  • GitHub Actions: 8-hour scheduled runs + manual triggers          │
-│  • Neon PostgreSQL: Cloud database with connection pooling          │
-│  • Version Control: Git branching for team collaboration            │
-└──────────────────────────────────────────────────────────────────────┘
-
-┌──────────────────────────────────────────────────────────────────────┐
-│                       SECURITY & GOVERNANCE                           │
-│  • API Keys: GitHub Secrets management                               │
-│  • Database Auth: Environment variable configuration                │
-│  • Data Lineage: Versioned tables (V1 → V2 → V3)                   │
-│  • Audit Trail: Ingestion timestamps on all records                 │
-└──────────────────────────────────────────────────────────────────────┘
-```
-
 ### Data Flow
 1. **Ingestion**: GitHub Actions trigger pipeline every 8 hours
 2. **Raw Storage**: YouTube API data appended to Bronze tables
 3. **Transformation**: Silver layer computes metrics and cleans data
 4. **Analytics**: Gold layer creates aggregated, dashboard-ready views
 5. **Visualization**: Streamlit dashboard queries latest Gold layer data
-
----
-
-## Key Features
-
-### Channel Analytics
-- **Leaderboard System**: Channel grades (A++, A+, A, B+, B, C)
-- **Growth Tracking**: Subscriber and view count history over time
-- **Engagement Metrics**: Aggregated performance across all videos
-- **Channel Metadata**: Description, custom URLs, country, thumbnails
-
-### Video Intelligence
-- **Billionaires Club**: Videos with 1B+ views
-- **Milestone Tracker**: Videos within 5% of next major milestone (10M, 25M, 50M, 100M, 250M, 500M, 1B)
-- **Viral Detection**: Videos with engagement rates > 4%
-- **Performance Metrics**: Views per day, engagement ratios, growth velocity
-
-### Interactive Visualizations
-- **Time-Series Charts**: Historical view counts with Plotly
-- **Channel Comparison**: Multi-channel performance overlays
-- **Milestone Progress**: Visual progress bars and forecasting
-- **Engagement Analysis**: Like-to-view, comment-to-view ratios
-
----
-
-## Technology Stack IMPROVE THIS SECTION
 
 ### Data Engineering
 - **Pipeline**: Python
@@ -508,30 +412,7 @@ is_approaching_milestone = milestone_progress_pct >= 95
 
 ### Orchestration
 **GitHub Actions Workflow** (`.github/workflows/pipeline_v3.yml`):
-```yaml
-name: STREAMWATCH Pipeline V3
-on:
-  schedule:
-    - cron: '0 */8 * * *'  # Every 8 hours
-  workflow_dispatch:  # Manual trigger
 
-jobs:
-  ingest-and-transform:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Run pipeline
-        env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
-        run: python pipeline/ingest_youtube_data.py
-```
 
 ---
 
@@ -540,7 +421,7 @@ jobs:
 ### Home Page
 - **STREAMWATCH Header**: Gradient-styled branding
 - **7 Key Metrics**: Channels, Videos, Billionaires Club, Viral Videos, Total Subs, Total Views, Avg Engagement
-- **Top Channels**: Leaderboard with Social Blade grades (A++, A+, etc.)
+- **Top Channels**: Leaderboard with grades (A++, A+, etc.)
 - **Recent Videos**: Latest uploads across all channels
 
 ### Channel Leaderboard
@@ -557,7 +438,7 @@ jobs:
 - **Filters**: All Videos, Billionaires Watch (1B+), Approaching Milestone, Highly Viral
 - **Milestone Tiers**: 1B+, 500M-1B, 250M-500M, 100M-250M, 50M-100M, 25M-50M, 10M-25M
 - **Thumbnails**: Visual video cards
-- **Badges**: 💎 Billionaires Club, 🎯 Milestone Progress, 🔥 Highly Viral
+- **Badges**: Billionaires Club, Milestone Progress, Highly Viral
 - **Drill-Down**: Click video → Historical analysis
 
 ### Milestone Tracker
@@ -574,61 +455,36 @@ jobs:
 
 ---
 
-## Project Evolution
+## Future Improvements
 
-### Version 1 (V1)
-- **Scope**: 25 channels managed via GitHub Secrets
-- **Architecture**: Simple batch ingestion to Bronze layer
-- **Limitations**: Scalability constraints, manual channel management
+This project is currently in an early stage, and we've identified several areas that will take the idea to the next level. Our primary focus for future development is organized into the following categories:
 
-### Version 2 (V2)
-- **Enhancements**: 
-  - Engagement metrics calculation (engagement_rate, views_per_day)
-  - Channel metadata enrichment (descriptions, custom URLs)
-  - Improved timestamp formatting
-- **Milestone**: Transitioned to 50+ channels
 
-### Version 3 (V3) - Current
-- **Major Features**:
-  - Milestone tracking system (10M → 1B thresholds)
-  - Approaching milestone detection (within 5%)
-  - Days-to-milestone forecasting
-  - Billionaires Club tracking (1B+ views)
-  - Viral detection (>4% engagement)
-  - Enhanced dashboard with drill-down navigation
-- **Improvements**:
-  - Database-driven channel management (no Secrets limit)
-  - Polars integration for faster data processing
-  - Connection pooling for reliability
-  - Social Blade-style grading system
+**User Experience and Interface (UI/UX)**
 
----
+Platform Migration: Migrate the frontend from Streamlit to a more robust framework like Next.js. This will provide greater customization and control over the visualization experience, enabling a more professional and scalable user interface.
 
-## 🚀 Future Roadmap
+Custom Watchlists: Implement features for custom channel/video watchlists and easier input methods. This will facilitate more efficient control over the data being tracked and analyzed.
 
-### Phase 1: Dashboard Enhancement (In Progress)
-- [ ] Migrate from Streamlit to Next.js
-- [ ] User authentication and saved dashboards
-- [ ] Custom channel watchlists
-- [ ] Email alerts for milestone achievements
+Browser Integration: Explore browser extensions or tools for seamless integration and data input directly from video platforms.
 
-### Phase 2: Machine Learning Integration
-- [ ] View count forecasting (LSTM/Prophet models)
-- [ ] Milestone achievement probability
-- [ ] Engagement rate prediction
-- [ ] Anomaly detection (viral breakouts)
 
-### Phase 3: External Data Integration (V4)
-- [ ] Twitter API: Social mentions correlation
-- [ ] Spotify API: Music video cross-analysis
-- [ ] Google Trends: Search volume integration
-- [ ] Wikipedia API: Creator biography enrichment
+**Additional Data Integration**
 
-### Phase 4: Advanced Analytics
-- [ ] Channel comparison overlays
-- [ ] Category benchmarking
-- [ ] Optimal posting time analysis
-- [ ] Audience demographics (via API limitations)
+To increase the dimensions and insights that can be derived, we plan to integrate data from diverse external sources:
+
+Social Media: Integrate data from platforms like the Twitter API to analyze social engagement surrounding video content.
+
+Contextual Data: Incorporate data from Google Trends and Wikipedia to provide richer context and external factors influencing the trends being analyzed.
+
+Other Platforms: Investigate integrating data from platforms like Spotify for broader media analysis.
+
+
+**Data Orchestration and Scalability**
+
+While the current setup is functional, migrating to a dedicated orchestration platform will be necessary for enterprise-level scale:
+
+Orchestration Migration: Transition the data pipeline from GitHub Actions to a more comprehensive workflow management platform, such as Apache Airflow. This will allow for greater resilience, more complex and high-level data transformations, and improved monitoring for a scalable, production environment.
 
 ---
 
@@ -675,7 +531,7 @@ CREATE INDEX idx_channels_timestamp ON channels_log_v3(ingestion_timestamp);
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Current Test Coverage
 - ✅ API connection validation
@@ -691,7 +547,7 @@ pytest tests/ -v
 
 ---
 
-## 📝 Lessons Learned
+## Lessons Learned
 
 ### 1. API Quota Management
 - **Myth**: Initial estimates suggested 2,719 units/run
@@ -715,16 +571,7 @@ pytest tests/ -v
 
 ---
 
-## Acknowledgments
-
-- **IDS 706 + Teaching Team** for project guidance
-- **YouTube Data API v3** for comprehensive data access
-- **Neon** for cloud-hosted PostgreSQL
-- **Streamlit** for rapid dashboard prototyping
-- **Social Blade** for UI/UX inspiration
-
----
 <div align="center">
-    <strong>Built with ❤️ by the STREAMWATCH Team</strong><br>
+    <strong>Built with ❤️ by the STREAMSMITHS</strong><br>
     <em>IDS 706 Fall 2025 - Duke University</em>
 </div>
