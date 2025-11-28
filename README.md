@@ -27,9 +27,9 @@
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
-**STREAMWATCH** is a comprehensive YouTube analytics platform that provides deep insights into channel performance, video trends, and milestone tracking. Designed as a "mini Social Blade" with enhanced analytics capabilities, STREAMWATCH goes beyond basic metrics by implementing a robust data engineering pipeline and interactive visualizations.
+**STREAMWATCH** is a comprehensive YouTube analytics platform that provides insights into channel performance, video trends, and milestone tracking.
 
 The platform processes data from 50-100+ YouTube channels through a **bronze-silver-gold data pipeline architecture**, delivering:
 - Real-time channel and video performance tracking
@@ -38,23 +38,17 @@ The platform processes data from 50-100+ YouTube channels through a **bronze-sil
 - Historical data analysis with interactive visualizations
 - Scalable data infrastructure supporting future ML predictions
 
-### Project Goals
-1. Build a production-grade data engineering pipeline for YouTube analytics
-2. Implement scalable architecture following modern data engineering best practices
-3. Create an intuitive dashboard for exploring YouTube performance metrics
-4. Demonstrate key principles: scalability, modularity, observability, and data governance
-
 ---
 
 ## Team
 
 | Name | Role | Responsibilities |
 |------|------|-----------------|
-| **Tony Ngari** | Leader / Engineering | Pipeline architecture, database design, system integration, project coordination |
-| **Joseph Hong** | Engineering | Data processing workflows, API integration, automation |
-| **Trey Chase** | Data Science | Analytics implementation, metrics calculation, data validation |
-| **Can He** | Analytics | Dashboard development, visualization design, reporting |
-| **Matthew Fischer** | Data Science | Statistical analysis, performance metrics, quality assurance |
+| **Tony N.** | Leader / Engineering | Pipeline architecture, database design, system integration, project coordination |
+| **Joseph H.** | Engineering | Data processing workflows, API integration, model development |
+| **Trey C.** | Data Science | Model development, metrics calculation |
+| **Can H.** | Analytics | Dashboard development, visualization design |
+| **Matthew F.** | Data Science | Model development, metrics calculation |
 
 ---
 
