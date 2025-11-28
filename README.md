@@ -1,16 +1,15 @@
 # STREAMWATCH
-### Advanced YouTube Analytics Platform with Predictive Intelligence
+### YouTube Analytics Platform
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
 ![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub%20Actions-brightgreen.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 **IDS 706 Fall 2025 Final Project**  
-Duke University, Data Engineering & MLOps
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Project Overview](#-project-overview)
 - [Team](#-team)
