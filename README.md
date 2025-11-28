@@ -30,13 +30,12 @@ The platform processes data from 50+ YouTube channels through a **bronze-silver-
 - Milestone achievement monitoring
 - Engagement analytics and trend identification
 - Historical data analysis with interactive visualizations
-- Scalable data infrastructure supporting future ML predictions
 
 ### Team
 
 | Name | Role | Responsibilities |
 |------|------|-----------------|
-| **Tony N.** | Leader / Engineering | Pipeline architecture, database design, system integration, project coordination |
+| **Tony N.** | Leader / Engineering | Architecture, database design, integrations, project coordination |
 | **Joseph H.** | Engineering | Data processing workflows, API integration, model development |
 | **Trey C.** | Data Science | Model development, metrics calculation |
 | **Can H.** | Analytics | Dashboard development, visualization design |
@@ -51,19 +50,19 @@ STREAMWATCH implements a **medallion architecture** (bronze-silver-gold).
 ### Data Source
 [**YouTube Data API v3**](https://developers.google.com/youtube/v3)
 
-**Bronze Layer (bronze_v3.py)**
+**Bronze Layer**
 
 - Grabs raw data from YouTube (channel info, videos, trending content) and saves as JSON files with timestamps
 
-**Silver Layer (silver_v3.py)**
+**Silver Layer**
 
 - Cleans up the raw data, Calculates useful metrics like engagement rates, milestons, then converts JSON to Parquet (a faster file format)
 
-**Gold Layer (gold_v3.py)**
+**Gold Layer**
 
 - Takes cleaned data and loads it into the database
 
-**Orchestration (run_pipeline_v3.py)**
+**Orchestration**
 
 - Runs all three layers in order automatically
 - Can be scheduled to run hourly via GitHub Actions
@@ -72,6 +71,19 @@ STREAMWATCH implements a **medallion architecture** (bronze-silver-gold).
 
 - Interactive web dashboard displaying channnel and video metrircs.
 
+```mermaid
+flowchart LR
+    API[YouTube API] --> Bronze[(Bronze<br/>Raw Data)]
+    Bronze --> Silver[(Silver<br/>Cleaned Data)]
+    Silver --> Gold[(Gold<br/>Analytics)]
+    Gold --> Dashboard[Streamlit<br/>Dashboard]
+    
+    style Bronze fill:#cd7f32,stroke:#8b4513,stroke-width:2px,color:#fff
+    style Silver fill:#c0c0c0,stroke:#808080,stroke-width:2px,color:#000
+    style Gold fill:#ffd700,stroke:#daa520,stroke-width:2px,color:#000
+    style Dashboard fill:#4a90e2,stroke:#2e5c8a,stroke-width:2px,color:#fff
+```
+   
 ---
 
 # Setup
@@ -170,42 +182,25 @@ For automated pipeline runs:
 
 ---
 
-# Dashboard
+# Dashboard [ADD SCREENSHOT]
 
-### Home Page
-- **STREAMWATCH Header**: Gradient-styled branding
-- **7 Key Metrics**: Channels, Videos, Billionaires Club, Viral Videos, Total Subs, Total Views, Avg Engagement
-- **Top Channels**: Leaderboard with grades (A++, A+, etc.)
-- **Recent Videos**: Latest uploads across all channels
+- StreamWatch offers a unified dashboard with key metrics on channels, videos, and engagement, alongside leaderboards for top creators and recent uploads.
+- Users can explore channels through a graded leaderboard system and drill down into any creator to view their full video catalog.
+- The Video Explorer highlights viral content, major milestones, and trending videos with filters and badge indicators.
+- A Milestone Tracker provides forecasting, progress bars, and velocity metrics for videos nearing major view thresholds.
+- Each video has a deep-dive page with 30-day history, growth analytics, engagement ratios, and full metadata.
 
-### Channel Leaderboard
-- **Grading System**: 
-  - `A++`: 50M+ subs, 10B+ views
-  - `A+`: 10M+ subs, 1B+ views
-  - `A`: 1M+ subs, 100M+ views
-  - `B+`: 100K+ subs, 10M+ views
-  - `B/C`: Below thresholds
-- **Sortable Metrics**: Subscribers, views, engagement, video count
-- **Drill-Down**: Click channel → View all videos
+---
 
-### Video Explorer
-- **Filters**: All Videos, Billionaires Watch (1B+), Approaching Milestone, Highly Viral
-- **Milestone Tiers**: 1B+, 500M-1B, 250M-500M, 100M-250M, 50M-100M, 25M-50M, 10M-25M
-- **Thumbnails**: Visual video cards
-- **Badges**: Billionaires Club, Milestone Progress, Highly Viral
-- **Drill-Down**: Click video → Historical analysis
+# Database [FINISH SECTION]
 
-### Milestone Tracker
-- **Progress Bars**: Visual completion percentage
-- **Forecasting**: Days to next milestone (linear projection)
-- **Velocity Metrics**: Daily view growth rate
-- **5% Threshold**: Only shows videos within striking distance
+The database contains various tables, including baseline, and additions from each iteration of the pipeline (V2 and V3).
 
-### Video Deep Dive (Drill-Down)
-- **30-Day History**: Plotly time-series chart
-- **Growth Metrics**: Views gained, daily growth, growth rate %
-- **Engagement Analysis**: Like-to-view, comment-to-view, like-to-comment ratios
-- **Metadata**: Duration, category, days since publish
+The tables contain the informaiton as follows:
+
+You may query the tables as desired, for instance, if you'd like to see.....
+
+There are also some interesting joins that can be done in order to....for instance.....
 
 ---
 
@@ -247,7 +242,6 @@ For automated pipeline runs:
 - **Scheduled Automation**: GitHub Actions hourly cron ensures consistent data freshness
 - **Caching Strategy**: Streamlit `@st.cache_data(ttl=3600)` reduces database load
 
-
 ### 7. Efficiency
 - **API Quota Optimization**: Batch requests, selective field retrieval (`part='snippet,statistics'`)
 - **Query Optimization**: `DISTINCT ON` for latest records, indexed `ingestion_timestamp`
@@ -274,7 +268,6 @@ This project is currently in an early stage, and we've identified several areas 
 **Additional Data Integration**
 - Integrate data from platforms like the Twitter API and Spotify to analyze social engagement surrounding video content.
 - Incorporate data from Google Trends and Wikipedia to provide richer context and external factors influencing the trends being analyzed.
-
 
 **Data Orchestration and Scalability**
 - Transition the data pipeline from GitHub Actions to a more comprehensive workflow management platform, such as Apache Airflow. This will allow for greater resilience, more complex and high-level data transformations, and improved monitoring for a scalable, production environment.
