@@ -49,7 +49,7 @@ The platform processes data from 50+ YouTube channels through a **bronze-silver-
 STREAMWATCH implements a **medallion architecture** (bronze-silver-gold).
 
 ### Data Source
-[**YouTube Data API v3**][https://developers.google.com/youtube/v3]
+[**YouTube Data API v3**](https://developers.google.com/youtube/v3)
 
 ### Data Flow
 Ingestion: Pipeline ingests data from Youtube API
