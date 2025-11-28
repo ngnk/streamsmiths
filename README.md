@@ -51,13 +51,6 @@ STREAMWATCH implements a **medallion architecture** (bronze-silver-gold).
 ### Data Source
 [**YouTube Data API v3**](https://developers.google.com/youtube/v3)
 
-### Data Flow
-Ingestion: Pipeline ingests data from Youtube API
-Raw Storage: Raw data appended to Bronze tables
-Transformation: Silver layer computes metrics and cleans data
-Analytics: Gold layer creates aggregated, dashboard-ready views
-Visualization: Streamlit dashboard queries latest Gold layer data
-
 **Bronze Layer (bronze_v3.py)**
 
 - Grabs raw data from YouTube (channel info, videos, trending content) and saves as JSON files with timestamps
