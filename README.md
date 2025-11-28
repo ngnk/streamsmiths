@@ -12,17 +12,16 @@
 
 ## Table of Contents
 
-- [Project Overview](#-project-overview)
-- [Team](#-team)
-- [Architecture](#-architecture)
-- [Setup Instructions](#-setup-instructions)
-- [Key Principles Implementation](#-key-principles-implementation)
-- [Dashboard Features](#-dashboard-features)
+- [Project Overview](#-Project-Overview)
+- [Architecture](#-Architecture)
+- [Setup Instructions](#-Setup)
+- [Dashboard](#-Dashboard)
+- [Key Principles](#-Key-Principles)
 - [Future Improvements](#-future-improvements)
 
 ---
 
-## Project Overview
+# Project Overview
 
 **STREAMWATCH** is a comprehensive YouTube analytics platform that provides insights into channel performance, video trends, and milestone tracking.
 
@@ -33,9 +32,7 @@ The platform processes data from 50+ YouTube channels through a **bronze-silver-
 - Historical data analysis with interactive visualizations
 - Scalable data infrastructure supporting future ML predictions
 
----
-
-## Team
+### Team
 
 | Name | Role | Responsibilities |
 |------|------|-----------------|
@@ -47,7 +44,7 @@ The platform processes data from 50+ YouTube channels through a **bronze-silver-
 
 ---
 
-## Architecture
+# Architecture
 
 STREAMWATCH implements a **medallion architecture** (bronze-silver-gold).
 
@@ -84,7 +81,7 @@ Visualization: Streamlit dashboard queries latest Gold layer data
 
 ---
 
-## Setup Instructions
+# Setup
 
 **Get a YouTube API Key:**
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
@@ -180,7 +177,46 @@ For automated pipeline runs:
 
 ---
 
-## Key Principles Implementation
+# Dashboard
+
+### Home Page
+- **STREAMWATCH Header**: Gradient-styled branding
+- **7 Key Metrics**: Channels, Videos, Billionaires Club, Viral Videos, Total Subs, Total Views, Avg Engagement
+- **Top Channels**: Leaderboard with grades (A++, A+, etc.)
+- **Recent Videos**: Latest uploads across all channels
+
+### Channel Leaderboard
+- **Grading System**: 
+  - `A++`: 50M+ subs, 10B+ views
+  - `A+`: 10M+ subs, 1B+ views
+  - `A`: 1M+ subs, 100M+ views
+  - `B+`: 100K+ subs, 10M+ views
+  - `B/C`: Below thresholds
+- **Sortable Metrics**: Subscribers, views, engagement, video count
+- **Drill-Down**: Click channel → View all videos
+
+### Video Explorer
+- **Filters**: All Videos, Billionaires Watch (1B+), Approaching Milestone, Highly Viral
+- **Milestone Tiers**: 1B+, 500M-1B, 250M-500M, 100M-250M, 50M-100M, 25M-50M, 10M-25M
+- **Thumbnails**: Visual video cards
+- **Badges**: Billionaires Club, Milestone Progress, Highly Viral
+- **Drill-Down**: Click video → Historical analysis
+
+### Milestone Tracker
+- **Progress Bars**: Visual completion percentage
+- **Forecasting**: Days to next milestone (linear projection)
+- **Velocity Metrics**: Daily view growth rate
+- **5% Threshold**: Only shows videos within striking distance
+
+### Video Deep Dive (Drill-Down)
+- **30-Day History**: Plotly time-series chart
+- **Growth Metrics**: Views gained, daily growth, growth rate %
+- **Engagement Analysis**: Like-to-view, comment-to-view, like-to-comment ratios
+- **Metadata**: Duration, category, days since publish
+
+---
+
+# Key Principles
 
 ### 1. Scalability
 - **Horizontal Scaling**: Database-driven channel management supports 50-100+ channels (vs. 25-channel GitHub Secrets limit)
@@ -230,45 +266,6 @@ For automated pipeline runs:
 - **Environment Variables**: `.env` file in `.gitignore`, `python-dotenv` for local dev
 - **Database Encryption**: Neon provides SSL/TLS connections by default
 - **No Hardcoded Credentials**: All sensitive data externalized to environment config
-
----
-
-## Dashboard Features
-
-### Home Page
-- **STREAMWATCH Header**: Gradient-styled branding
-- **7 Key Metrics**: Channels, Videos, Billionaires Club, Viral Videos, Total Subs, Total Views, Avg Engagement
-- **Top Channels**: Leaderboard with grades (A++, A+, etc.)
-- **Recent Videos**: Latest uploads across all channels
-
-### Channel Leaderboard
-- **Grading System**: 
-  - `A++`: 50M+ subs, 10B+ views
-  - `A+`: 10M+ subs, 1B+ views
-  - `A`: 1M+ subs, 100M+ views
-  - `B+`: 100K+ subs, 10M+ views
-  - `B/C`: Below thresholds
-- **Sortable Metrics**: Subscribers, views, engagement, video count
-- **Drill-Down**: Click channel → View all videos
-
-### Video Explorer
-- **Filters**: All Videos, Billionaires Watch (1B+), Approaching Milestone, Highly Viral
-- **Milestone Tiers**: 1B+, 500M-1B, 250M-500M, 100M-250M, 50M-100M, 25M-50M, 10M-25M
-- **Thumbnails**: Visual video cards
-- **Badges**: Billionaires Club, Milestone Progress, Highly Viral
-- **Drill-Down**: Click video → Historical analysis
-
-### Milestone Tracker
-- **Progress Bars**: Visual completion percentage
-- **Forecasting**: Days to next milestone (linear projection)
-- **Velocity Metrics**: Daily view growth rate
-- **5% Threshold**: Only shows videos within striking distance
-
-### Video Deep Dive (Drill-Down)
-- **30-Day History**: Plotly time-series chart
-- **Growth Metrics**: Views gained, daily growth, growth rate %
-- **Engagement Analysis**: Like-to-view, comment-to-view, like-to-comment ratios
-- **Metadata**: Duration, category, days since publish
 
 ---
 
