@@ -2,7 +2,7 @@
 
 # STREAMWATCH
 
-### IDS 706 Fall 2025 Final Project: YouTube Analytics Platform
+### IDS 706 Fall 2025 Final Project
 
 ![V3](https://github.com/ngnk/streamsmiths/actions/workflows/workflow_v3.yml/badge.svg) ![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub%20Actions-brightgreen.svg)
 
