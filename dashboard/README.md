@@ -2,7 +2,7 @@
 
 ## How to run
 
-1. CD into /dashboard directory and install dependencies (venv optional):
+1. CD into /dashboard directory and install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
