@@ -12,12 +12,13 @@
 
 ## Table of Contents
 
-- [Project Overview](#-Project-Overview)
-- [Architecture](#-Architecture)
-- [Setup Instructions](#-Setup)
-- [Dashboard](#-Dashboard)
-- [Key Principles](#-Key-Principles)
-- [Future Improvements](#-future-improvements)
+- [Project Overview](#Project-Overview)
+- [Architecture](#Architecture)
+- [Setup Instructions](#Setup)
+- [Dashboard](#Dashboard)
+- [Database](#Database)
+- [Key Principles](#Key-Principles)
+- [Future Improvements](#Future-Improvements)
 
 ---
 
@@ -47,7 +48,7 @@ The platform processes data from 50+ YouTube channels through a **bronze-silver-
 
 STREAMWATCH implements a **medallion architecture** (bronze-silver-gold).
 
-### Data Source
+**Data Source**
 [**YouTube Data API v3**](https://developers.google.com/youtube/v3)
 
 **Bronze Layer**
@@ -111,19 +112,6 @@ cd streamwatch
 pip install -r requirements.txt
 ```
 
-**Required packages** (`requirements.txt`):
-```txt
-streamlit>=1.40.0
-polars>=0.20.0
-plotly>=5.18.0
-pandas>=2.1.0
-sqlalchemy>=2.0.0
-python-dotenv>=1.0.0
-requests>=2.31.0
-google-api-python-client>=2.100.0
-psycopg2-binary>=2.9.9
-```
-
 ### 3. Configure Environment Variables
 Create a `.env` file in the project root:
 
@@ -150,11 +138,6 @@ Run the pipeline setup script to create tables:
 python scripts/setup_database.py
 ```
 
-This will create:
-- `channels_log_v3` (Bronze layer)
-- `videos_log_v3` (Bronze layer)
-- Future: Silver and Gold layer tables
-
 ### 6. Run Initial Data Ingestion
 ```bash
 python pipeline/ingest_youtube_data.py
@@ -177,30 +160,107 @@ For automated pipeline runs:
    - `YOUTUBE_API_KEY`
    - `NEON_DATABASE_URL`
    - `YOUTUBE_CHANNEL_IDS`
-4. Enable GitHub Actions in repository settings
+4. Enable GitHub Actions in repository settings and activate `workflow_v3`
 5. Pipeline will run automatically every hour
 
 ---
 
-# Dashboard [ADD SCREENSHOT]
+# Dashboard
 
-- StreamWatch offers a unified dashboard with key metrics on channels, videos, and engagement, alongside leaderboards for top creators and recent uploads.
+- The dashboard with key metrics on channels, videos, and engagement, alongside leaderboards for top creators and recent uploads.
 - Users can explore channels through a graded leaderboard system and drill down into any creator to view their full video catalog.
 - The Video Explorer highlights viral content, major milestones, and trending videos with filters and badge indicators.
 - A Milestone Tracker provides forecasting, progress bars, and velocity metrics for videos nearing major view thresholds.
 - Each video has a deep-dive page with 30-day history, growth analytics, engagement ratios, and full metadata.
 
+![](/dashboard/dashboard.png)
+
 ---
 
-# Database [FINISH SECTION]
+# Database
 
-The database contains various tables, including baseline, and additions from each iteration of the pipeline (V2 and V3).
+Each pipeline iteration (baseline, V2, and V3) maintains separate tables to preserve historical data while allowing for system improvements.
 
-The tables contain the informaiton as follows:
+The tables contain the following information:
 
-You may query the tables as desired, for instance, if you'd like to see.....
+- **channels_log_v3**: Channel metadata including subscriber counts, total views, video counts, thumbnails, country, keywords, and topic categories
+- **videos_log_v3**: Video performance metrics with engagement rates, milestone tracking, and attention segmentation (billionaires_watch, milestones_watch, highly_viral)
+- **trending_videos_log_v3**: Trending videos by region with all the same metrics as videos_log_v3 plus trending_region
+- **Earlier versions** (baseline, V2): Historical pipeline versions for comparison and analysis
 
-There are also some interesting joins that can be done in order to....for instance.....
+You may query the tables as desired. For instance, if you'd like to see the latest channel statistics:
+
+```sql
+SELECT channel_title, subscriber_count, view_count, video_count
+FROM channels_log_v3
+ORDER BY ingestion_timestamp DESC
+LIMIT 10;
+```
+
+To streamline analytics, consider creating database views. 
+
+For example, you can define a view to always retrieve the latest data for every channel:
+
+```sql
+CREATE VIEW latest_channels_view AS
+SELECT DISTINCT ON (channel_id)
+    channel_id,
+    channel_title,
+    custom_url,
+    subscriber_count,
+    view_count,
+    video_count,
+    country,
+    published_at,
+    thumbnail_url,
+    keywords,
+    topic_categories,
+    ingestion_timestamp
+FROM channels_log_v3
+ORDER BY channel_id, ingestion_timestamp DESC;
+```
+
+To develop additional metrics, you could deploy this query against the `videos_log_v3` table to view the hourly change in views and comments.
+
+```sql
+WITH video_snapshots AS (
+    SELECT 
+        video_id,
+        video_title,
+        channel_title,
+        view_count,
+        like_count,
+        comment_count,
+        ingestion_timestamp::timestamp as snapshot_time,
+        LAG(view_count) OVER (PARTITION BY video_id ORDER BY ingestion_timestamp::timestamp) as prev_view_count,
+        LAG(like_count) OVER (PARTITION BY video_id ORDER BY ingestion_timestamp::timestamp) as prev_like_count,
+        LAG(comment_count) OVER (PARTITION BY video_id ORDER BY ingestion_timestamp::timestamp) as prev_comment_count,
+        LAG(ingestion_timestamp::timestamp) OVER (PARTITION BY video_id ORDER BY ingestion_timestamp::timestamp) as prev_snapshot_time
+    FROM videos_log_v3
+)
+SELECT 
+    video_id,
+    video_title,
+    channel_title,
+    view_count,
+    like_count,
+    comment_count,
+    snapshot_time,
+    prev_snapshot_time,
+    EXTRACT(EPOCH FROM (snapshot_time - prev_snapshot_time)) / 3600 as hours_between_snapshots,
+    view_count - COALESCE(prev_view_count, 0) as view_count_change,
+    like_count - COALESCE(prev_like_count, 0) as like_count_change,
+    comment_count - COALESCE(prev_comment_count, 0) as comment_count_change,
+    ROUND((view_count - COALESCE(prev_view_count, 0))::numeric / 
+          NULLIF(EXTRACT(EPOCH FROM (snapshot_time - prev_snapshot_time)) / 3600, 0), 2) as views_per_hour
+FROM video_snapshots
+WHERE prev_snapshot_time IS NOT NULL
+    AND snapshot_time >= NOW() - INTERVAL '24 hours'
+ORDER BY views_per_hour DESC
+LIMIT 50;
+```
+
+Overall, numerous options exist for database manipulation. These examples serve as a starting point.
 
 ---
 
