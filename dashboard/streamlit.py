@@ -15,6 +15,22 @@ from neon_utils import load_trending_v2
 def get_data(days: int, region: str) -> pd.DataFrame:
     df = load_trending_v2(days=days, region=region)
     df = df.sort_values("ingestion_timestamp").reset_index(drop=True)
+
+    # Adding velocity features
+    # Change in views between consecutive ingestions for each video
+    df["view_delta"] = df.groupby("video_id")["view_count"].diff()
+
+    # Time difference in HOURS between consecutive ingestions
+    time_diff = df.groupby("video_id")["ingestion_timestamp"].diff()
+    df["time_delta_hours"] = time_diff.dt.total_seconds() / 3600.0
+
+    # Views gained per hour between snapshots
+    df["view_velocity_per_hour"] = df["view_delta"] / df["time_delta_hours"]
+
+    # Clean up infinities / very small time deltas
+    df.loc[~np.isfinite(df["view_velocity_per_hour"]), "view_velocity_per_hour"] = np.nan
+
+
     return df
 
 def get_leaderboard_figure(df: pd.DataFrame):
@@ -223,7 +239,7 @@ st.caption(f"Latest snapshot timestamp: {latest_ts}")
 st.markdown("---")
 
 # ---- 1. Creator leaderboard ----
-st.subheader("1. Creator leaderboard")
+st.subheader("Creator leaderboard")
 
 fig_leaderboard, channel_stats = get_leaderboard_figure(df)
 st.plotly_chart(fig_leaderboard, use_container_width=True)
@@ -233,8 +249,35 @@ with st.expander("Show underlying table"):
 
 st.markdown("---")
 
-# ---- 2. Regression ----
-st.subheader("2. View count regression (last 2 days as test set)")
+# Fastest Growing Videos (Velocity Section)
+
+st.subheader("Fastest growing videos (change in views between consecutive ingestions for each video)")
+
+# Use latest snapshot rows only
+df_latest = df[df["ingestion_timestamp"] == latest_ts].copy()
+
+# Some videos might have NaN velocity (first snapshot), so drop them
+df_latest = df_latest.dropna(subset=["view_velocity_per_hour"])
+
+top_velocity = (
+    df_latest.sort_values("view_velocity_per_hour", ascending=False)
+    .head(10)[
+        [
+            "video_id",
+            "video_title",
+            "view_count",
+            "view_velocity_per_hour",
+        ]
+    ]
+)
+
+st.dataframe(top_velocity)
+
+st.markdown("---")
+
+
+# ---- Regression ----
+st.subheader("View count regression (last 2 days as test set)")
 
 reg_result = train_and_eval_regression(df)
 
@@ -252,8 +295,8 @@ with col_b:
 
 st.markdown("---")
 
-# ---- 3. live trend + prediction----
-st.subheader("3. Live view count trend for one video")
+# ---- live trend + prediction----
+st.subheader("Live view count trend for one video")
 
 test_df = reg_result["test_df"]
 
