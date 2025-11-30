@@ -1,6 +1,6 @@
 """
 Time Series Forecasting: ARIMA vs DLM vs Neural Network
-Extended forecasts to January 2026 with proper fan plots
+Extended forecasts with ALL available data points (not filtered by year)
 """
 
 import os
@@ -64,11 +64,11 @@ def connect_to_neon(table_name: str = "videos_log_v3") -> pl.DataFrame:
 
 
 # ============================================================================
-# DATA PREPARATION
+# DATA PREPARATION - USES ALL DATA POINTS
 # ============================================================================
 
 def prepare_timeseries(df: pl.DataFrame, target_metric: str = "view_count") -> pd.DataFrame:
-    """Aggregate data into hourly time series."""
+    """Aggregate data into hourly time series - USES ALL AVAILABLE DATA"""
     df_pd = df.to_pandas()
     
     if 'published_at' in df_pd.columns:
@@ -86,22 +86,8 @@ def prepare_timeseries(df: pl.DataFrame, target_metric: str = "view_count") -> p
 
     df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('h')
 
-    # Filter to dense period
-    try:
-        df_pd['__year'] = pd.to_datetime(df_pd[timestamp_col]).dt.year
-        year_counts = df_pd['__year'].value_counts().sort_values(ascending=False)
-        top_year = int(year_counts.index[0])
-        top_count = int(year_counts.iloc[0])
-        total = len(df_pd)
-        frac = top_count / total if total > 0 else 0
-
-        if frac >= 0.5 or top_count >= 200:
-            print(f"[PREPARE] Filtering to densest year: {top_year}")
-            df_pd = df_pd[df_pd['__year'] == top_year].copy()
-            df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('h')
-        df_pd.drop(columns=['__year'], inplace=True)
-    except Exception:
-        pass
+    # NOTE: Removed year filtering - using ALL data points
+    print('[PREPARE] Using ALL available data points (no year filtering)')
     
     if target_metric == 'engagement_rate':
         agg_df = df_pd.groupby('time_bin').agg({
@@ -209,14 +195,11 @@ class DynamicLinearModel:
 
 
 # ============================================================================
-# NEURAL NETWORK FORECASTER - Simplified, stable version
+# NEURAL NETWORK FORECASTER
 # ============================================================================
 
 class SimpleNNForecaster:
-    """
-    Simple NN forecaster that predicts the next value directly.
-    No mean reversion to prevent collapse.
-    """
+    """Simple NN forecaster that predicts the next value directly"""
     
     def __init__(self, lags=24):
         self.lags = lags
@@ -278,15 +261,13 @@ class SimpleNNForecaster:
             pred_scaled = self.model.predict(X_scaled)[0]
             pred = self.scaler_y.inverse_transform([[pred_scaled]])[0, 0]
             
-            # Keep prediction bounded (no collapse, no explosion)
-            pred = max(pred, self.last_mean * 0.5)  # Floor at 50% of recent mean
-            pred = min(pred, self.last_mean * 2.0)  # Cap at 200% of recent mean
+            pred = max(pred, self.last_mean * 0.5)
+            pred = min(pred, self.last_mean * 2.0)
             
             window.append(pred)
             forecasts.append(pred)
         
         forecasts = np.array(forecasts)
-        # Uncertainty grows with horizon
         forecast_std = np.array([self.resid_std * np.sqrt(1 + 0.01 * h) for h in range(steps)])
         
         return forecasts, forecast_std
@@ -406,7 +387,7 @@ def fit_dlm(y_train, y_test):
 
 
 # ============================================================================
-# VISUALIZATION - Linear scale with proper fan plots
+# VISUALIZATION
 # ============================================================================
 
 def format_large_number(x, pos=None):
@@ -448,32 +429,32 @@ def create_faceted_forecast_plot(
     plt.subplots_adjust(hspace=0.25)
     
     def plot_panel(ax, model_name, result, ext_result):
-        # Get data range for y-limits (focus on recent data + forecast)
+        # Get data range for y-limits
         recent_y = y_full[-500:] if len(y_full) > 500 else y_full
         y_median = np.median(recent_y)
         y_iqr = np.percentile(recent_y, 75) - np.percentile(recent_y, 25)
         
-        # Set y-limits based on recent data (exclude outliers)
         y_lower = max(0, y_median - 3 * y_iqr)
         y_upper = y_median + 3 * y_iqr
         
         if ext_result is not None:
             f_ext, f_ext_std = ext_result
-            # Extend upper limit if forecast goes higher
             forecast_upper = np.max(f_ext + 2 * f_ext_std)
             forecast_lower = np.min(f_ext - 2 * f_ext_std)
             y_upper = max(y_upper, forecast_upper)
             y_lower = max(0, min(y_lower, forecast_lower))
         
-        # Plot observed data (thin line for visibility)
+        # Plot observed data
         ax.plot(timestamps_train, y_train, color=colors['observed'], 
                 linewidth=0.8, alpha=0.6, label='Observed (Train)')
         ax.plot(timestamps_test, y_test, color=colors['observed_test'],
                 linewidth=0.8, alpha=0.6, label='Observed (Test)')
         
-        # Plot fitted values
+        # Plot fitted values - FIXED
         if result is not None:
-            fitted = result.get('fitted') or result.get('fitted_train')
+            fitted = result.get('fitted')
+            if fitted is None:
+                fitted = result.get('fitted_train')
             if fitted is not None:
                 fitted = np.array(fitted)
                 valid = ~np.isnan(fitted)
@@ -488,11 +469,10 @@ def create_faceted_forecast_plot(
             f_ext = np.array(f_ext)
             f_ext_std = np.array(f_ext_std)
             
-            # Main forecast line
             ax.plot(ext_forecast_timestamps, f_ext, color=colors['forecast'],
                    linewidth=2.5, label=f'{model_name} Forecast')
             
-            # Fan plot - 50%, 80%, 95% CI
+            # Fan plot
             for alpha, z, label in [(0.4, 0.67, '50%'), (0.25, 1.28, '80%'), (0.12, 1.96, '95%')]:
                 lower = np.maximum(f_ext - z * f_ext_std, 0)
                 upper = f_ext + z * f_ext_std
@@ -502,7 +482,6 @@ def create_faceted_forecast_plot(
         # Vertical line at forecast start
         ax.axvline(timestamps[-1], color='gray', linestyle='--', alpha=0.7, linewidth=1)
         
-        # Set limits and format
         ax.set_ylim(y_lower, y_upper)
         ax.yaxis.set_major_formatter(plt.FuncFormatter(format_large_number))
         ax.set_title(f'{model_name}', fontsize=14, fontweight='bold', pad=10)
@@ -538,7 +517,7 @@ def create_faceted_forecast_plot(
     fig.legend(handles=legend_elements, loc='upper right', 
               bbox_to_anchor=(0.99, 0.99), fontsize=10, title='Confidence Intervals')
     
-    fig.suptitle(f'Time Series Forecast to January 2026: {target_metric.replace("_", " ").title()}',
+    fig.suptitle(f'Time Series Forecast: {target_metric.replace("_", " ").title()} (All Data)',
                 fontsize=16, fontweight='bold', y=1.01)
     
     Path(output_path).parent.mkdir(exist_ok=True)
@@ -554,7 +533,7 @@ def create_faceted_forecast_plot(
 def main():
     print("=" * 80)
     print("TIME SERIES FORECASTING: ARIMA vs DLM vs Neural Network")
-    print("Extended to January 2026")
+    print("Using ALL available data points (no year filtering)")
     print("=" * 80)
     
     # 1. Load data
@@ -586,11 +565,11 @@ def main():
     dlm_result = fit_dlm(y_train, y_test)
     nn_result = fit_nn_model(y_train, y_test, steps_ahead=len(y_test), lags=24)
     
-    # 5. Extended forecasts to January 2026
+    # 5. Extended forecasts
     last_dt = pd.to_datetime(timestamps[-1])
     target_date = pd.Timestamp('2026-01-31')
     hours_to_forecast = int((target_date - last_dt).total_seconds() / 3600)
-    hours_to_forecast = max(hours_to_forecast, 24 * 60)  # At least 60 days
+    hours_to_forecast = max(hours_to_forecast, 24 * 60)
     
     print(f"\n[FORECAST] Extending forecasts for {hours_to_forecast} hours (~{hours_to_forecast//24} days)")
     print(f"[FORECAST] From {last_dt} to {target_date}")
