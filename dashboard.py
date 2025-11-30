@@ -345,14 +345,14 @@ def load_aggregated_timeseries(days: int = 60):
     cutoff = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
     query = f"""
     SELECT 
-        date_trunc('hour', ingestion_timestamp) as time_bin,
+        date_trunc('hour', ingestion_timestamp::timestamp) as time_bin,
         SUM(view_count) as total_views,
         SUM(like_count) as total_likes,
         SUM(comment_count) as total_comments,
         COUNT(*) as video_count
     FROM videos_log_v3
     WHERE ingestion_timestamp >= '{cutoff}'
-    GROUP BY date_trunc('hour', ingestion_timestamp)
+    GROUP BY date_trunc('hour', ingestion_timestamp::timestamp)
     ORDER BY time_bin ASC
     """
     return pd.read_sql(query, engine)

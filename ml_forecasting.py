@@ -473,8 +473,7 @@ def create_faceted_forecast_plot(
         
         # Plot fitted values
         if result is not None:
-            # Avoid truth-testing numpy arrays; explicitly check for None
-            fitted = result.get('fitted') if result.get('fitted') is not None else result.get('fitted_train')
+            fitted = result.get('fitted') or result.get('fitted_train')
             if fitted is not None:
                 fitted = np.array(fitted)
                 valid = ~np.isnan(fitted)
