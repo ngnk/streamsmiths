@@ -1,44 +1,53 @@
 """
-Complete Time Series Analysis Script for videos_log_v2
-Run this on YOUR LOCAL MACHINE where network access to Neon is available
-
-Usage:
-    python neon_timeseries_analysis.py
-
-Requirements:
-    pip install polars pandas numpy statsmodels scipy scikit-learn matplotlib python-dotenv pyarrow connectorx
+Time Series Forecasting: ARIMA vs DLM
+Connects to Neon database, fits models, creates faceted visualizations with fan plots
 """
 
 import os
-import pandas as pd
-import polars as pl
-import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 from pathlib import Path
 
-from statsmodels.tsa.arima.model import ARIMA
-from statsmodels.tsa.ar_model import AutoReg
-from scipy.linalg import cho_factor, cho_solve
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import numpy as np
+import pandas as pd
+import polars as pl
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
+from scipy import stats
 from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from datetime import datetime
+from math import ceil
+
+from sklearn.neural_network import MLPRegressor
+from sklearn.preprocessing import StandardScaler
+
+try:
+    from pmdarima import auto_arima
+except Exception:
+    auto_arima = None
+
+from statsmodels.tsa.arima.model import ARIMA
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
 # ============================================================================
-# NEON DATABASE CONNECTION
+# DATABASE CONNECTION
 # ============================================================================
 
-def fetch_videos_from_neon(table_name: str = "videos_log_v2") -> pl.DataFrame:
-    """Fetch videos_log_v2 table from Neon database or fall back to local parquet"""
+def connect_to_neon(table_name: str = "videos_log_v3") -> pl.DataFrame:
+    """
+    Connect to Neon database and fetch video data.
+    Uses pandas + SQLAlchemy for compatibility with Python 3.13.
+    """
     load_dotenv()
     
     db_uri = os.getenv("NEON_DATABASE_URL")
-    
-    # Fallback to hardcoded connection string if no .env file
     if not db_uri:
-        print("[FETCH] No .env file found, using hardcoded connection string...")
-        db_uri = "postgresql://neondb_owner:npg_c38OpMvawKVg@ep-withered-sky-aeqx6en8-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+        raise RuntimeError(
+            "NEON_DATABASE_URL not set. Add it to .env file.\n"
+            "Format: postgresql://user:pass@host/database?sslmode=require"
+        )
     
     # Clean the connection string
     db_uri = db_uri.strip()
@@ -46,622 +55,771 @@ def fetch_videos_from_neon(table_name: str = "videos_log_v2") -> pl.DataFrame:
         db_uri = db_uri[5:].strip()
     db_uri = db_uri.strip("'\"")
     
-    print(f"[FETCH] Connecting to Neon database...")
-    print(f"[FETCH] Fetching table: {table_name}")
+    print(f"[DATABASE] Connecting to Neon...")
+    print(f"[DATABASE] Fetching table: {table_name}")
     
     try:
-        # Read from database using Polars
-        query = f"SELECT * FROM {table_name} ORDER BY ingestion_timestamp"
-        df = pl.read_database_uri(query=query, uri=db_uri)
+        # Use pandas + SQLAlchemy (more compatible with Python 3.13)
+        from sqlalchemy import create_engine
         
-        print(f"[FETCH] ✓ Fetched {len(df)} rows from {table_name}")
+        engine = create_engine(db_uri, pool_pre_ping=True)
+        # Do not order by ingestion_timestamp here — prefer ordering/sorting after
+        # we choose the correct timestamp column (published_at vs ingestion_timestamp).
+        query = f"SELECT * FROM {table_name}"
+        
+        # Read with pandas then convert to polars
+        df_pandas = pd.read_sql(query, engine)
+        df = pl.from_pandas(df_pandas)
+        
+        print(f"[DATABASE] ✓ Fetched {len(df):,} rows from {table_name}")
         return df
     except Exception as e:
-        print(f"[FETCH] ✗ Polars connection error: {str(e)[:100]}")
-        print("[FETCH] Trying pandas + SQLAlchemy as backup...")
-        
-        try:
-            return fetch_with_pandas(table_name, db_uri)
-        except Exception as e2:
-            print(f"[FETCH] ✗ SQLAlchemy connection error: {str(e2)[:100]}")
-            print("\n" + "="*70)
-            print("DATABASE CONNECTION FAILED")
-            print("="*70)
-            print("Possible solutions:")
-            print("1. Install required packages: pip install psycopg2-binary sqlalchemy")
-            print("2. Check network/firewall settings")
-            print("3. Verify database is accessible")
-            print("4. Use local parquet file instead (see below)")
-            print("="*70)
-            print("\n[FETCH] Falling back to local parquet file...")
-            return fetch_from_local_parquet()
-
-
-def fetch_with_pandas(table_name: str, db_uri: str) -> pl.DataFrame:
-    """Backup method using pandas + SQLAlchemy"""
-    from sqlalchemy import create_engine
-    
-    engine = create_engine(db_uri)
-    query = f"SELECT * FROM {table_name} ORDER BY ingestion_timestamp"
-    
-    df_pandas = pd.read_sql(query, engine)
-    print(f"[FETCH] ✓ Fetched {len(df_pandas)} rows using pandas")
-    
-    # Convert to Polars
-    return pl.from_pandas(df_pandas)
-
-
-def fetch_from_local_parquet() -> pl.DataFrame:
-    """Fallback to local parquet file if database connection fails"""
-    possible_paths = [
-        "silver_data/videos.parquet",
-        "data/videos.parquet",
-        "videos.parquet",
-        "../silver_data/videos.parquet"
-    ]
-    
-    for path in possible_paths:
-        if Path(path).exists():
-            print(f"[FETCH] ✓ Found local parquet: {path}")
-            df = pl.read_parquet(path)
-            
-            # Rename columns if needed to match database schema
-            cols = set(df.columns)
-            if 'ingest_timestamp' in cols and 'ingestion_timestamp' not in cols:
-                df = df.rename({'ingest_timestamp': 'ingestion_timestamp'})
-            
-            # Add views_per_day if missing
-            if 'views_per_day' not in df.columns:
-                df = df.with_columns([pl.lit(0).alias('views_per_day')])
-            
-            print(f"[FETCH] ✓ Loaded {len(df)} rows from local parquet")
-            return df
-    
-    raise FileNotFoundError(
-        "\n" + "="*70 + "\n"
-        "NO DATA SOURCE AVAILABLE\n"
-        "="*70 + "\n"
-        "Neither Neon database connection nor local parquet file found.\n\n"
-        "Please either:\n"
-        "1. Fix your .env with correct NEON_DATABASE_URL, or\n"
-        "2. Place a parquet file at one of these locations:\n" +
-        "\n".join(f"   - {p}" for p in possible_paths) + "\n" +
-        "="*70
-    )
+        print(f"[DATABASE] ✗ Connection error: {e}")
+        raise
 
 
 # ============================================================================
-# TIME SERIES DATA PREPARATION
+# DATA PREPARATION
 # ============================================================================
 
-def prepare_timeseries_data(df: pl.DataFrame, aggregation: str = "minutely") -> pd.DataFrame:
+def prepare_timeseries(df: pl.DataFrame, target_metric: str = "view_count") -> pd.DataFrame:
     """
-    Convert videos_log_v2 data into aggregated time series.
+    Aggregate data into hourly time series.
     
-    Args:
-        df: Polars DataFrame from Neon
-        aggregation: "minutely", "hourly" or "daily"
-        
+    Parameters:
+    -----------
+    df : pl.DataFrame
+        Raw data from database
+    target_metric : str
+        Metric to forecast (e.g., 'view_count', 'like_count', 'engagement_rate')
+    
     Returns:
-        Pandas DataFrame with aggregated metrics
-    """
-    print(f"\n[PREPARE] Original data: {len(df)} video records")
-    print(f"[PREPARE] Aggregation: {aggregation}")
+    --------
+    pd.DataFrame with columns: ['timestamp', target_metric]
     
-    # Convert to pandas for easier time series manipulation
+    """
+
     df_pd = df.to_pandas()
     
-    # Check which timestamp to use
-    timestamp_col = 'ingestion_timestamp'
-    
-    # Parse ingestion timestamps
-    df_pd['ingestion_timestamp'] = pd.to_datetime(df_pd['ingestion_timestamp'])
-    
-    # Check time spread of ingestion_timestamp
-    ingestion_unique = df_pd['ingestion_timestamp'].dt.floor('h').nunique()
-    
-    if ingestion_unique < 5:
-        print(f"[PREPARE] ⚠️  ingestion_timestamp has only {ingestion_unique} unique hours")
-        print(f"[PREPARE] This indicates batch loading - switching to published_at")
-        
-        # Use published_at instead
-        if 'published_at' in df_pd.columns:
-            timestamp_col = 'published_at'
-            df_pd['published_at'] = pd.to_datetime(df_pd['published_at'], errors='coerce')
-            df_pd = df_pd.dropna(subset=['published_at'])
-            print(f"[PREPARE] Using published_at timestamps (when videos were published)")
+    # Determine which timestamp to use. Prefer `published_at` (video publish time)
+    # over `ingestion_timestamp` (when the row was added to the DB).
+    if 'published_at' in df_pd.columns:
+        df_pd['published_at'] = pd.to_datetime(df_pd['published_at'], errors='coerce')
+        df_pd = df_pd.dropna(subset=['published_at'])
+        timestamp_col = 'published_at'
+        print('[PREPARE] Using `published_at` as the timestamp column')
+    elif 'ingestion_timestamp' in df_pd.columns:
+        df_pd['ingestion_timestamp'] = pd.to_datetime(df_pd['ingestion_timestamp'], errors='coerce')
+        df_pd = df_pd.dropna(subset=['ingestion_timestamp'])
+        timestamp_col = 'ingestion_timestamp'
+        print('[PREPARE] Using `ingestion_timestamp` as the timestamp column')
+    else:
+        raise RuntimeError('No usable timestamp column found (published_at or ingestion_timestamp)')
+
+    # Create hourly bins (we aggregate hourly by default)
+    df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('h')
+
+    # --- Filter to dense period if present ---
+    # Many rows may be concentrated in a recent year (e.g., 2025). If one
+    # year contains the majority of records, restrict the analysis to that
+    # year so models are not dominated by sparse historical data.
+    try:
+        df_pd['__year'] = pd.to_datetime(df_pd[timestamp_col]).dt.year
+        year_counts = df_pd['__year'].value_counts().sort_values(ascending=False)
+        top_year = int(year_counts.index[0])
+        top_count = int(year_counts.iloc[0])
+        total = len(df_pd)
+        frac = top_count / total if total > 0 else 0
+
+        # Heuristic: restrict if top year contains >= 50% of rows or at least 200 rows
+        if frac >= 0.5 or top_count >= 200:
+            print(f"[PREPARE] Filtering to densest year: {top_year} ({top_count}/{total} rows, {frac:.0%})")
+            df_pd = df_pd[df_pd['__year'] == top_year].copy()
+            # Recompute time_bin after filtering
+            df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('h')
         else:
-            print(f"[PREPARE] ✗ No published_at column found!")
-            print(f"[PREPARE] Cannot perform time series analysis with batch-loaded data")
-            timestamp_col = 'ingestion_timestamp'
+            print(f"[PREPARE] No dominant year found (top {top_year}: {top_count}/{total} rows). Using full history.")
+
+        # drop helper column
+        df_pd.drop(columns=['__year'], inplace=True)
+    except Exception:
+        # If something goes wrong, continue with full dataset
+        pass
     
-    # Create time bins based on chosen timestamp
-    if aggregation == "minutely":
-        df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('T')
-    elif aggregation == "hourly":
-        df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('h')
-    else:  # daily
-        df_pd['time_bin'] = df_pd[timestamp_col].dt.floor('D')
+    # Aggregate by hour
+    if target_metric == 'engagement_rate':
+        # Recalculate engagement rate at aggregated level
+        agg_df = df_pd.groupby('time_bin').agg({
+            'view_count': 'sum',
+            'like_count': 'sum',
+            'comment_count': 'sum'
+        }).reset_index()
+        
+        agg_df['engagement_rate'] = (
+            (agg_df['like_count'] + agg_df['comment_count']) / 
+            agg_df['view_count'].replace(0, 1)
+        ) * 100
+        
+        result = agg_df[['time_bin', 'engagement_rate']].copy()
+        result.columns = ['timestamp', target_metric]
+    else:
+        agg_df = df_pd.groupby('time_bin').agg({
+            target_metric: 'sum'
+        }).reset_index()
+        agg_df.columns = ['timestamp', target_metric]
+        result = agg_df
     
-    # Calculate engagement_rate if not present or recalculate
-    df_pd['engagement_rate'] = ((df_pd['like_count'] + df_pd['comment_count']) / 
-                                 df_pd['view_count'].replace(0, 1)) * 100
+    result = result.sort_values('timestamp').reset_index(drop=True)
     
-    # Aggregate
-    agg_metrics = df_pd.groupby('time_bin').agg({
-        'view_count': 'sum',
-        'like_count': 'sum',
-        'comment_count': 'sum',
-        'engagement_rate': 'mean',
-        'views_per_day': 'mean',
-        'video_id': 'count'
-    }).reset_index()
+    print(f"[PREPARE] Time series length: {len(result)} hours")
+    print(f"[PREPARE] Date range: {result['timestamp'].min()} to {result['timestamp'].max()}")
+    print(f"[PREPARE] {target_metric} range: {result[target_metric].min():.2f} to {result[target_metric].max():.2f}")
     
-    agg_metrics.columns = ['time_bin', 'total_views', 'total_likes', 'total_comments',
-                           'avg_engagement_rate', 'avg_views_per_day', 'num_videos']
-    
-    agg_metrics = agg_metrics.sort_values('time_bin').reset_index(drop=True)
-    
-    print(f"[PREPARE] Aggregated to: {len(agg_metrics)} time points")
-    print(f"[PREPARE] Time range: {agg_metrics['time_bin'].min()} to {agg_metrics['time_bin'].max()}")
-    
-    return agg_metrics
+    return result
 
 
 # ============================================================================
-# DYNAMIC LINEAR MODEL (DLM)
+# DYNAMIC LINEAR MODEL (Kalman Filter)
 # ============================================================================
 
-class DLMForwardBackward:
-    """Dynamic Linear Model with Forward Filtering and Backward Smoothing"""
+class DynamicLinearModel:
+    """
+    Dynamic Linear Model using Kalman Filter with forward filtering
+    and backward smoothing (Rauch-Tung-Striebel smoother).
+    """
     
-    def __init__(self, obs_variance=1.0, state_variance=1.0):
+    def __init__(self, obs_variance=None, state_variance=None):
         self.obs_variance = obs_variance
         self.state_variance = state_variance
+        
+        # Storage for filtering results
         self.filtered_means = None
-        self.filtered_covs = None
+        self.filtered_vars = None
+        self.predicted_means = None
+        self.predicted_vars = None
+        
+        # Storage for smoothing results
         self.smoothed_means = None
-        self.smoothed_covs = None
-        
+        self.smoothed_vars = None
+    
+    def _initialize_variances(self, y):
+        """Initialize observation and state variances if not provided"""
+        if self.obs_variance is None:
+            self.obs_variance = np.var(y) * 0.1
+        if self.state_variance is None:
+            diffs = np.diff(y)
+            self.state_variance = np.var(diffs) * 0.5
+    
     def forward_filter(self, y):
-        """Kalman Filter - Forward Pass"""
-        n = len(y)
-        filtered_means = np.zeros(n)
-        filtered_covs = np.zeros(n)
-        predicted_means = np.zeros(n)
-        predicted_covs = np.zeros(n)
+        """
+        Kalman Filter: Forward pass through data
         
+        Returns:
+        --------
+        filtered_means : array
+            Filtered state estimates
+        """
+        n = len(y)
+        
+        # Initialize arrays
+        self.filtered_means = np.zeros(n)
+        self.filtered_vars = np.zeros(n)
+        self.predicted_means = np.zeros(n)
+        self.predicted_vars = np.zeros(n)
+        
+        # Initial state
         m0 = y[0]
         C0 = self.state_variance * 10
         
         for t in range(n):
+            # Prediction step
             if t == 0:
-                predicted_means[t] = m0
-                predicted_covs[t] = C0
+                self.predicted_means[t] = m0
+                self.predicted_vars[t] = C0
             else:
-                predicted_means[t] = filtered_means[t-1]
-                predicted_covs[t] = filtered_covs[t-1] + self.state_variance
+                self.predicted_means[t] = self.filtered_means[t-1]
+                self.predicted_vars[t] = self.filtered_vars[t-1] + self.state_variance
             
-            forecast_error = y[t] - predicted_means[t]
-            forecast_variance = predicted_covs[t] + self.obs_variance
-            kalman_gain = predicted_covs[t] / forecast_variance
+            # Update step
+            forecast_error = y[t] - self.predicted_means[t]
+            forecast_var = self.predicted_vars[t] + self.obs_variance
+            kalman_gain = self.predicted_vars[t] / forecast_var
             
-            filtered_means[t] = predicted_means[t] + kalman_gain * forecast_error
-            filtered_covs[t] = (1 - kalman_gain) * predicted_covs[t]
+            self.filtered_means[t] = self.predicted_means[t] + kalman_gain * forecast_error
+            self.filtered_vars[t] = (1 - kalman_gain) * self.predicted_vars[t]
         
-        self.filtered_means = filtered_means
-        self.filtered_covs = filtered_covs
-        self.predicted_means = predicted_means
-        self.predicted_covs = predicted_covs
-        
-        return filtered_means
+        return self.filtered_means
     
-    def backward_smooth(self, y):
-        """Rauch-Tung-Striebel Smoother - Backward Pass"""
-        if self.filtered_means is None:
-            self.forward_filter(y)
+    def backward_smooth(self):
+        """
+        Rauch-Tung-Striebel Smoother: Backward pass through data
         
-        n = len(y)
-        smoothed_means = np.zeros(n)
-        smoothed_covs = np.zeros(n)
+        Returns:
+        --------
+        smoothed_means : array
+            Smoothed state estimates
+        """
+        n = len(self.filtered_means)
         
-        smoothed_means[-1] = self.filtered_means[-1]
-        smoothed_covs[-1] = self.filtered_covs[-1]
+        self.smoothed_means = np.zeros(n)
+        self.smoothed_vars = np.zeros(n)
         
+        # Initialize at the end
+        self.smoothed_means[-1] = self.filtered_means[-1]
+        self.smoothed_vars[-1] = self.filtered_vars[-1]
+        
+        # Backward recursion
         for t in range(n-2, -1, -1):
-            J_t = self.filtered_covs[t] / (self.filtered_covs[t] + self.state_variance)
+            J_t = self.filtered_vars[t] / (self.filtered_vars[t] + self.state_variance)
             
-            smoothed_means[t] = self.filtered_means[t] + J_t * (
-                smoothed_means[t+1] - self.filtered_means[t]
+            self.smoothed_means[t] = (
+                self.filtered_means[t] + 
+                J_t * (self.smoothed_means[t+1] - self.filtered_means[t])
             )
-            smoothed_covs[t] = self.filtered_covs[t] + J_t**2 * (
-                smoothed_covs[t+1] - self.filtered_covs[t] - self.state_variance
+            
+            self.smoothed_vars[t] = (
+                self.filtered_vars[t] + 
+                J_t**2 * (self.smoothed_vars[t+1] - self.filtered_vars[t] - self.state_variance)
             )
         
-        self.smoothed_means = smoothed_means
-        self.smoothed_covs = smoothed_covs
-        
-        return smoothed_means
+        return self.smoothed_means
     
-    def fit_predict(self, y_train, y_test=None):
-        """Fit model and make predictions"""
-        self.forward_filter(y_train)
-        self.backward_smooth(y_train)
+    def fit(self, y):
+        """Fit the model to data"""
+        self._initialize_variances(y)
+        self.forward_filter(y)
+        self.backward_smooth()
+        return self
+    
+    def forecast(self, steps=14):
+        """
+        Generate forecasts with uncertainty estimates
         
-        if y_test is not None:
-            n_test = len(y_test)
-            predictions = np.zeros(n_test)
-            pred_cov = self.filtered_covs[-1] + self.state_variance
-            
-            # Simple exponential smoothing forecast
-            last_state = self.filtered_means[-1]
-            predictions[0] = last_state
-            
-            for i in range(1, n_test):
-                predictions[i] = predictions[i-1]  # Random walk forecast
-            
-            return self.smoothed_means, predictions
+        Parameters:
+        -----------
+        steps : int
+            Number of steps to forecast (default: 14 for 2 weeks)
         
-        return self.smoothed_means, None
+        Returns:
+        --------
+        forecasts : array
+            Point forecasts
+        forecast_vars : array
+            Forecast variances (for fan plot)
+        """
+        if self.smoothed_means is None:
+            raise RuntimeError("Model must be fitted before forecasting")
+        
+        forecasts = np.zeros(steps)
+        forecast_vars = np.zeros(steps)
+        
+        # Start from the last smoothed state
+        last_mean = self.smoothed_means[-1]
+        last_var = self.smoothed_vars[-1]
+        
+        for h in range(steps):
+            # Random walk forecast
+            forecasts[h] = last_mean
+            forecast_vars[h] = last_var + (h + 1) * self.state_variance + self.obs_variance
+        
+        return forecasts, forecast_vars
 
 
 # ============================================================================
-# MODEL FITTING FUNCTIONS
+# MODEL FITTING & EVALUATION
 # ============================================================================
 
-def fit_arima_model(y_train, y_test, order=None):
-    """Fit ARIMA model with automatic order selection if order=None"""
-    if order is None:
-        # Try multiple orders and select best AIC
-        orders_to_try = [
-            (0, 0, 0), (1, 0, 0), (0, 0, 1), (1, 0, 1),
-            (0, 1, 0), (1, 1, 0), (0, 1, 1), (1, 1, 1),
-            (2, 0, 0), (0, 0, 2), (2, 1, 0), (0, 1, 2),
-            (2, 1, 1), (1, 1, 2), (2, 0, 1), (1, 0, 2)
-        ]
-        best_aic = np.inf
-        best_order = (1, 1, 1)
-        best_model = None
-        
-        for test_order in orders_to_try:
-            try:
-                model = ARIMA(y_train, order=test_order)
-                model_fit = model.fit()
-                if model_fit.aic < best_aic:
-                    best_aic = model_fit.aic
-                    best_order = test_order
-                    best_model = model_fit
-            except:
-                continue
-        
-        if best_model is None:
-            print("  Could not fit any ARIMA model")
-            return None
-        
-        print(f"  Best ARIMA order: {best_order} (AIC: {best_aic:.2f})")
-        order = best_order
-        model_fit = best_model
-    else:
-        try:
-            model = ARIMA(y_train, order=order)
-            model_fit = model.fit()
-        except Exception as e:
-            print(f"  ARIMA fitting error: {e}")
-            return None
+def fit_arima(y_train, y_test, order=(1, 1, 1)):
+    """
+    Fit ARIMA model
     
-    fitted = model_fit.fittedvalues
-    forecast = model_fit.forecast(steps=len(y_test))
+    Returns:
+    --------
+    dict with keys: 'model', 'fitted', 'forecast', 'forecast_std', 'metrics'
+    """
+    print(f"\n[ARIMA] Fitting ARIMA{order}...")
     
-    return {
-        'model': model_fit,
-        'fitted': fitted,
-        'forecast': forecast,
-        'aic': model_fit.aic,
-        'bic': model_fit.bic,
-        'params': order
-    }
-
-
-def fit_ar1_model(y_train, y_test):
-    """Fit AR(1) model"""
     try:
-        model = AutoReg(y_train, lags=1)
+        # If pmdarima is available, try auto_arima to find a better order
+        if auto_arima is not None:
+            print("[ARIMA] Running auto_arima to select order (this may take a while)...")
+            aa = auto_arima(y_train, seasonal=False, stepwise=True, error_action='ignore', suppress_warnings=True)
+            sel_order = aa.order
+            print(f"[ARIMA] auto_arima selected order={sel_order}")
+            model = ARIMA(y_train, order=sel_order)
+        else:
+            model = ARIMA(y_train, order=order)
+
         model_fit = model.fit()
-        
+
+        # Fitted values
         fitted = model_fit.fittedvalues
-        forecast = model_fit.forecast(steps=len(y_test))
+
+        # Forecast with confidence intervals for full extended horizon (user will request steps)
+        forecast_obj = model_fit.get_forecast(steps=len(y_test))
+        forecast = forecast_obj.predicted_mean
+        forecast_std = forecast_obj.se_mean
+        
+        # Calculate metrics
+        train_rmse = np.sqrt(mean_squared_error(
+            y_train[len(y_train)-len(fitted):], fitted
+        ))
+        test_rmse = np.sqrt(mean_squared_error(y_test, forecast))
+        
+        print(f"[ARIMA] Train RMSE: {train_rmse:.2f}")
+        print(f"[ARIMA] Test RMSE: {test_rmse:.2f}")
+        print(f"[ARIMA] AIC: {model_fit.aic:.2f}")
         
         return {
             'model': model_fit,
             'fitted': fitted,
             'forecast': forecast,
-            'aic': model_fit.aic,
-            'bic': model_fit.bic,
-            'params': 1
+            'forecast_std': forecast_std,
+            'metrics': {
+                'train_rmse': train_rmse,
+                'test_rmse': test_rmse,
+                'aic': model_fit.aic
+            }
         }
     except Exception as e:
-        print(f"  AR(1) fitting error: {e}")
+        print(f"[ARIMA] ✗ Fitting error: {e}")
         return None
 
 
-def fit_dlm_model(y_train, y_test):
-    """Fit DLM with Forward-Backward Smoother"""
+def fit_dlm(y_train, y_test):
+    """
+    Fit Dynamic Linear Model
+    
+    Returns:
+    --------
+    dict with keys: 'model', 'fitted', 'forecast', 'forecast_std', 'metrics'
+    """
+    print(f"\n[DLM] Fitting Dynamic Linear Model...")
+    
     try:
-        obs_var = np.var(y_train) * 0.1
-        state_var = np.var(np.diff(y_train)) * 0.5
+        model = DynamicLinearModel()
+        model.fit(y_train)
         
-        dlm = DLMForwardBackward(obs_variance=obs_var, state_variance=state_var)
-        fitted, forecast = dlm.fit_predict(y_train, y_test)
+        # Fitted values (smoothed)
+        fitted = model.smoothed_means
         
-        n = len(y_train)
-        k = 2
-        rss = np.sum((y_train - fitted)**2)
+        # Forecast (for test length; extended forecast will be requested separately)
+        forecast, forecast_vars = model.forecast(steps=len(y_test))
+        forecast_std = np.sqrt(forecast_vars)
         
-        aic = n * np.log(rss / n) + 2 * k
-        bic = n * np.log(rss / n) + k * np.log(n)
+        # Calculate metrics
+        train_rmse = np.sqrt(mean_squared_error(y_train, fitted))
+        test_rmse = np.sqrt(mean_squared_error(y_test, forecast))
+        
+        print(f"[DLM] Train RMSE: {train_rmse:.2f}")
+        print(f"[DLM] Test RMSE: {test_rmse:.2f}")
         
         return {
-            'model': dlm,
+            'model': model,
             'fitted': fitted,
             'forecast': forecast,
-            'aic': aic,
-            'bic': bic,
-            'params': {'obs_var': obs_var, 'state_var': state_var}
+            'forecast_std': forecast_std,
+            'metrics': {
+                'train_rmse': train_rmse,
+                'test_rmse': test_rmse
+            }
         }
     except Exception as e:
-        print(f"  DLM fitting error: {e}")
+        print(f"[DLM] ✗ Fitting error: {e}")
+        return None
+
+
+def fit_dlm_extended(model_obj, steps):
+    """
+    Given a fitted DynamicLinearModel instance, produce extended forecasts and std.
+    """
+    forecast, forecast_vars = model_obj.forecast(steps=steps)
+    return forecast, np.sqrt(forecast_vars)
+
+
+def fit_nn_model(y_train, y_test, steps_ahead=24, lags=24):
+    """
+    Fit a simple MLP on lag features and produce recursive multi-step forecasts.
+    Returns a dict with keys: 'model', 'fitted_train', 'forecast', 'forecast_std'.
+    If y_test is empty, 'forecast' will be the extended forecast of length steps_ahead.
+    """
+    print("\n[NN] Fitting MLPRegressor with lag features...")
+    try:
+        # Build lag matrix
+        X = []
+        y = []
+        for i in range(lags, len(y_train)):
+            X.append(y_train[i-lags:i])
+            y.append(y_train[i])
+        if len(X) < 10:
+            print("[NN] Not enough training examples for NN model")
+            return None
+
+        X = np.array(X)
+        y = np.array(y)
+
+        # Scale features and target
+        scaler_X = StandardScaler()
+        scaler_y = StandardScaler()
+        Xs = scaler_X.fit_transform(X)
+        ys = scaler_y.fit_transform(y.reshape(-1, 1)).ravel()
+
+        model = MLPRegressor(hidden_layer_sizes=(100, 50), max_iter=1000, random_state=0, early_stopping=True)
+        model.fit(Xs, ys)
+
+        # Compute residual std on training set (in original scale)
+        preds_train_scaled = model.predict(Xs)
+        preds_train = scaler_y.inverse_transform(preds_train_scaled.reshape(-1, 1)).ravel()
+        resid_std = np.sqrt(np.mean((preds_train - y)**2))
+
+        # Fitted values aligned to the end of training series (original scale)
+        fitted_full = np.full(len(y_train), np.nan)
+        fitted_full[lags:len(y_train)] = preds_train
+
+        # If y_test length > 0, produce forecast of that length for evaluation
+        forecasts = None
+        forecasts_std = None
+        if steps_ahead > 0:
+            # Recursive forecasting starting from last lags of y_train
+            last_window = list(y_train[-lags:]) if len(y_train) >= lags else list(y_train[-len(y_train):])
+            if len(last_window) < lags:
+                pad = [np.mean(y_train)] * (lags - len(last_window))
+                last_window = pad + last_window
+
+            forecasts = []
+            window = last_window.copy()
+            for _ in range(steps_ahead):
+                x_in = np.array(window[-lags:]).reshape(1, -1)
+                x_in_s = scaler_X.transform(x_in)
+                f_scaled = model.predict(x_in_s)[0]
+                f = scaler_y.inverse_transform(np.array([[f_scaled]])).ravel()[0]
+                forecasts.append(f)
+                window.append(f)
+
+            forecasts = np.array(forecasts)
+            forecasts_std = np.full(len(forecasts), resid_std)
+
+        return {
+            'model': model,
+            'scaler_X': scaler_X,
+            'scaler_y': scaler_y,
+            'fitted_train': fitted_full,
+            'forecast': forecasts,
+            'forecast_std': forecasts_std,
+            'train_resid_std': resid_std
+        }
+    except Exception as e:
+        print(f"[NN] ✗ Fitting error: {e}")
         return None
 
 
 # ============================================================================
-# METRICS CALCULATION
+# VISUALIZATION WITH FAN PLOTS
 # ============================================================================
 
-def calculate_metrics(y_true, y_pred):
-    """Calculate performance metrics"""
-    mse = mean_squared_error(y_true, y_pred)
-    rmse = np.sqrt(mse)
-    mae = mean_absolute_error(y_true, y_pred)
+def create_faceted_forecast_plot(
+    timestamps,
+    y_full,
+    train_size,
+    arima_result,
+    dlm_result,
+    nn_result,
+    ext_forecast_timestamps,
+    arima_ext=None,
+    dlm_ext=None,
+    nn_ext=None,
+    target_metric=None,
+    output_path='outputs/forecast_comparison.png'
+):
+    """
+    Create faceted visualization with:
+    - Top panel: ARIMA fitted + fan plot
+    - Bottom panel: DLM fitted + fan plot
     
-    ss_res = np.sum((y_true - y_pred)**2)
-    ss_tot = np.sum((y_true - np.mean(y_true))**2)
-    r2 = 1 - (ss_res / ss_tot) if ss_tot > 0 else 0
+    Fan plots show 50%, 80%, and 95% confidence intervals
+    """
+    print(f"\n[PLOT] Creating faceted visualization...")
     
-    mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+    # Split data
+    timestamps_train = timestamps[:train_size]
+    timestamps_test = timestamps[train_size:]
+    y_train = y_full[:train_size]
+    y_test = y_full[train_size:]
     
-    return {
-        'RMSE': rmse,
-        'MAE': mae,
-        'R2': r2,
-        'MAPE': mape,
-        'MSE': mse
-    }
-
-
-# ============================================================================
-# VISUALIZATION FUNCTION
-# ============================================================================
-
-def create_visualization(results_dict, output_dir='outputs'):
-    """Create visualization of fitted models and forecasts"""
-    if not results_dict:
-        print("\n[VIZ] No results to visualize")
-        return
+    # Create figure with 3 rows (ARIMA, DLM, NN)
+    fig, axes = plt.subplots(3, 1, figsize=(16, 13), sharex=True)
     
-    data = results_dict['data']
-    results = results_dict['results']
-    target_col = data['target_col']
-    
-    y_train = data['y_train']
-    y_test = data['y_test']
-    dates_train = data['dates_train']
-    dates_test = data['dates_test']
-    
-    # Combine for full series plotting
-    y_full = np.concatenate([y_train, y_test])
-    dates_full = np.concatenate([dates_train, dates_test])
-    
-    print(f"\n[VIZ] Creating visualization for {target_col}...")
-    
-    # Create figure
-    fig, ax = plt.subplots(figsize=(14, 7))
-    
-    # Plot full observed series
-    ax.plot(pd.to_datetime(dates_full), y_full, 
-            label="Observed", color="#1f77b4", linewidth=2, alpha=0.7)
-    
-    # Plot each model's fitted and forecast
-    colors = {'ARIMA': '#ff7f0e', 'AR1': '#2ca02c', 'DLM': '#d62728'}
-    
-    for model_name, result in results.items():
-        color = colors.get(model_name, '#000000')
-        
-        # Get fitted values
-        fitted = np.asarray(result['fitted'])
-        if len(fitted) > 0:
-            # Plot fitted line
-            model_label = model_name
-            if model_name == 'ARIMA' and 'params' in result:
-                model_label = f"ARIMA{result['params']}"
-            
-            ax.plot(pd.to_datetime(dates_train[-len(fitted):]), fitted,
-                   label=f"{model_label} fitted", linestyle="--", 
-                   color=color, linewidth=2)
-        
-        # Get forecast values
-        forecast = result.get('forecast')
-        if forecast is not None:
-            forecast = np.asarray(forecast)
-            if len(forecast) > 0:
-                ax.plot(pd.to_datetime(dates_test[:len(forecast)]), forecast,
-                       label=f"{model_label} forecast", linestyle=":", 
-                       color=color, linewidth=2)
-    
-    # Add vertical line at train/test split
-    split_date = pd.to_datetime(dates_train[-1])
-    ax.axvline(split_date, color='black', linestyle='--', 
-               alpha=0.3, linewidth=1.5, label='Train/Test Split')
-    
-    # Formatting
-    title_map = {
-        'total_views': 'Total Views',
-        'total_likes': 'Total Likes',
-        'total_comments': 'Total Comments',
-        'avg_engagement_rate': 'Average Engagement Rate',
-        'avg_views_per_day': 'Average Views Per Day',
-        'num_videos': 'Number of Videos'
+    # Color scheme
+    colors = {
+        'observed': '#1f77b4',
+        'fitted': '#ff7f0e', 
+        'forecast': '#d62728',
+        'ci_dark': 0.3,
+        'ci_medium': 0.2,
+        'ci_light': 0.1
     }
     
-    title = title_map.get(target_col, target_col.replace('_', ' ').title())
-    ax.set_title(f"{title} — Observed, Fitted, and Forecasts", 
-                 fontsize=14, fontweight='bold')
-    ax.set_xlabel("Date", fontsize=12)
-    ax.set_ylabel(title, fontsize=12)
-    ax.legend(loc='best', framealpha=0.9, fontsize=10)
-    ax.grid(alpha=0.3, linestyle='--')
+    # ========== ARIMA PANEL ==========
+    ax1 = axes[0]
+    
+    if arima_result is not None:
+        # Plot observed data
+        ax1.plot(timestamps_train, y_train, 
+                label='Observed (Train)', color=colors['observed'], 
+                linewidth=2, alpha=0.7)
+        ax1.plot(timestamps_test, y_test,
+                label='Observed (Test)', color=colors['observed'],
+                linewidth=2, alpha=0.7, linestyle='--')
+        
+        # Plot fitted values
+        fitted = arima_result['fitted']
+        fitted_times = timestamps_train[len(timestamps_train)-len(fitted):]
+        ax1.plot(fitted_times, fitted,
+                label='ARIMA Fitted', color=colors['fitted'],
+                linewidth=2, linestyle='--')
+        
+        # Plot short test forecast (for comparison)
+        forecast = arima_result.get('forecast')
+        forecast_std = arima_result.get('forecast_std')
+        if forecast is not None and len(forecast) > 0:
+            ax1.plot(timestamps_test, forecast,
+                label='ARIMA Forecast (test)', color=colors['forecast'],
+                linewidth=2.5)
+
+        # Plot extended forecast if provided
+        if arima_ext is not None:
+            f_ext, f_ext_std = arima_ext
+            days = int(len(ext_forecast_timestamps) / 24)
+            ax1.plot(ext_forecast_timestamps, f_ext, label=f'ARIMA Extended Forecast (+{days}d)', color=colors['forecast'], linewidth=1.8)
+            for alpha, z_score in [(colors['ci_light'], 1.96), (colors['ci_medium'], 1.28), (colors['ci_dark'], 0.67)]:
+                lower = f_ext - z_score * f_ext_std
+                upper = f_ext + z_score * f_ext_std
+                ax1.fill_between(ext_forecast_timestamps, lower, upper, alpha=alpha, color=colors['forecast'])
+        
+        # Fan plot (95%, 80%, 50% intervals) for test forecast
+        if forecast is not None and forecast_std is not None:
+            for alpha, z_score in [(colors['ci_light'], 1.96), (colors['ci_medium'], 1.28), (colors['ci_dark'], 0.67)]:
+                lower = forecast - z_score * forecast_std
+                upper = forecast + z_score * forecast_std
+                ax1.fill_between(timestamps_test, lower, upper, alpha=alpha, color=colors['forecast'])
+        
+        # Add vertical line at train/test split
+        ax1.axvline(timestamps_train[-1], color='black', 
+                   linestyle=':', alpha=0.5, linewidth=1.5)
+        
+        # Format
+        ax1.set_title(f'ARIMA Model - {target_metric.replace("_", " ").title()}', 
+                     fontsize=14, fontweight='bold', pad=15)
+        ax1.set_ylabel(target_metric.replace("_", " ").title(), fontsize=12)
+        ax1.legend(loc='best', framealpha=0.95, fontsize=10)
+        ax1.grid(alpha=0.3, linestyle='--')
+        
+        # Add metrics text
+        metrics = arima_result['metrics']
+        metrics_text = (
+            f"Train RMSE: {metrics['train_rmse']:.2f}\n"
+            f"Test RMSE: {metrics['test_rmse']:.2f}\n"
+            f"AIC: {metrics['aic']:.2f}"
+        )
+        ax1.text(0.02, 0.98, metrics_text, transform=ax1.transAxes,
+                verticalalignment='top', bbox=dict(boxstyle='round', 
+                facecolor='wheat', alpha=0.5), fontsize=10)
+
+        # --- Auto-scale or log-scale if dynamic range is huge ---
+        try:
+            vals = []
+            vals.extend(np.asarray(y_train).ravel().tolist())
+            vals.extend(np.asarray(y_test).ravel().tolist())
+            if 'fitted' in arima_result and arima_result['fitted'] is not None:
+                vals.extend(np.asarray(arima_result['fitted']).ravel().tolist())
+            if 'forecast' in arima_result and arima_result['forecast'] is not None:
+                vals.extend(np.asarray(arima_result['forecast']).ravel().tolist())
+            if arima_ext is not None:
+                f_ext_vals, f_ext_std_vals = arima_ext
+                vals.extend(np.asarray(f_ext_vals).ravel().tolist())
+                vals.extend((np.asarray(f_ext_vals) - 1.96 * np.asarray(f_ext_std_vals)).ravel().tolist())
+                vals.extend((np.asarray(f_ext_vals) + 1.96 * np.asarray(f_ext_std_vals)).ravel().tolist())
+
+            vals_arr = np.array([v for v in vals if np.isfinite(v)])
+            if vals_arr.size > 0:
+                vmax = float(np.nanmax(vals_arr))
+                vmin_pos = float(np.nanmin(vals_arr[vals_arr > 0])) if np.any(vals_arr > 0) else float(np.nanmin(vals_arr))
+                if vmin_pos > 0 and (vmax / vmin_pos) > 1000:
+                    ax1.set_yscale('log')
+        except Exception:
+            pass
+    
+    # ========== DLM PANEL ==========
+    ax2 = axes[1]
+    
+    if dlm_result is not None:
+        # Plot observed data
+        ax2.plot(timestamps_train, y_train,
+                label='Observed (Train)', color=colors['observed'],
+                linewidth=2, alpha=0.7)
+        ax2.plot(timestamps_test, y_test,
+                label='Observed (Test)', color=colors['observed'],
+                linewidth=2, alpha=0.7, linestyle='--')
+        
+        # Plot fitted values
+        fitted = dlm_result['fitted']
+        ax2.plot(timestamps_train, fitted,
+                label='DLM Fitted', color=colors['fitted'],
+                linewidth=2, linestyle='--')
+        
+        # Plot short test forecast
+        forecast = dlm_result.get('forecast')
+        forecast_std = dlm_result.get('forecast_std')
+        if forecast is not None and len(forecast) > 0:
+            ax2.plot(timestamps_test, forecast, label='DLM Forecast (test)', color=colors['forecast'], linewidth=2.5)
+
+        # Extended DLM forecast
+        if dlm_ext is not None:
+            f_ext, f_ext_std = dlm_ext
+            days = int(len(ext_forecast_timestamps) / 24)
+            ax2.plot(ext_forecast_timestamps, f_ext, label=f'DLM Extended Forecast (+{days}d)', color=colors['forecast'], linewidth=1.8)
+            for alpha, z_score in [(colors['ci_light'], 1.96), (colors['ci_medium'], 1.28), (colors['ci_dark'], 0.67)]:
+                lower = f_ext - z_score * f_ext_std
+                upper = f_ext + z_score * f_ext_std
+                ax2.fill_between(ext_forecast_timestamps, lower, upper, alpha=alpha, color=colors['forecast'])
+
+        # Fan plot for test forecast
+        if forecast is not None and forecast_std is not None:
+            for alpha, z_score in [(colors['ci_light'], 1.96), (colors['ci_medium'], 1.28), (colors['ci_dark'], 0.67)]:
+                lower = forecast - z_score * forecast_std
+                upper = forecast + z_score * forecast_std
+                ax2.fill_between(timestamps_test, lower, upper, alpha=alpha, color=colors['forecast'])
+        
+        # Add vertical line at train/test split
+        ax2.axvline(timestamps_train[-1], color='black',
+                   linestyle=':', alpha=0.5, linewidth=1.5)
+        
+        # Format
+        ax2.set_title('Dynamic Linear Model (Kalman Filter)', 
+                     fontsize=14, fontweight='bold', pad=15)
+        ax2.set_xlabel('Date', fontsize=12)
+        ax2.set_ylabel(target_metric.replace("_", " ").title(), fontsize=12)
+        ax2.legend(loc='best', framealpha=0.95, fontsize=10)
+        ax2.grid(alpha=0.3, linestyle='--')
+        
+        # Add metrics text
+        metrics = dlm_result['metrics']
+        metrics_text = (
+            f"Train RMSE: {metrics['train_rmse']:.2f}\n"
+            f"Test RMSE: {metrics['test_rmse']:.2f}"
+        )
+        ax2.text(0.02, 0.98, metrics_text, transform=ax2.transAxes,
+                verticalalignment='top', bbox=dict(boxstyle='round',
+                facecolor='wheat', alpha=0.5), fontsize=10)
+
+        # --- Ensure DLM panel y-limits cover observed, fitted, and forecasts ---
+        try:
+            vals = []
+            vals.extend(np.asarray(y_train).ravel().tolist())
+            vals.extend(np.asarray(y_test).ravel().tolist())
+            if 'fitted' in dlm_result and dlm_result['fitted'] is not None:
+                vals.extend(np.asarray(dlm_result['fitted']).ravel().tolist())
+            if forecast is not None:
+                vals.extend(np.asarray(forecast).ravel().tolist())
+            if dlm_ext is not None:
+                f_ext_vals, f_ext_std_vals = dlm_ext
+                vals.extend(np.asarray(f_ext_vals).ravel().tolist())
+                # include CI endpoints
+                vals.extend((np.asarray(f_ext_vals) - 1.96 * np.asarray(f_ext_std_vals)).ravel().tolist())
+                vals.extend((np.asarray(f_ext_vals) + 1.96 * np.asarray(f_ext_std_vals)).ravel().tolist())
+
+            vals_arr = np.array([v for v in vals if np.isfinite(v)])
+            if vals_arr.size > 0:
+                ymin = float(np.nanmin(vals_arr))
+                ymax = float(np.nanmax(vals_arr))
+                if ymax > ymin:
+                    pad = max((ymax - ymin) * 0.08, 1.0)
+                    ax2.set_ylim(ymin - pad, ymax + pad)
+        except Exception:
+            pass
+        # Apply log-scaling if dynamic range is very large
+        try:
+            vals_all = np.array([v for v in vals if np.isfinite(v)])
+            if vals_all.size > 0:
+                vmax = float(np.nanmax(vals_all))
+                vmin_pos = float(np.nanmin(vals_all[vals_all > 0])) if np.any(vals_all > 0) else float(np.nanmin(vals_all))
+                if vmin_pos > 0 and (vmax / vmin_pos) > 1000:
+                    ax2.set_yscale('log')
+        except Exception:
+            pass
+    
+    # ========== NN PANEL ==========
+    ax3 = axes[2]
+    if nn_result is not None:
+        ax3.plot(timestamps_train, y_train, label='Observed (Train)', color=colors['observed'], linewidth=2, alpha=0.7)
+        ax3.plot(timestamps_test, y_test, label='Observed (Test)', color=colors['observed'], linewidth=2, alpha=0.7, linestyle='--')
+
+        # Plot NN fitted training values (if available)
+        if isinstance(nn_result, dict) and nn_result.get('fitted_train') is not None:
+            fitted_nn = np.asarray(nn_result.get('fitted_train'))
+            if np.any(~np.isnan(fitted_nn)):
+                ax3.plot(timestamps[:len(fitted_nn)], fitted_nn, label='NN Fitted (train)', color=colors['fitted'], linewidth=2, linestyle='--')
+
+        # Extended NN forecast (trained on full series)
+        if nn_ext is not None:
+            f_ext, f_ext_std = nn_ext
+            days = int(len(ext_forecast_timestamps) / 24)
+            ax3.plot(ext_forecast_timestamps, f_ext, label=f'NN Extended Forecast (+{days}d)', color=colors['forecast'], linewidth=1.8)
+            for alpha, z_score in [(colors['ci_light'], 1.96), (colors['ci_medium'], 1.28), (colors['ci_dark'], 0.67)]:
+                lower = f_ext - z_score * f_ext_std
+                upper = f_ext + z_score * f_ext_std
+                ax3.fill_between(ext_forecast_timestamps, lower, upper, alpha=alpha, color=colors['forecast'])
+
+        # Auto-log-scale NN panel if range is extreme
+        try:
+            vals = []
+            vals.extend(np.asarray(y_train).ravel().tolist())
+            vals.extend(np.asarray(y_test).ravel().tolist())
+            if isinstance(nn_result, dict) and nn_result.get('fitted_train') is not None:
+                vals.extend(np.asarray(nn_result.get('fitted_train')).ravel().tolist())
+            if nn_ext is not None:
+                f_ext_vals, f_ext_std_vals = nn_ext
+                vals.extend(np.asarray(f_ext_vals).ravel().tolist())
+                vals.extend((np.asarray(f_ext_vals) - 1.96 * np.asarray(f_ext_std_vals)).ravel().tolist())
+                vals.extend((np.asarray(f_ext_vals) + 1.96 * np.asarray(f_ext_std_vals)).ravel().tolist())
+
+            vals_arr = np.array([v for v in vals if np.isfinite(v)])
+            if vals_arr.size > 0:
+                vmax = float(np.nanmax(vals_arr))
+                vmin_pos = float(np.nanmin(vals_arr[vals_arr > 0])) if np.any(vals_arr > 0) else float(np.nanmin(vals_arr))
+                if vmin_pos > 0 and (vmax / vmin_pos) > 1000:
+                    ax3.set_yscale('log')
+        except Exception:
+            pass
+
+        ax3.set_title('Neural Network (MLP) Forecast', fontsize=14, fontweight='bold', pad=15)
+        ax3.set_xlabel('Date', fontsize=12)
+        ax3.set_ylabel(target_metric.replace('_', ' ').title(), fontsize=12)
+        ax3.legend(loc='best', framealpha=0.95, fontsize=10)
+        ax3.grid(alpha=0.3, linestyle='--')
+
+    # Add legend for confidence intervals
+    legend_elements = [
+        Patch(facecolor=colors['forecast'], alpha=colors['ci_light'], 
+              label='95% CI'),
+        Patch(facecolor=colors['forecast'], alpha=colors['ci_medium'], 
+              label='80% CI'),
+        Patch(facecolor=colors['forecast'], alpha=colors['ci_dark'], 
+              label='50% CI')
+    ]
+    fig.legend(handles=legend_elements, loc='upper right', 
+              bbox_to_anchor=(0.98, 0.98), fontsize=10)
     
     plt.tight_layout()
     
-    # Save figure
-    output_path = Path(output_dir)
-    output_path.mkdir(exist_ok=True)
+    # Save
+    output_dir = Path(output_path).parent
+    output_dir.mkdir(exist_ok=True)
     
-    filename = f"{target_col}_forecast.png"
-    save_path = output_path / filename
-    
-    fig.savefig(save_path, dpi=150, bbox_inches='tight')
-    print(f"[VIZ] ✓ Saved: {save_path}")
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    print(f"[PLOT] ✓ Saved: {output_path}")
     
     plt.close()
-
-
-# ============================================================================
-# MAIN ANALYSIS FUNCTION
-# ============================================================================
-
-def run_model_comparison(data, target_col='total_views', train_size=0.7):
-    """Run all models and compare performance"""
-    
-    if len(data) < 10:
-        raise ValueError(
-            f"\n{'='*60}\n"
-            f"INSUFFICIENT DATA: Only {len(data)} time points available!\n"
-            f"{'='*60}\n"
-            "Time series analysis requires at least 10 observations (preferably 20+).\n"
-        )
-    
-    y = data[target_col].values
-    dates = data['time_bin'].values
-    
-    split_idx = int(len(y) * train_size)
-    split_idx = max(5, min(split_idx, len(y) - 5))
-    
-    y_train = y[:split_idx]
-    y_test = y[split_idx:]
-    dates_train = dates[:split_idx]
-    dates_test = dates[split_idx:]
-    
-    print(f"\nAnalyzing: {target_col}")
-    print(f"Train size: {len(y_train)}, Test size: {len(y_test)}")
-    print(f"Time range: {dates[0]} to {dates[-1]}")
-    print("="*60)
-    
-    results = {}
-    
-    # Fit ARIMA with automatic order selection
-    print("\nFitting ARIMA (auto order selection)...")
-    arima_result = fit_arima_model(y_train, y_test, order=None)
-    if arima_result:
-        results['ARIMA'] = arima_result
-        print(f"  AIC: {arima_result['aic']:.2f}, BIC: {arima_result['bic']:.2f}")
-    
-    # Fit AR(1)
-    print("\nFitting AR(1)...")
-    ar1_result = fit_ar1_model(y_train, y_test)
-    if ar1_result:
-        results['AR1'] = ar1_result
-        print(f"  AIC: {ar1_result['aic']:.2f}, BIC: {ar1_result['bic']:.2f}")
-    
-    # Fit DLM
-    print("\nFitting DLM (Forward-Backward Smoother)...")
-    dlm_result = fit_dlm_model(y_train, y_test)
-    if dlm_result:
-        results['DLM'] = dlm_result
-        print(f"  AIC: {dlm_result['aic']:.2f}, BIC: {dlm_result['bic']:.2f}")
-    
-    if not results:
-        print("\nNo models were successfully fitted.")
-        return None
-    
-    # Calculate metrics
-    print("\n" + "="*60)
-    print("TRAINING SET PERFORMANCE:")
-    print("="*60)
-    
-    train_metrics = {}
-    for model_name, result in results.items():
-        fitted = result['fitted']
-        min_len = min(len(y_train), len(fitted))
-        if min_len > 0:
-            metrics = calculate_metrics(y_train[-min_len:], fitted[-min_len:])
-            train_metrics[model_name] = metrics
-            
-            print(f"\n{model_name}:")
-            for metric, value in metrics.items():
-                print(f"  {metric}: {value:.4f}")
-    
-    print("\n" + "="*60)
-    print("TEST SET PERFORMANCE:")
-    print("="*60)
-    
-    test_metrics = {}
-    for model_name, result in results.items():
-        forecast = result['forecast']
-        min_len = min(len(y_test), len(forecast))
-        if min_len > 0:
-            metrics = calculate_metrics(y_test[:min_len], forecast[:min_len])
-            test_metrics[model_name] = metrics
-            
-            print(f"\n{model_name}:")
-            for metric, value in metrics.items():
-                print(f"  {metric}: {value:.4f}")
-    
-    # Model comparison summary
-    print("\n" + "="*60)
-    print("MODEL COMPARISON SUMMARY:")
-    print("="*60)
-    
-    comparison_df = pd.DataFrame({
-        'Model': list(results.keys()),
-        'AIC': [r['aic'] for r in results.values()],
-        'BIC': [r['bic'] for r in results.values()],
-        'Train_RMSE': [train_metrics.get(m, {}).get('RMSE', np.nan) for m in results.keys()],
-        'Test_RMSE': [test_metrics.get(m, {}).get('RMSE', np.nan) for m in results.keys()],
-        'Train_R2': [train_metrics.get(m, {}).get('R2', np.nan) for m in results.keys()],
-        'Test_R2': [test_metrics.get(m, {}).get('R2', np.nan) for m in results.keys()]
-    })
-    
-    print(comparison_df.to_string(index=False))
-    
-    # Save results
-    output_dir = Path('./results')
-    output_dir.mkdir(exist_ok=True)
-    comparison_df.to_csv(output_dir / 'model_comparison.csv', index=False)
-    print(f"\n✓ Results saved to {output_dir}/model_comparison.csv")
-    
-    return {
-        'results': results,
-        'train_metrics': train_metrics,
-        'test_metrics': test_metrics,
-        'comparison_df': comparison_df,
-        'data': {
-            'y_train': y_train,
-            'y_test': y_test,
-            'dates_train': dates_train,
-            'dates_test': dates_test,
-            'target_col': target_col
-        }
-    }
 
 
 # ============================================================================
@@ -670,100 +828,145 @@ def run_model_comparison(data, target_col='total_views', train_size=0.7):
 
 def main():
     """Main execution function"""
-    print("="*70)
-    print("TIME SERIES FORECASTING - videos_log_v2")
-    print("="*70)
     
-    # Fetch data from Neon
-    df_videos = fetch_videos_from_neon("videos_log_v2")
+    print("=" * 80)
+    print("TIME SERIES FORECASTING: ARIMA vs DLM")
+    print("=" * 80)
     
-    # Check if data has time spread in ingestion_timestamp
-    df_pd_check = df_videos.to_pandas()
-    df_pd_check['ingestion_timestamp'] = pd.to_datetime(df_pd_check['ingestion_timestamp'])
-    ingestion_hours = df_pd_check['ingestion_timestamp'].dt.floor('h').nunique()
+    # 1. Connect to database
+    df = connect_to_neon(table_name="videos_log_v3")
     
-    # If ingestion timestamps are concentrated, start with daily aggregation
-    # Otherwise, try minutely first
-    if ingestion_hours < 5:
-        print("\n[INFO] Detected batch ingestion - starting with daily aggregation")
-        print("[INFO] (Will use published_at timestamps instead of ingestion_timestamp)")
-        time_series_data = prepare_timeseries_data(df_videos, aggregation="daily")
-    else:
-        # Try minutely aggregation first
-        minutely_data = prepare_timeseries_data(df_videos, aggregation="minutely")
+    # 2. Prepare time series
+    # You can change target_metric to: 'view_count', 'like_count', 'engagement_rate'
+    target_metric = 'view_count'
+    ts_data = prepare_timeseries(df, target_metric=target_metric)
+    
+    if len(ts_data) < 30:
+        print(f"\n[ERROR] Insufficient data: only {len(ts_data)} time points")
+        print("[ERROR] Need at least 30 hours of data for reliable forecasting")
+        return
+    
+    # 3. Split into train/test (last 14 hours = 2 weeks of hourly forecasts)
+    test_size = min(14, len(ts_data) // 5)  # At least 20% for test
+    train_size = len(ts_data) - test_size
+    
+    timestamps = ts_data['timestamp'].values
+    y_full = ts_data[target_metric].values
+    
+    y_train = y_full[:train_size]
+    y_test = y_full[train_size:]
+    
+    print(f"\n[SPLIT] Train size: {train_size} hours")
+    print(f"[SPLIT] Test size: {test_size} hours")
+    print(f"[SPLIT] Train period: {timestamps[0]} to {timestamps[train_size-1]}")
+    print(f"[SPLIT] Test period: {timestamps[train_size]} to {timestamps[-1]}")
+    
+    # 4. Fit ARIMA model (on train for evaluation)
+    arima_result = fit_arima(y_train, y_test, order=(1, 1, 1))
 
-        # If not enough minutely data, try hourly then daily
-        if len(minutely_data) < 10:
-            print("\n⚠️  Not enough minutely data points. Switching to hourly aggregation...")
-            hourly_data = prepare_timeseries_data(df_videos, aggregation="hourly")
-            if len(hourly_data) < 10:
-                print("\n⚠️  Not enough hourly data points. Switching to daily aggregation...")
-                daily_data = prepare_timeseries_data(df_videos, aggregation="daily")
-                time_series_data = daily_data
-            else:
-                time_series_data = hourly_data
+    # 5. Fit DLM model (on train for evaluation)
+    dlm_result = fit_dlm(y_train, y_test)
+
+    # 6. Fit NN model (on train for evaluation)
+    nn_eval = fit_nn_model(y_train, y_test, steps_ahead=len(y_test), lags=24)
+
+    # 7. Prepare extended forecasts for a shorter horizon (default: 30 days)
+    default_forecast_days = 30
+    hours_to_forecast = int(default_forecast_days * 24)
+
+    last_dt = pd.to_datetime(timestamps[-1])
+    ext_forecast_timestamps = [last_dt + pd.Timedelta(hours=i+1) for i in range(hours_to_forecast)]
+
+    print(f"\n[FORECAST] Extending forecasts for {hours_to_forecast} hours (~{default_forecast_days} days)")
+
+    # Re-fit ARIMA on full series to produce final forecasts
+    arima_ext = None
+    try:
+        if auto_arima is not None:
+            aa_full = auto_arima(y_full, seasonal=False, stepwise=True, error_action='ignore', suppress_warnings=True)
+            sel_order_full = aa_full.order
+            print(f"[ARIMA] auto_arima (full) selected order={sel_order_full}")
+            ar_model = ARIMA(y_full, order=sel_order_full).fit()
         else:
-            time_series_data = minutely_data
+            ar_model = ARIMA(y_full, order=(1, 1, 1)).fit()
+
+        fo = ar_model.get_forecast(steps=hours_to_forecast)
+        arima_ext = (np.array(fo.predicted_mean), np.array(fo.se_mean))
+    except Exception as e:
+        print(f"[ARIMA] ✗ Extended forecast error: {e}")
+        arima_ext = None
+
+    # Re-fit DLM on full series
+    dlm_ext = None
+    try:
+        dlm_full = DynamicLinearModel()
+        dlm_full.fit(y_full)
+        f_ext, f_ext_std = fit_dlm_extended(dlm_full, hours_to_forecast)
+        dlm_ext = (np.array(f_ext), np.array(f_ext_std))
+    except Exception as e:
+        print(f"[DLM] ✗ Extended forecast error: {e}")
+        dlm_ext = None
+
+    # Fit NN on full series for extended forecast
+    nn_ext = None
+    try:
+        nn_f = fit_nn_model(y_full, np.array([]), steps_ahead=hours_to_forecast, lags=24)
+        if nn_f is not None and nn_f.get('forecast') is not None:
+            nn_ext = (np.array(nn_f['forecast']), np.array(nn_f['forecast_std']))
+    except Exception as e:
+        print(f"[NN] ✗ Extended forecast error: {e}")
+        nn_ext = None
     
-    # Check if we have enough data
-    if len(time_series_data) < 10:
-        print("\n" + "="*70)
-        print("❌ INSUFFICIENT DATA FOR TIME SERIES ANALYSIS")
-        print("="*70)
-        print(f"Found only {len(time_series_data)} time points (need at least 10)")
-        print("\nPossible issues:")
-        print("1. Data was loaded in a single batch (all same ingestion_timestamp)")
-        print("2. Not enough videos with published_at dates")
-        print("3. Published dates are too concentrated")
-        print("\nSuggestions:")
-        print("- Check your data source has videos published over time")
-        print("- Verify published_at column exists and has valid dates")
-        print("- Load more historical video data")
-        print("="*70)
-        return None
+    # 6. Create visualization
+    if arima_result is not None or dlm_result is not None or nn_eval is not None:
+        create_faceted_forecast_plot(
+            timestamps=timestamps,
+            y_full=y_full,
+            train_size=train_size,
+            arima_result=arima_result,
+            dlm_result=dlm_result,
+            nn_result=nn_eval,
+            ext_forecast_timestamps=ext_forecast_timestamps,
+            arima_ext=arima_ext,
+            dlm_ext=dlm_ext,
+            nn_ext=nn_ext,
+            target_metric=target_metric,
+            output_path='outputs/forecast_comparison.png'
+        )
     
-    # Run forecasting models
-    print("\n" + "="*70)
-    print("RUNNING FORECASTING MODELS")
-    print("="*70)
+    # 7. Print comparison summary
+    print("\n" + "=" * 80)
+    print("MODEL COMPARISON SUMMARY")
+    print("=" * 80)
     
-    # Store results for visualization
-    all_results = {}
+    if arima_result and dlm_result:
+        comparison = pd.DataFrame({
+            'Model': ['ARIMA(1,1,1)', 'DLM'],
+            'Train_RMSE': [
+                arima_result['metrics']['train_rmse'],
+                dlm_result['metrics']['train_rmse']
+            ],
+            'Test_RMSE': [
+                arima_result['metrics']['test_rmse'],
+                dlm_result['metrics']['test_rmse']
+            ]
+        })
+        
+        print(comparison.to_string(index=False))
+        
+        # Save comparison
+        output_dir = Path('outputs')
+        output_dir.mkdir(exist_ok=True)
+        comparison.to_csv(output_dir / 'model_comparison.csv', index=False)
+        print(f"\n[SAVE] ✓ Comparison saved to outputs/model_comparison.csv")
     
-    # Analyze total views
-    print("\n📊 TARGET: Total Views")
-    results_views = run_model_comparison(time_series_data, target_col='total_views')
-    if results_views:
-        all_results['total_views'] = results_views
-    
-    # Analyze total likes
-    print("\n\n📊 TARGET: Total Likes")
-    results_likes = run_model_comparison(time_series_data, target_col='total_likes')
-    if results_likes:
-        all_results['total_likes'] = results_likes
-    
-    # Analyze engagement rate
-    print("\n\n📊 TARGET: Average Engagement Rate")
-    results_engagement = run_model_comparison(time_series_data, target_col='avg_engagement_rate')
-    if results_engagement:
-        all_results['avg_engagement_rate'] = results_engagement
-    
-    # Create visualizations
-    print("\n" + "="*70)
-    print("CREATING VISUALIZATIONS")
-    print("="*70)
-    
-    for target, results in all_results.items():
-        create_visualization(results, output_dir='outputs')
-    
-    print("\n" + "="*70)
+    print("\n" + "=" * 80)
     print("✅ ANALYSIS COMPLETE!")
-    print("="*70)
-    print("\nResults saved to:")
-    print("  - ./results/model_comparison.csv")
-    print("  - ./outputs/*_forecast.png")
-    
-    return all_results
+    print("=" * 80)
+    print("\nOutputs:")
+    print("  • outputs/forecast_comparison.png - Faceted visualization with fan plots")
+    print("  • outputs/model_comparison.csv - Performance metrics")
+    print("=" * 80)
 
 
 if __name__ == "__main__":
