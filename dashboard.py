@@ -11,6 +11,14 @@ import pandas as pd
 import numpy as np
 from statsmodels.tsa.arima.model import ARIMA
 from scipy import stats
+from sklearn.neural_network import MLPRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error
+
+try:
+    from pmdarima import auto_arima
+except Exception:
+    auto_arima = None
 
 # Page config
 st.set_page_config(
@@ -81,15 +89,32 @@ st.markdown("""
         color: white;
         margin: 1rem 0;
     }
+    .model-card {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        padding: 1.5rem;
+        border-radius: 12px;
+        color: white;
+        margin: 0.5rem 0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .model-card-arima {
+        background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    }
+    .model-card-dlm {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .model-card-nn {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # ============================================================================
-# TIME SERIES FORECASTING - ARIMA & DLM
+# TIME SERIES MODELS
 # ============================================================================
 
 class DynamicLinearModel:
-    """Dynamic Linear Model using Kalman Filter"""
+    """Dynamic Linear Model using Kalman Filter with trend support"""
     
     def __init__(self, obs_variance=None, state_variance=None):
         self.obs_variance = obs_variance
@@ -98,6 +123,7 @@ class DynamicLinearModel:
         self.filtered_vars = None
         self.smoothed_means = None
         self.smoothed_vars = None
+        self._trend = 0
     
     def _initialize_variances(self, y):
         if self.obs_variance is None:
@@ -105,6 +131,12 @@ class DynamicLinearModel:
         if self.state_variance is None:
             diffs = np.diff(y)
             self.state_variance = np.var(diffs) * 0.5 if len(diffs) > 0 else 1.0
+        
+        # Estimate trend
+        if len(y) > 10:
+            self._trend = np.mean(np.diff(y[-20:])) if len(y) > 20 else np.mean(np.diff(y))
+        else:
+            self._trend = 0
     
     def forward_filter(self, y):
         n = len(y)
@@ -162,75 +194,90 @@ class DynamicLinearModel:
         last_var = self.smoothed_vars[-1]
         
         for h in range(steps):
-            forecasts[h] = last_mean
+            forecasts[h] = last_mean + self._trend * (h + 1)
             forecast_vars[h] = last_var + (h + 1) * self.state_variance + self.obs_variance
         
         return forecasts, forecast_vars
 
-@st.cache_data(ttl=3600)
-def fit_forecasting_models(video_id: str, history_df: pd.DataFrame, forecast_days: int = 7):
+
+class SimpleNNForecaster:
     """
-    Fit both ARIMA and DLM models for forecasting.
-    Returns dict with both model results.
+    Simple NN forecaster that predicts the next value directly.
+    No mean reversion to prevent collapse.
     """
-    if len(history_df) < 10:
-        return None
     
-    # Prepare data
-    df = history_df.copy()
-    df['ingestion_timestamp'] = pd.to_datetime(df['ingestion_timestamp'])
-    df = df.sort_values('ingestion_timestamp')
+    def __init__(self, lags=24):
+        self.lags = lags
+        self.model = None
+        self.scaler_X = StandardScaler()
+        self.scaler_y = StandardScaler()
+        self.last_mean = 0
+        self.resid_std = 0
     
-    y = df['view_count'].values
-    dates = df['ingestion_timestamp'].values
+    def _build_features(self, y):
+        """Build lag features"""
+        X, targets = [], []
+        for i in range(self.lags, len(y)):
+            X.append(y[i-self.lags:i])
+            targets.append(y[i])
+        return np.array(X), np.array(targets)
     
-    # Split for validation
-    train_size = int(len(y) * 0.85)
-    y_train = y[:train_size]
-    y_test = y[train_size:]
-    
-    results = {}
-    
-    # Fit ARIMA
-    try:
-        arima = ARIMA(y_train, order=(1, 1, 1))
-        arima_fit = arima.fit()
+    def fit(self, y):
+        y = np.array(y).ravel()
+        if len(y) < self.lags + 10:
+            return None
         
-        # Forecast
-        forecast_obj = arima_fit.get_forecast(steps=forecast_days)
-        arima_forecast = forecast_obj.predicted_mean
-        arima_std = forecast_obj.se_mean
+        self.last_mean = np.mean(y[-100:]) if len(y) > 100 else np.mean(y)
         
-        results['arima'] = {
-            'fitted': arima_fit.fittedvalues,
-            'forecast': arima_forecast,
-            'forecast_std': arima_std,
-            'train_size': train_size
-        }
-    except:
-        results['arima'] = None
-    
-    # Fit DLM
-    try:
-        dlm = DynamicLinearModel()
-        dlm.fit(y_train)
+        X, targets = self._build_features(y)
+        if len(X) < 10:
+            return None
         
-        dlm_forecast, dlm_vars = dlm.forecast(steps=forecast_days)
-        dlm_std = np.sqrt(dlm_vars)
+        X_scaled = self.scaler_X.fit_transform(X)
+        y_scaled = self.scaler_y.fit_transform(targets.reshape(-1, 1)).ravel()
         
-        results['dlm'] = {
-            'fitted': dlm.smoothed_means,
-            'forecast': dlm_forecast,
-            'forecast_std': dlm_std,
-            'train_size': train_size
-        }
-    except:
-        results['dlm'] = None
+        self.model = MLPRegressor(
+            hidden_layer_sizes=(64, 32),
+            max_iter=1000, random_state=42,
+            early_stopping=True, validation_fraction=0.15,
+            alpha=0.001, learning_rate='adaptive'
+        )
+        self.model.fit(X_scaled, y_scaled)
+        
+        preds_scaled = self.model.predict(X_scaled)
+        preds = self.scaler_y.inverse_transform(preds_scaled.reshape(-1, 1)).ravel()
+        self.resid_std = np.std(targets - preds)
+        
+        fitted = np.full(len(y), np.nan)
+        fitted[self.lags:] = preds
+        return fitted
     
-    results['dates'] = dates
-    results['y_full'] = y
-    
-    return results
+    def forecast(self, y, steps):
+        if self.model is None:
+            return None, None
+        
+        y = np.array(y).ravel()
+        forecasts = []
+        window = list(y[-self.lags:])
+        
+        for h in range(steps):
+            X_in = np.array(window[-self.lags:]).reshape(1, -1)
+            X_scaled = self.scaler_X.transform(X_in)
+            pred_scaled = self.model.predict(X_scaled)[0]
+            pred = self.scaler_y.inverse_transform([[pred_scaled]])[0, 0]
+            
+            # Keep prediction bounded (no collapse, no explosion)
+            pred = max(pred, self.last_mean * 0.5)
+            pred = min(pred, self.last_mean * 2.0)
+            
+            window.append(pred)
+            forecasts.append(pred)
+        
+        forecasts = np.array(forecasts)
+        forecast_std = np.array([self.resid_std * np.sqrt(1 + 0.01 * h) for h in range(steps)])
+        
+        return forecasts, forecast_std
+
 
 # ============================================================================
 # DATABASE CONNECTION
@@ -244,7 +291,6 @@ def get_db_connection():
         st.error("⚠️ NEON_DATABASE_URL not found. Please set it in your .env file.")
         st.stop()
     
-    # Clean the connection string (remove 'psql' prefix if present)
     db_uri = db_uri.strip()
     if db_uri.startswith("psql "):
         db_uri = db_uri[5:].strip()
@@ -252,7 +298,7 @@ def get_db_connection():
     
     return create_engine(db_uri, pool_pre_ping=True, pool_recycle=1800)
 
-# Data loading functions
+
 @st.cache_data(ttl=3600)
 def load_channels():
     """Load latest channel data from V3"""
@@ -264,6 +310,7 @@ def load_channels():
     """
     return pl.from_pandas(pd.read_sql(query, engine))
 
+
 @st.cache_data(ttl=3600)
 def load_videos():
     """Load latest video data from V3"""
@@ -274,6 +321,7 @@ def load_videos():
     ORDER BY video_id, ingestion_timestamp DESC
     """
     return pl.from_pandas(pd.read_sql(query, engine))
+
 
 @st.cache_data(ttl=3600)
 def load_video_history(video_id: str, days: int = 30):
@@ -289,6 +337,27 @@ def load_video_history(video_id: str, days: int = 30):
     """
     return pl.from_pandas(pd.read_sql(query, engine))
 
+
+@st.cache_data(ttl=3600)
+def load_aggregated_timeseries(days: int = 60):
+    """Load aggregated time series for the Forecast Lab"""
+    engine = get_db_connection()
+    cutoff = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+    query = f"""
+    SELECT 
+        date_trunc('hour', ingestion_timestamp) as time_bin,
+        SUM(view_count) as total_views,
+        SUM(like_count) as total_likes,
+        SUM(comment_count) as total_comments,
+        COUNT(*) as video_count
+    FROM videos_log_v3
+    WHERE ingestion_timestamp >= '{cutoff}'
+    GROUP BY date_trunc('hour', ingestion_timestamp)
+    ORDER BY time_bin ASC
+    """
+    return pd.read_sql(query, engine)
+
+
 @st.cache_data(ttl=3600)
 def load_channel_history(channel_id: str, days: int = 30):
     """Load time-series data for a specific channel"""
@@ -302,6 +371,7 @@ def load_channel_history(channel_id: str, days: int = 30):
     ORDER BY ingestion_timestamp ASC
     """
     return pl.from_pandas(pd.read_sql(query, engine))
+
 
 def calculate_grade(subs, views):
     """Assign a Social Blade Style Letter Grade based on scale"""
@@ -326,6 +396,7 @@ def calculate_grade(subs, views):
     elif score >= 50: return "B"
     else: return "C"
 
+
 def format_number(num):
     """Format numbers with B for billions, M for millions, K for thousands"""
     if num >= 1_000_000_000:
@@ -337,11 +408,219 @@ def format_number(num):
     else:
         return f"{int(num)}"
 
-# Sidebar navigation
+
+# ============================================================================
+# FORECASTING FUNCTIONS
+# ============================================================================
+
+@st.cache_data(ttl=3600)
+def fit_all_models(_y_train, _y_test, forecast_steps=168):
+    """Fit ARIMA, DLM, and NN models and return results"""
+    # Convert to regular arrays to avoid caching issues
+    y_train = np.array(_y_train)
+    y_test = np.array(_y_test)
+    
+    results = {}
+    
+    # ARIMA
+    try:
+        if auto_arima is not None:
+            aa = auto_arima(y_train, seasonal=False, stepwise=True, 
+                           error_action='ignore', suppress_warnings=True)
+            order = aa.order
+        else:
+            order = (1, 1, 1)
+        
+        model = ARIMA(y_train, order=order)
+        model_fit = model.fit()
+        
+        fitted = np.array(model_fit.fittedvalues)
+        forecast_obj = model_fit.get_forecast(steps=forecast_steps)
+        forecast = np.array(forecast_obj.predicted_mean)
+        forecast_std = np.array(forecast_obj.se_mean)
+        
+        # Align fitted values with training data
+        if len(fitted) < len(y_train):
+            fitted_full = np.full(len(y_train), np.nan)
+            fitted_full[-len(fitted):] = fitted
+            fitted = fitted_full
+        
+        train_rmse = np.sqrt(np.nanmean((y_train - fitted)**2))
+        
+        results['arima'] = {
+            'fitted': fitted,
+            'forecast': forecast,
+            'forecast_std': forecast_std,
+            'order': order,
+            'metrics': {'train_rmse': train_rmse, 'aic': model_fit.aic}
+        }
+    except Exception as e:
+        results['arima'] = None
+        st.warning(f"ARIMA fitting failed: {e}")
+    
+    # DLM
+    try:
+        dlm = DynamicLinearModel()
+        dlm.fit(y_train)
+        
+        fitted = np.array(dlm.smoothed_means)
+        forecast, forecast_vars = dlm.forecast(steps=forecast_steps)
+        forecast_std = np.sqrt(forecast_vars)
+        
+        train_rmse = np.sqrt(mean_squared_error(y_train, fitted))
+        
+        results['dlm'] = {
+            'fitted': fitted,
+            'forecast': np.array(forecast),
+            'forecast_std': np.array(forecast_std),
+            'metrics': {'train_rmse': train_rmse}
+        }
+    except Exception as e:
+        results['dlm'] = None
+        st.warning(f"DLM fitting failed: {e}")
+    
+    # Neural Network
+    try:
+        lags = min(24, len(y_train)//4)  # Ensure enough data for training
+        nn = SimpleNNForecaster(lags=lags)
+        fitted = nn.fit(y_train)
+        
+        if fitted is not None:
+            forecast, forecast_std = nn.forecast(y_train, forecast_steps)
+            
+            # Calculate RMSE on non-NaN fitted values
+            valid_mask = ~np.isnan(fitted)
+            if np.sum(valid_mask) > 0:
+                train_rmse = np.sqrt(mean_squared_error(
+                    y_train[valid_mask], fitted[valid_mask]
+                ))
+            else:
+                train_rmse = np.nan
+            
+            results['nn'] = {
+                'fitted': fitted,
+                'forecast': forecast,
+                'forecast_std': forecast_std,
+                'lags': lags,
+                'metrics': {'train_rmse': train_rmse}
+            }
+        else:
+            results['nn'] = None
+    except Exception as e:
+        results['nn'] = None
+        st.warning(f"NN fitting failed: {e}")
+    
+    return results
+
+
+def create_forecast_plot(timestamps, y_full, train_size, results, forecast_timestamps, metric_name):
+    """Create a clean Plotly figure with all three model forecasts"""
+    
+    fig = go.Figure()
+    
+    timestamps_train = timestamps[:train_size]
+    y_train = y_full[:train_size]
+    
+    # Plot observed data
+    fig.add_trace(go.Scatter(
+        x=timestamps,
+        y=y_full,
+        mode='lines',
+        name='Observed',
+        line=dict(color='#2E86AB', width=2.5),
+        hovertemplate='%{x}<br>Views: %{y:,.0f}<extra></extra>'
+    ))
+    
+    # Colors for each model
+    model_colors = {
+        'arima': '#FF6B35',
+        'dlm': '#8B5CF6', 
+        'nn': '#10B981'
+    }
+    
+    model_names = {
+        'arima': 'ARIMA',
+        'dlm': 'DLM (Kalman)',
+        'nn': 'Neural Network'
+    }
+    
+    # Plot each model's forecast
+    for model_key in ['arima', 'dlm', 'nn']:
+        result = results.get(model_key)
+        if result is None:
+            continue
+        
+        forecast = result['forecast']
+        forecast_std = result['forecast_std']
+        color = model_colors[model_key]
+        name = model_names[model_key]
+        
+        # Main forecast line
+        fig.add_trace(go.Scatter(
+            x=forecast_timestamps,
+            y=forecast,
+            mode='lines',
+            name=f'{name} Forecast',
+            line=dict(color=color, width=2.5, dash='dash'),
+            hovertemplate=f'{name}<br>%{{x}}<br>Forecast: %{{y:,.0f}}<extra></extra>'
+        ))
+        
+        # 95% confidence interval
+        upper_95 = forecast + 1.96 * forecast_std
+        lower_95 = forecast - 1.96 * forecast_std
+        lower_95 = np.maximum(lower_95, 0)  # Don't go below 0 for counts
+        
+        fig.add_trace(go.Scatter(
+            x=list(forecast_timestamps) + list(forecast_timestamps)[::-1],
+            y=list(upper_95) + list(lower_95)[::-1],
+            fill='toself',
+            fillcolor=color.replace(')', ', 0.15)').replace('rgb', 'rgba') if 'rgb' in color else f'rgba({int(color[1:3], 16)}, {int(color[3:5], 16)}, {int(color[5:7], 16)}, 0.15)',
+            line=dict(color='rgba(0,0,0,0)'),
+            name=f'{name} 95% CI',
+            showlegend=False,
+            hoverinfo='skip'
+        ))
+    
+    # Add vertical line at forecast start
+    fig.add_vline(
+        x=timestamps[-1],
+        line_dash="dash",
+        line_color="gray",
+        annotation_text="Forecast Start",
+        annotation_position="top"
+    )
+    
+    fig.update_layout(
+        title=dict(
+            text=f'{metric_name.replace("_", " ").title()} Forecast Comparison',
+            font=dict(size=20)
+        ),
+        xaxis_title='Date',
+        yaxis_title=metric_name.replace('_', ' ').title(),
+        hovermode='x unified',
+        height=600,
+        legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            y=1.02,
+            xanchor='right',
+            x=1
+        ),
+        template='plotly_white'
+    )
+    
+    return fig
+
+
+# ============================================================================
+# SIDEBAR NAVIGATION
+# ============================================================================
+
 st.sidebar.title("🎯 Navigation")
 page = st.sidebar.radio(
     "Choose a page:",
-    ["🏠 Home", "📊 Channel Leaderboard", "🎬 Video Explorer", "🚀 Milestone Tracker", "📈 Forecast Lab"]
+    ["🏠 Home", "📊 Channel Leaderboard", "🎬 Video Explorer", 
+     "🚀 Milestone Tracker", "🔬 Forecast Lab"]
 )
 
 # Initialize session state
@@ -590,165 +869,8 @@ elif page == "🎬 Video Explorer":
         progress_pct = video_data['milestone_progress_pct'] / 100
         st.progress(progress_pct)
         st.caption(f"{video_data['milestone_progress_pct']:.1f}% progress toward {video_data['next_milestone']:,} views")
-        
-        st.markdown("---")
-        
-        # ML Forecasting Section
-        st.subheader("📈 AI-Powered View Count Forecast")
-        
-        history = load_video_history(video_id, days=30)
-        
-        if len(history) >= 10:
-            df_history = history.to_pandas()
-            
-            # Fit models
-            with st.spinner("🤖 Training ARIMA and DLM models..."):
-                forecast_results = fit_forecasting_models(video_id, df_history, forecast_days=14)
-            
-            if forecast_results:
-                # Create comprehensive forecast plot
-                fig = go.Figure()
-                
-                dates = pd.to_datetime(df_history['ingestion_timestamp'])
-                y_full = df_history['view_count'].values
-                
-                # Historical data
-                fig.add_trace(go.Scatter(
-                    x=dates,
-                    y=y_full,
-                    mode='lines+markers',
-                    name='Actual Views',
-                    line=dict(color='#1f77b4', width=3),
-                    marker=dict(size=8)
-                ))
-                
-                # Generate future dates for forecast
-                last_date = dates.iloc[-1]
-                future_dates = pd.date_range(start=last_date, periods=15, freq='D')[1:]
-                
-                # ARIMA forecast
-                if forecast_results['arima']:
-                    arima_forecast = forecast_results['arima']['forecast']
-                    arima_std = forecast_results['arima']['forecast_std']
-                    
-                    fig.add_trace(go.Scatter(
-                        x=future_dates,
-                        y=arima_forecast,
-                        mode='lines',
-                        name='ARIMA Forecast',
-                        line=dict(color='#ff7f0e', width=3, dash='dash')
-                    ))
-                    
-                    # 95% confidence interval
-                    fig.add_trace(go.Scatter(
-                        x=future_dates.tolist() + future_dates.tolist()[::-1],
-                        y=(arima_forecast + 1.96*arima_std).tolist() + (arima_forecast - 1.96*arima_std).tolist()[::-1],
-                        fill='toself',
-                        fillcolor='rgba(255,127,14,0.2)',
-                        line=dict(color='rgba(255,255,255,0)'),
-                        name='ARIMA 95% CI',
-                        showlegend=True
-                    ))
-                
-                # DLM forecast
-                if forecast_results['dlm']:
-                    dlm_forecast = forecast_results['dlm']['forecast']
-                    dlm_std = forecast_results['dlm']['forecast_std']
-                    
-                    fig.add_trace(go.Scatter(
-                        x=future_dates,
-                        y=dlm_forecast,
-                        mode='lines',
-                        name='DLM Forecast',
-                        line=dict(color='#d62728', width=3, dash='dot')
-                    ))
-                    
-                    # 95% confidence interval
-                    fig.add_trace(go.Scatter(
-                        x=future_dates.tolist() + future_dates.tolist()[::-1],
-                        y=(dlm_forecast + 1.96*dlm_std).tolist() + (dlm_forecast - 1.96*dlm_std).tolist()[::-1],
-                        fill='toself',
-                        fillcolor='rgba(214,39,40,0.2)',
-                        line=dict(color='rgba(255,255,255,0)'),
-                        name='DLM 95% CI',
-                        showlegend=True
-                    ))
-                
-                # Add milestone line
-                fig.add_hline(
-                    y=video_data['next_milestone'],
-                    line_dash="dash",
-                    line_color="gold",
-                    annotation_text=f"Next Milestone: {video_data['next_milestone']:,}",
-                    annotation_position="right"
-                )
-                
-                fig.update_layout(
-                    title="14-Day View Count Forecast (ARIMA vs DLM)",
-                    xaxis_title="Date",
-                    yaxis_title="View Count",
-                    hovermode='x unified',
-                    height=600,
-                    showlegend=True
-                )
-                
-                st.plotly_chart(fig, use_container_width=True)
-                
-                # Forecast summary cards
-                st.markdown("### 📊 Forecast Summary")
-                
-                col1, col2 = st.columns(2)
-                
-                with col1:
-                    if forecast_results['arima']:
-                        arima_14day = forecast_results['arima']['forecast'][-1]
-                        st.markdown(f"""
-                        <div class="forecast-card">
-                            <h3>🔮 ARIMA Model</h3>
-                            <h2>{int(arima_14day):,} views</h2>
-                            <p>Expected in 14 days</p>
-                            <p>Growth: +{int(arima_14day - y_full[-1]):,} views</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                
-                with col2:
-                    if forecast_results['dlm']:
-                        dlm_14day = forecast_results['dlm']['forecast'][-1]
-                        st.markdown(f"""
-                        <div class="forecast-card">
-                            <h3>🎯 DLM Model</h3>
-                            <h2>{int(dlm_14day):,} views</h2>
-                            <p>Expected in 14 days</p>
-                            <p>Growth: +{int(dlm_14day - y_full[-1]):,} views</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                
-                st.info("💡 **Model Info**: ARIMA captures autoregressive patterns, while DLM (Kalman Filter) adapts to changing trends. Compare both forecasts for robust predictions.")
-            else:
-                st.warning("Unable to fit forecasting models. Need more data points.")
-        else:
-            st.info("Not enough historical data for AI forecasting (need at least 10 snapshots)")
-        
-        st.markdown("---")
-        
-        # Engagement analysis
-        st.subheader("💬 Engagement Analysis")
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.markdown("**Engagement Ratios:**")
-            st.metric("Like-to-View", f"{video_data['like_view_ratio']:.4f}")
-            st.metric("Comment-to-View", f"{video_data['comment_view_ratio']:.4f}")
-            st.metric("Like-to-Comment", f"{video_data['like_comment_ratio']:.2f}")
-        
-        with col2:
-            st.markdown("**Performance Context:**")
-            st.metric("Video Age", f"{video_data['days_since_publish']} days")
-            st.metric("Duration", f"{video_data['duration_seconds']//60} min {video_data['duration_seconds']%60} sec")
     
     else:
-        # Explorer view
         col1, col2 = st.columns(2)
         
         with col1:
@@ -839,153 +961,272 @@ elif page == "🚀 Milestone Tracker":
             
             st.markdown("---")
 
-elif page == "📈 Forecast Lab":
-    st.title("📈 Forecast Lab - AI Time Series Analysis")
+elif page == "🔬 Forecast Lab":
+    st.title("🔬 Forecast Lab - AI Time Series Analysis")
     
     st.markdown("""
-    This page provides advanced time series forecasting using two statistical models:
-    - **ARIMA(1,1,1)**: AutoRegressive Integrated Moving Average
-    - **DLM**: Dynamic Linear Model (Kalman Filter with forward-backward smoothing)
+    Compare three time series forecasting models on aggregated YouTube view data:
+    
+    - **ARIMA**: AutoRegressive Integrated Moving Average - captures autocorrelation patterns
+    - **DLM (Kalman Filter)**: Dynamic Linear Model with forward-backward smoothing - adapts to changing trends
+    - **Neural Network**: MLP with trend-aware features - learns complex nonlinear patterns
     """)
     
     st.markdown("---")
     
-    # Video selection
-    st.subheader("Select a Video for Forecasting")
+    # Configuration
+    col1, col2, col3 = st.columns(3)
     
-    # Get top videos
-    top_videos = videos_df.sort("view_count", descending=True).head(50)
+    with col1:
+        history_days = st.slider("Historical Data (days)", 14, 90, 60)
     
-    video_options = {}
-    for row in top_videos.iter_rows(named=True):
-        label = f"{row['video_title'][:60]}... ({row['view_count']:,} views)"
-        video_options[label] = row['video_id']
+    with col2:
+        forecast_days = st.slider("Forecast Horizon (days)", 1, 14, 7)
     
-    selected_label = st.selectbox("Choose a video:", list(video_options.keys()))
-    selected_video_id = video_options[selected_label]
+    with col3:
+        train_split = st.slider("Train/Test Split (%)", 70, 95, 85)
     
-    if st.button("🚀 Generate Forecast"):
-        video_data = videos_df.filter(pl.col("video_id") == selected_video_id).to_dicts()[0]
+    # Load and prepare data
+    with st.spinner("Loading aggregated time series data..."):
+        ts_data = load_aggregated_timeseries(days=history_days)
+    
+    if len(ts_data) < 30:
+        st.error(f"Insufficient data: only {len(ts_data)} time points. Need at least 30 hours.")
+        st.stop()
+    
+    st.success(f"✅ Loaded {len(ts_data)} hourly observations from {ts_data['time_bin'].min()} to {ts_data['time_bin'].max()}")
+    
+    # Prepare time series
+    timestamps = pd.to_datetime(ts_data['time_bin']).values
+    y_full = ts_data['total_views'].values
+    
+    train_size = int(len(y_full) * train_split / 100)
+    test_size = len(y_full) - train_size
+    
+    y_train = y_full[:train_size]
+    y_test = y_full[train_size:]
+    
+    forecast_steps = forecast_days * 24  # Convert to hours
+    
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Training Points", f"{train_size:,}")
+    col2.metric("Test Points", f"{test_size:,}")
+    col3.metric("Forecast Steps", f"{forecast_steps:,} hours")
+    
+    st.markdown("---")
+    
+    if st.button("🚀 Run All Models", type="primary", use_container_width=True):
         
-        st.markdown(f"### 📊 Forecasting: {video_data['video_title']}")
+        with st.spinner("Training models... This may take a moment..."):
+            results = fit_all_models(y_train, y_test, forecast_steps)
         
-        history = load_video_history(selected_video_id, days=30)
+        # Generate forecast timestamps
+        last_dt = pd.to_datetime(timestamps[-1])
+        forecast_timestamps = pd.date_range(start=last_dt, periods=forecast_steps + 1, freq='h')[1:]
         
-        if len(history) >= 10:
-            df_history = history.to_pandas()
-            
-            with st.spinner("🤖 Training models... This may take a moment..."):
-                forecast_results = fit_forecasting_models(selected_video_id, df_history, forecast_days=14)
-            
-            if forecast_results:
-                # Create faceted visualization
+        # Create main comparison plot
+        st.subheader("📈 Model Comparison")
+        
+        fig = create_forecast_plot(
+            timestamps=timestamps,
+            y_full=y_full,
+            train_size=train_size,
+            results=results,
+            forecast_timestamps=forecast_timestamps,
+            metric_name='total_views'
+        )
+        
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Model performance cards
+        st.subheader("📊 Model Performance")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            if results.get('arima'):
+                r = results['arima']
+                st.markdown(f"""
+                <div class="model-card model-card-arima">
+                    <h3>🔶 ARIMA{r.get('order', '(1,1,1)')}</h3>
+                    <p><strong>Train RMSE:</strong> {r['metrics']['train_rmse']:,.0f}</p>
+                    <p><strong>AIC:</strong> {r['metrics']['aic']:,.0f}</p>
+                    <p><strong>7-Day Forecast:</strong> {r['forecast'][-1]:,.0f} views</p>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.warning("ARIMA model failed")
+        
+        with col2:
+            if results.get('dlm'):
+                r = results['dlm']
+                st.markdown(f"""
+                <div class="model-card model-card-dlm">
+                    <h3>🔮 DLM (Kalman)</h3>
+                    <p><strong>Train RMSE:</strong> {r['metrics']['train_rmse']:,.0f}</p>
+                    <p><strong>Adaptive:</strong> Yes (state-space)</p>
+                    <p><strong>7-Day Forecast:</strong> {r['forecast'][-1]:,.0f} views</p>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.warning("DLM model failed")
+        
+        with col3:
+            if results.get('nn'):
+                r = results['nn']
+                rmse_val = r['metrics']['train_rmse']
+                rmse_str = f"{rmse_val:,.0f}" if not np.isnan(rmse_val) else "N/A"
+                st.markdown(f"""
+                <div class="model-card model-card-nn">
+                    <h3>🧠 Neural Network</h3>
+                    <p><strong>Train RMSE:</strong> {rmse_str}</p>
+                    <p><strong>Architecture:</strong> MLP (128-64-32)</p>
+                    <p><strong>7-Day Forecast:</strong> {r['forecast'][-1]:,.0f} views</p>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.warning("NN model failed")
+        
+        st.markdown("---")
+        
+        # Individual model plots
+        st.subheader("🔍 Individual Model Details")
+        
+        tabs = st.tabs(["ARIMA", "DLM (Kalman)", "Neural Network"])
+        
+        with tabs[0]:
+            if results.get('arima'):
+                r = results['arima']
+                
                 fig = go.Figure()
-                
-                dates = pd.to_datetime(df_history['ingestion_timestamp'])
-                y_full = df_history['view_count'].values
-                
-                # Historical
                 fig.add_trace(go.Scatter(
-                    x=dates,
-                    y=y_full,
-                    mode='lines+markers',
-                    name='Historical Views',
-                    line=dict(color='#1f77b4', width=3)
+                    x=timestamps, y=y_full,
+                    mode='lines', name='Observed',
+                    line=dict(color='#2E86AB', width=2)
                 ))
                 
-                last_date = dates.iloc[-1]
-                future_dates = pd.date_range(start=last_date, periods=15, freq='D')[1:]
+                fitted_times = timestamps[len(timestamps)-len(r['fitted']):]
+                fig.add_trace(go.Scatter(
+                    x=fitted_times, y=r['fitted'],
+                    mode='lines', name='Fitted',
+                    line=dict(color='#FF6B35', width=2, dash='dot')
+                ))
                 
-                # ARIMA
-                if forecast_results['arima']:
-                    arima_fc = forecast_results['arima']['forecast']
-                    arima_std = forecast_results['arima']['forecast_std']
-                    
-                    fig.add_trace(go.Scatter(
-                        x=future_dates,
-                        y=arima_fc,
-                        mode='lines',
-                        name='ARIMA',
-                        line=dict(color='#ff7f0e', width=3, dash='dash')
-                    ))
-                    
-                    # Confidence bands
-                    for alpha, z in [(0.1, 1.96), (0.2, 1.28), (0.3, 0.67)]:
-                        fig.add_trace(go.Scatter(
-                            x=future_dates.tolist() + future_dates.tolist()[::-1],
-                            y=(arima_fc + z*arima_std).tolist() + (arima_fc - z*arima_std).tolist()[::-1],
-                            fill='toself',
-                            fillcolor=f'rgba(255,127,14,{alpha})',
-                            line=dict(color='rgba(255,255,255,0)'),
-                            showlegend=False,
-                            hoverinfo='skip'
-                        ))
+                fig.add_trace(go.Scatter(
+                    x=forecast_timestamps, y=r['forecast'],
+                    mode='lines', name='Forecast',
+                    line=dict(color='#FF6B35', width=2.5)
+                ))
                 
-                # DLM
-                if forecast_results['dlm']:
-                    dlm_fc = forecast_results['dlm']['forecast']
-                    dlm_std = forecast_results['dlm']['forecast_std']
-                    
-                    fig.add_trace(go.Scatter(
-                        x=future_dates,
-                        y=dlm_fc,
-                        mode='lines',
-                        name='DLM (Kalman)',
-                        line=dict(color='#d62728', width=3, dash='dot')
-                    ))
-                    
-                    # Confidence bands
-                    for alpha, z in [(0.1, 1.96), (0.2, 1.28), (0.3, 0.67)]:
-                        fig.add_trace(go.Scatter(
-                            x=future_dates.tolist() + future_dates.tolist()[::-1],
-                            y=(dlm_fc + z*dlm_std).tolist() + (dlm_fc - z*dlm_std).tolist()[::-1],
-                            fill='toself',
-                            fillcolor=f'rgba(214,39,40,{alpha})',
-                            line=dict(color='rgba(255,255,255,0)'),
-                            showlegend=False,
-                            hoverinfo='skip'
-                        ))
+                upper = r['forecast'] + 1.96 * r['forecast_std']
+                lower = np.maximum(r['forecast'] - 1.96 * r['forecast_std'], 0)
                 
-                fig.update_layout(
-                    title="14-Day Forecast Comparison",
-                    xaxis_title="Date",
-                    yaxis_title="View Count",
-                    height=700,
-                    hovermode='x unified'
-                )
+                fig.add_trace(go.Scatter(
+                    x=list(forecast_timestamps) + list(forecast_timestamps)[::-1],
+                    y=list(upper) + list(lower)[::-1],
+                    fill='toself', fillcolor='rgba(255,107,53,0.2)',
+                    line=dict(color='rgba(0,0,0,0)'),
+                    name='95% CI', showlegend=True
+                ))
                 
+                fig.update_layout(title='ARIMA Model Detail', height=400, template='plotly_white')
                 st.plotly_chart(fig, use_container_width=True)
                 
-                # Model comparison
-                st.markdown("### 📊 Model Comparison")
+                st.info(f"**Model Order:** ARIMA{r.get('order', '(1,1,1)')} | **AIC:** {r['metrics']['aic']:,.0f}")
+        
+        with tabs[1]:
+            if results.get('dlm'):
+                r = results['dlm']
                 
-                col1, col2, col3 = st.columns(3)
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(
+                    x=timestamps, y=y_full,
+                    mode='lines', name='Observed',
+                    line=dict(color='#2E86AB', width=2)
+                ))
                 
-                with col1:
-                    st.markdown("**Current Status**")
-                    st.metric("Current Views", f"{y_full[-1]:,}")
-                    st.metric("Days of Data", len(y_full))
+                fig.add_trace(go.Scatter(
+                    x=timestamps[:train_size], y=r['fitted'],
+                    mode='lines', name='Smoothed (Kalman)',
+                    line=dict(color='#8B5CF6', width=2, dash='dot')
+                ))
                 
-                with col2:
-                    if forecast_results['arima']:
-                        st.markdown("**ARIMA Forecast**")
-                        arima_14 = forecast_results['arima']['forecast'][-1]
-                        st.metric("14-Day Forecast", f"{int(arima_14):,}")
-                        st.metric("Expected Growth", f"+{int(arima_14 - y_full[-1]):,}")
+                fig.add_trace(go.Scatter(
+                    x=forecast_timestamps, y=r['forecast'],
+                    mode='lines', name='Forecast',
+                    line=dict(color='#8B5CF6', width=2.5)
+                ))
                 
-                with col3:
-                    if forecast_results['dlm']:
-                        st.markdown("**DLM Forecast**")
-                        dlm_14 = forecast_results['dlm']['forecast'][-1]
-                        st.metric("14-Day Forecast", f"{int(dlm_14):,}")
-                        st.metric("Expected Growth", f"+{int(dlm_14 - y_full[-1]):,}")
+                upper = r['forecast'] + 1.96 * r['forecast_std']
+                lower = np.maximum(r['forecast'] - 1.96 * r['forecast_std'], 0)
                 
-                st.success("✅ Forecast complete! Use these predictions to inform content strategy and milestone planning.")
-            else:
-                st.error("Unable to fit models. Try a video with more historical data.")
-        else:
-            st.warning("Not enough data for forecasting. Need at least 10 snapshots (typically 10+ days of data).")
+                fig.add_trace(go.Scatter(
+                    x=list(forecast_timestamps) + list(forecast_timestamps)[::-1],
+                    y=list(upper) + list(lower)[::-1],
+                    fill='toself', fillcolor='rgba(139,92,246,0.2)',
+                    line=dict(color='rgba(0,0,0,0)'),
+                    name='95% CI', showlegend=True
+                ))
+                
+                fig.update_layout(title='DLM (Kalman Filter) Detail', height=400, template='plotly_white')
+                st.plotly_chart(fig, use_container_width=True)
+                
+                st.info("**Method:** Forward-backward Kalman filtering with Rauch-Tung-Striebel smoothing")
+        
+        with tabs[2]:
+            if results.get('nn'):
+                r = results['nn']
+                
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(
+                    x=timestamps, y=y_full,
+                    mode='lines', name='Observed',
+                    line=dict(color='#2E86AB', width=2)
+                ))
+                
+                # NN fitted values are only for training data
+                fitted = r['fitted']
+                if fitted is not None:
+                    fitted = np.array(fitted)
+                    valid_mask = ~np.isnan(fitted)
+                    # Use only training timestamps (fitted is length train_size)
+                    train_timestamps = timestamps[:len(fitted)]
+                    if np.any(valid_mask):
+                        fig.add_trace(go.Scatter(
+                            x=train_timestamps[valid_mask], 
+                            y=fitted[valid_mask],
+                            mode='lines', name='Fitted (Training)',
+                            line=dict(color='#10B981', width=2, dash='dot')
+                        ))
+                
+                fig.add_trace(go.Scatter(
+                    x=forecast_timestamps, y=r['forecast'],
+                    mode='lines', name='Forecast',
+                    line=dict(color='#10B981', width=2.5)
+                ))
+                
+                upper = r['forecast'] + 1.96 * r['forecast_std']
+                lower = np.maximum(r['forecast'] - 1.96 * r['forecast_std'], 0)
+                
+                fig.add_trace(go.Scatter(
+                    x=list(forecast_timestamps) + list(forecast_timestamps)[::-1],
+                    y=list(upper) + list(lower)[::-1],
+                    fill='toself', fillcolor='rgba(16,185,129,0.2)',
+                    line=dict(color='rgba(0,0,0,0)'),
+                    name='95% CI', showlegend=True
+                ))
+                
+                # Add train/test split line
+                fig.add_vline(x=timestamps[train_size-1], line_dash="dash", 
+                             line_color="gray", annotation_text="Train End")
+                
+                fig.update_layout(title='Neural Network Detail', height=400, template='plotly_white')
+                st.plotly_chart(fig, use_container_width=True)
+                
+                st.info("**Method:** MLP (128-64-32) trained on log-transformed data with cyclical hour encoding and mean-reversion regularization")
+        
+        st.success("✅ Forecast analysis complete!")
 
 # Footer
 st.markdown("---")
-st.markdown("<p style='text-align: center; color: gray;'>Project STREAMWATCH - IDS 706 Fall 2025 • Powered by ARIMA & Kalman Filter ML Models</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: gray;'>Project STREAMWATCH - IDS 706 Fall 2025 • Powered by ARIMA, Kalman Filter & Neural Network Models</p>", unsafe_allow_html=True)
