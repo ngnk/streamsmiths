@@ -14,7 +14,7 @@
 
 - [Project Overview](#Project-Overview)
 - [Architecture](#Architecture)
-- [Setup Instructions](#Setup)
+- [Setup](#Setup)
 - [Dashboard](#Dashboard)
 - [Database](#Database)
 - [Key Principles](#Key-Principles)
