@@ -104,7 +104,7 @@ flowchart LR
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/ngnk/streamsmiths.git
-cd streamwatch
+cd streamsmiths
 ```
 
 ### 2. Install Dependencies
