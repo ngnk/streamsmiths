@@ -100,7 +100,20 @@ flowchart LR
 1. Sign up at [Neon.tech](https://neon.tech)
 2. Create a new project
 3. Copy the connection string to `NEON_DATABASE_URL`
-   
+
+**Collect the Channel IDs:**
+1. Navigate to your channel of choice, and click on the channel name/icon to go to their home page
+2. Click on ```more``` on their channel homepage headline
+3. It should bring up a popup tab. Scroll to the bottom, under ```More info``` and click on ```Share channel```
+4. Click on ```Copy channel ID```
+5. For the .env variable (and later github secret), paste them in sequence (order doesn't matter) without spaces, and separated by comma
+
+For reference, here is a sample list of 5 channels (Pewdiepie, LikeNastya, LinusTechTips, CNN, Cocomelon)
+
+```bash
+UC-lHJZR3Gqxm24_Vd_AJ5Yw,UCJplp5SjeGSdVdwsfb9Q7lQ,UCXuqSBlHAE6Xw-yeJA0Tunw,UCupvZG-5ko_eiXAupbDfxWw,UCbCmjCuTUZos6Inko4u57UQ
+```
+
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/ngnk/streamsmiths.git
@@ -145,24 +158,25 @@ python pipeline/ingest_youtube_data.py
 
 ### 7. Launch Dashboard
 
-1. CD into /dashboard directory and install dependencies:
+CD into /dashboard directory and install dependencies:
 ```bash
 cd dashboard
 pip install -r requirements.txt
 ```
 
-2. Create .env file with your database connection string with NEON_DATABASE_URL as the variable name
+Create .env file with your database connection string with NEON_DATABASE_URL as the variable name
 ```bash
 NEON_DATABASE_URL='YOUR_CONNECTION_STRING'
 ```
 
-3. Run:
+Run:
 ```bash
 streamlit run dashboard_v3.py
 ```
 The dashboard should automatically open in your browser at `http://localhost:8501`
 
-4. Operate:
+
+Operate:
 Do not close the terminal window otherwise dashboard will terminate.
 To terminate, press CTRL + C in terminal.
 
