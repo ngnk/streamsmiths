@@ -7,7 +7,7 @@
 pip install -r requirements.txt
 ```
 
-2. Create .env file with your database connection string (in our case it is NEON_DATABASE_URL). If you use a separate service change variable name appropriately in dashboard script.
+2. Create .env file with your database connection string with NEON_DATABASE_URL as the variable name. If you use a separate service, feel free to change the variable name in dashboard script.
 
 3. Run:
 ```bash
