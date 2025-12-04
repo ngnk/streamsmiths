@@ -122,7 +122,7 @@ YOUTUBE_API_KEY=YOUR_YOUTUBE_API_KEY
 # Database Configuration
 NEON_DATABASE_URL=YOUR_DATABASE_CONNECTION_STRING
 
-# Optional: Channel List (comma-separated channel IDs)
+# Channel List (comma-separated channel IDs)
 YOUTUBE_CHANNEL_IDS=UCupvZG-5ko_eiXAupbDfxWw,UCX6OQ3DkcsbYNE6H8uQQuVA
 ```
 
