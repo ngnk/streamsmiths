@@ -144,22 +144,38 @@ python pipeline/ingest_youtube_data.py
 ```
 
 ### 7. Launch Dashboard
+
+1. CD into /dashboard directory and install dependencies:
 ```bash
 cd dashboard
-streamlit run dashboard.py
+pip install -r requirements.txt
 ```
 
-Access the dashboard at `http://localhost:8501`
+2. Create .env file with your database connection string with NEON_DATABASE_URL as the variable name
+```bash
+NEON_DATABASE_URL='YOUR_CONNECTION_STRING'
+```
 
-### 8. (Optional) Set Up GitHub Actions
+3. Run:
+```bash
+streamlit run dashboard_v3.py
+```
+The dashboard should automatically open in your browser at `http://localhost:8501`
+
+4. Operate:
+Do not close the terminal window otherwise dashboard will terminate.
+To terminate, press CTRL + C in terminal.
+
+### 8. Set Up GitHub Actions
 For automated pipeline runs:
 
 1. Fork the repository
 2. Go to **Settings → Secrets and variables → Actions**
-3. Add secrets:
-   - `YOUTUBE_API_KEY`
-   - `NEON_DATABASE_URL`
-   - `YOUTUBE_CHANNEL_IDS`
+3. Add the following secrets:
+   - `YOUTUBE_API_KEY` (input your youtube api key)
+   - `NEON_DATABASE_URL` (input your database connection string)
+   - `YOUTUBE_CHANNEL_IDS` (input a comma separated list (no spaces) of channel IDs)
+  
 4. Enable GitHub Actions in repository settings and activate `workflow_v3`
 5. Pipeline will run automatically every hour
 
@@ -172,6 +188,7 @@ For automated pipeline runs:
 - The Video Explorer highlights viral content, major milestones, and trending videos with filters and badge indicators.
 - A Milestone Tracker provides forecasting, progress bars, and velocity metrics for videos nearing major view thresholds.
 - Each video has a deep-dive page with 30-day history, growth analytics, engagement ratios, and full metadata.
+- Intelligence lab uses time-series models and linear regressions to analyze and forecast viewership on both videos and channels.
 
 ![](/dashboard/dashboard.png)
 
@@ -179,7 +196,7 @@ For automated pipeline runs:
 
 # Database
 
-Each pipeline iteration (baseline, V2, and V3) maintains separate tables to preserve historical data while allowing for system improvements.
+Each pipeline iteration (baseline, V2, and V3) maintains separate tables. V3 is the most up-to-date, so analysis should focus primarily on tables with a ```v3``` suffix.
 
 The tables contain the following information:
 
@@ -338,6 +355,6 @@ This project is currently in an early stage, and we've identified several areas 
 ---
 
 <div align="center">
-    <strong>Built with ❤️ by the STREAMSMITHS</strong><br>
+    <strong>Built with 🖤 by the STREAMSMITHS</strong><br>
     <em>IDS 706 Fall 2025 - Duke University</em>
 </div>
