@@ -1,21 +1,15 @@
-name: V3 Pipeline 
+name: V3 Pipeline
 
 on:
-  # Run on 8-hour schedule
-  schedule:
-    - cron: '0 * * * *'  # Every 8 hours
-  
-  # Allow manual trigger
   workflow_dispatch:
-    inputs:
-      include_trending:
-        description: 'Include trending videos'
-        required: false
-        default: 'true'
-        type: boolean
+
+  schedule:
+    - cron: '0 * * * *'
 
 jobs:
   run-pipeline-v3:
+    if: github.ref == 'refs/heads/matt'
+
     runs-on: ubuntu-latest
     
     steps:
@@ -36,7 +30,6 @@ jobs:
         run: python run_pipeline_v3.py
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          YOUTUBE_CHANNEL_IDS: ${{ secrets.YOUTUBE_CHANNEL_IDS }}
           NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
       
       - name: Pipeline Summary
@@ -44,4 +37,3 @@ jobs:
         run: |
           echo "✅ V3 Pipeline completed successfully!"
           echo "🎯 Tables updated: channels_log_v3, videos_log_v3, trending_videos_log_v3"
-          echo "📊 New features: Milestone tracking (10M→1B+), 5% approaching threshold"
