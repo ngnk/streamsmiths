@@ -324,13 +324,16 @@ This project is currently in an early stage, and we've identified several areas 
 - Migrate the frontend from Streamlit to a more robust framework like Next.js. This will provide greater customization and control over the visualization experience, enabling a more professional and scalable user interface.
 - Implement features for custom channel/video watchlists and easier input methods. This will facilitate more efficient control over the data being tracked and analyzed.
 - Explore browser extensions or tools for seamless integration and data input directly from video platforms.
+  
 
-**Additional Data Integration**
+**Data Sourcing**
 - Integrate data from platforms like the Twitter API and Spotify to analyze social engagement surrounding video content.
 - Incorporate data from Google Trends and Wikipedia to provide richer context and external factors influencing the trends being analyzed.
+- Implement predictive modeling or alternative strategies to counteract YouTube API subscriber count rounding.
+  
 
 **Data Orchestration and Scalability**
-- Transition the data pipeline from GitHub Actions to a more comprehensive workflow management platform, such as Apache Airflow. This will allow for greater resilience, more complex and high-level data transformations, and improved monitoring for a scalable, production environment.
+- Consider additional workflow tools, such as Apache Airflow. This will allow for greater resilience, more complex and high-level data transformations, and improved monitoring for a scalable, production environment.
 
 ---
 
