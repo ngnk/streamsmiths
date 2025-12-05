@@ -89,6 +89,7 @@ flowchart LR
 
 # Setup
 
+### 0. Prerequisites
 **Get a YouTube API Key:**
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project
@@ -120,12 +121,13 @@ git clone https://github.com/ngnk/streamsmiths.git
 cd streamsmiths
 ```
 
-### 2. Install Dependencies
+### 2. Testing
+#### Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Configure Environment Variables
+#### Configure Environment Variables
 Create a `.env` file in the project root:
 
 ```bash
@@ -139,24 +141,25 @@ NEON_DATABASE_URL=YOUR_DATABASE_CONNECTION_STRING
 YOUTUBE_CHANNEL_IDS=UCupvZG-5ko_eiXAupbDfxWw,UCX6OQ3DkcsbYNE6H8uQQuVA
 ```
 
-### 4. Confirm all components are good-to-go
+#### Confirm all components are good-to-go
 ```bash
 python test_setup.py
 ```
 
-### 5. Initialize Database Tables
-Run the pipeline setup script to create tables:
+### 3. Set Up GitHub Actions
+For automated pipeline runs:
 
-```bash
-python scripts/setup_database.py
-```
+1. Fork the repository
+2. Go to **Settings → Secrets and variables → Actions**
+3. Add the following secrets:
+   - `YOUTUBE_API_KEY` (input your youtube api key)
+   - `NEON_DATABASE_URL` (input your database connection string)
+   - `YOUTUBE_CHANNEL_IDS` (input a comma-separated list (no spaces) of channel IDs)
+  
+4. Enable GitHub Actions in repository settings and activate `workflow_v3` (`V3 Pipeline`)
+5. Pipeline will run automatically every hour
 
-### 6. Run Initial Data Ingestion
-```bash
-python pipeline/ingest_youtube_data.py
-```
-
-### 7. Launch Dashboard
+### 4. Launch Dashboard
 
 CD into /dashboard directory and install dependencies:
 ```bash
@@ -179,19 +182,6 @@ The dashboard should automatically open in your browser at `http://localhost:850
 Operate:
 Do not close the terminal window otherwise dashboard will terminate.
 To terminate, press CTRL + C in terminal.
-
-### 8. Set Up GitHub Actions
-For automated pipeline runs:
-
-1. Fork the repository
-2. Go to **Settings → Secrets and variables → Actions**
-3. Add the following secrets:
-   - `YOUTUBE_API_KEY` (input your youtube api key)
-   - `NEON_DATABASE_URL` (input your database connection string)
-   - `YOUTUBE_CHANNEL_IDS` (input a comma-separated list (no spaces) of channel IDs)
-  
-4. Enable GitHub Actions in repository settings and activate `workflow_v3` (`V3 Pipeline`)
-5. Pipeline will run automatically every hour
 
 ---
 
