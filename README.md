@@ -194,7 +194,32 @@ To terminate, press CTRL + C in terminal.
 - Each video has a deep-dive page with 30-day history, growth analytics, engagement ratios, and full metadata.
 - Intelligence lab uses time-series models and linear regressions to analyze and forecast viewership on both videos and channels.
 
-![](/dashboard/dashboard.png)
+<table>
+  <tr>
+    <td align="center">
+      <img src="/dashboard/dashboard.png" width="400" alt="Home Page">
+      <br />Home Page
+    </td>
+    <td align="center">
+      <img src="/dashboard/dashboard2.png" width="400" alt="Channel Leaderboard">
+      <br />Channel Leaderboard
+    </td>
+    <td align="center">
+      <img src="/dashboard/dashboard3.png" width="400" alt="Video Explorer">
+      <br />Video Explorer
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="/dashboard/dashboard4.png" width="400" alt="Milestone Tracker">
+      <br />Milestone Tracker
+    </td>
+    <td align="center">
+      <img src="/dashboard/dashboard5.png" width="400" alt="Intelligence Lab">
+      <br />Intelligence Lab
+    </td>
+    <td></td> </tr>
+</table>
 
 ---
 
@@ -287,53 +312,30 @@ Overall, numerous options exist for database manipulation. These examples serve 
 
 # Key Principles
 
-### 1. Scalability
-- **Horizontal Scaling**: Database-driven channel management supports 50-100+ channels (vs. 25-channel GitHub Secrets limit)
-- **API Quota Efficiency**: Pipeline consumes only ~3,000units/day, well under the 10,000 request limit
-- **Time-Series Architecture**: Append-only Bronze tables support unlimited historical growth
-- **Cloud Database**: Neon PostgreSQL with connection pooling handles concurrent queries
+Project StreamWatch follows a production-grade data engineering philosophy, prioritizing structure, stability, and performance.
 
-### 2. Modularity
-- **Versioned Tables**: Separate V1, V2, V3 schemas preserve existing data during iteration
-- **Layered Architecture**: Bronze (raw) → Silver (transformed) → Gold (analytics) separation
-- **Reusable Functions**: `calculate_grade()`, `format_number()`, `load_channels()` used across dashboard
-- **Independent Workflows**: Separate GitHub Actions for V1, V2, V3 pipelines
+### 1.  Usability & Modularity
+- **Three-layer architecture:** Bronze (ingestion), Silver (transformation), and Gold (loading) layers operate independently, allowing each to be developed, tested, and deployed separately
+- **Separation of concerns:** Each pipeline component handles one aspect of the data flow, enabling parallel development by team members
+- **Replicability:** Project is easy to set up and operate, making use of free-to-use platforms, including NEON and the Youtube API, and can easily be replicated without restrictions.
+- **Interactive:** The application frontend serves as a responsive analytics layer, facilitating low-latency data exploration and on-demand model inference for real-time projections.
+  
 
-### 3. Reusability
-- **Templated SQL Queries**: Parameterized queries work for channels, videos, time ranges
-- **Abstracted Data Loaders**: `load_video_history()`, `load_channel_history()` functions
-- **Style Components**: Reusable CSS classes (`.metric-card`, `.channel-card`, `.milestone-badge`)
-- **Visualization Templates**: Plotly chart configurations used across multiple pages
+### 2. Scalability & Efficiency
+- **Configuration-driven design:** Channel lists and API settings stored in environment variables, enabling expansion from 10 to 100+ channels without code changes
+- **Batch processing strategy:** API calls grouped efficiently (50 videos per request) to minimize quota usage and network overhead
+- **Append-only data model:** Database design supports unlimited historical data accumulation without performance degradation
+- **High-Performance Compute:** The transformation layer utilizes Polars instead of Pandas, providing significant speed and memory efficiency advantages for batch processing.
+- **Storage optimization:** Parquet format provides 85% size reduction compared to JSON while enabling fast analytical queries
 
-### 4. Observability
-- **Ingestion Timestamps**: Every record tagged with `ingestion_timestamp` for lineage tracking
-- **Pipeline Logging**: GitHub Actions logs capture API responses, row counts, errors
-- **Version Tracking**: V1 → V2 → V3 tables preserve evolution history
-- **Dashboard Metrics**: Real-time counts of channels, videos, Billionaires Club members
 
-### 5. Data Governance
-- **Schema Versioning**: V1, V2, V3 tables document pipeline evolution
-- **Immutable Bronze Layer**: Raw API responses never modified (append-only)
-- **Data Lineage**: Clear transformation path: Bronze → Silver → Gold
-- **Quality Validation**: Timestamp formatting, duplicate detection, null handling
+### 3. Reliability & Security
+- **Graceful degradation:** Pipeline continues execution even when individual channels fail, ensuring partial success rather than complete failure
+- **Defensive data handling:** Type conversion functions with fallback values prevent crashes from malformed or missing data
+- **Robust data parsing:** Timestamp and format handlers accommodate multiple input variations, always producing valid output
+- **Sensitive Data:** Use of Github secrets and environment variables to protect sensitive operator information.
 
-### 6. Reliability
-- **Connection Pooling**: SQLAlchemy `pool_pre_ping=True` prevents stale connections
-- **Error Recovery**: Try-catch blocks in API calls with graceful degradation
-- **Scheduled Automation**: GitHub Actions hourly cron ensures consistent data freshness
-- **Caching Strategy**: Streamlit `@st.cache_data(ttl=3600)` reduces database load
-
-### 7. Efficiency
-- **API Quota Optimization**: Batch requests, selective field retrieval (`part='snippet,statistics'`)
-- **Query Optimization**: `DISTINCT ON` for latest records, indexed `ingestion_timestamp`
-- **Dashboard Caching**: 1-hour TTL prevents redundant database queries
-- **Selective Data Loading**: Only fetch 20 videos per page, 30-day history windows
-
-### 8. Security
-- **Secret Management**: API keys stored in GitHub Secrets, never committed to Git
-- **Environment Variables**: `.env` file in `.gitignore`, `python-dotenv` for local dev
-- **Database Encryption**: Neon provides SSL/TLS connections by default
-- **No Hardcoded Credentials**: All sensitive data externalized to environment config
+Project StreamWatch bridges the gap between big data engineering and user-centric design. Through a scalable V3 pipeline and a predictive dashboard, it turns the vast complexity of YouTube analytics into clear, milestone-driven insights, proving that the true value of data lies not just in its collection, but in its ability to tell a story about the future.
 
 ---
 
@@ -341,15 +343,14 @@ Overall, numerous options exist for database manipulation. These examples serve 
 
 This project is currently in an early stage, and we've identified several areas that will take the idea to the next level. Our primary focus for future development is organized into the following categories:
 
-**User Experience and Interface (UI/UX)**
+**User Experience and Interface**
 - Migrate the frontend from Streamlit to a more robust framework like Next.js. This will provide greater customization and control over the visualization experience, enabling a more professional and scalable user interface.
 - Implement features for custom channel/video watchlists and easier input methods. This will facilitate more efficient control over the data being tracked and analyzed.
 - Explore browser extensions or tools for seamless integration and data input directly from video platforms.
   
 
 **Data Sourcing**
-- Integrate data from platforms like the Twitter API and Spotify to analyze social engagement surrounding video content.
-- Incorporate data from Google Trends and Wikipedia to provide richer context and external factors influencing the trends being analyzed.
+- Integrate data from additional platforms like the Twitter API, Spotify, and Google Trends to provide richer context and external factors influencing the trends being analyzed.
 - Implement predictive modeling or alternative strategies to counteract YouTube API subscriber count rounding.
   
 
