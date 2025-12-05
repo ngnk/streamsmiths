@@ -289,7 +289,7 @@ Overall, numerous options exist for database manipulation. These examples serve 
 
 ### 1. Scalability
 - **Horizontal Scaling**: Database-driven channel management supports 50-100+ channels (vs. 25-channel GitHub Secrets limit)
-- **API Quota Efficiency**: Pipeline consumes only 77 units/run (35x under estimated 2,719), providing massive headroom
+- **API Quota Efficiency**: Pipeline consumes only ~3,000units/day, well under the 10,000 request limit
 - **Time-Series Architecture**: Append-only Bronze tables support unlimited historical growth
 - **Cloud Database**: Neon PostgreSQL with connection pooling handles concurrent queries
 
